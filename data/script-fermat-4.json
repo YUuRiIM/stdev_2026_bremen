@@ -1,0 +1,17 @@
+[
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "마지막 이야기를 들려드리겠습니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": true,
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "페르마의 마지막 이야기가 전개됩니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": false,
+    "backgroundImage": "bg-lobby.png"
+  }
+]
