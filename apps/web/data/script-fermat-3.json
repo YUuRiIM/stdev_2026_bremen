@@ -934,100 +934,86 @@
     "speaker": "narrative",
     "name": "",
     "text": "[웃음 터짐. 경기는 계속된다. 페르마는 몇 세트를 거치며 점점 익숙해진다. 네 번째 세트쯤엔 스파이크까지 뛰어 본다. 티셔츠와 래시가드는 언제부턴가 벗겨져 수영복 한장만 남아 있다 — 본인은 너무 몰입해서 모른다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[최종 세트, 매치 포인트. 아이즐의 강한 스파이크가 페르마 옆으로 떨어지려는 순간.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "──잡았다!",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[페르마, 모래 위에 다이브. 공을 팔로 받아 올린다. 공이 네트를 넘어 아이즐 팀 코트에 툭, 떨어진다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "…….",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "이겼어!! 우리가 이겼어요!!",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "……하하. 고생하셨어요, 페르마 씨.",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[교수가 손을 내민다. 페르마, 모래투성이의 손을 잠시 내려다보다가 ── 조심스럽게 그 손을 잡고 일어난다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "(손, 크네.)",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "(……이런 생각 또 한다 또.)",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "아이즐: 졌다!! 우리 팀 고기 담당 당첨!",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "네, 진 팀이 오늘 숯불 담당입니다. 저녁 메뉴는 삼겹살과 차돌박이. 부탁드려요.",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "랩 선배 B: 아이즐 선배, 우리 완패네요.\n아이즐: 페르마 저거, 물리학으로 이기면 반칙 아닌가?\n 정당한 승부였습니다.",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-fermat-ball.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[페르마, 조용히 뺨을 문지른다. 모래도, 열기도, 심박수도 — 전부 자연의 탓으로 돌리고 싶다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
-  },
+    "backgroundImage": "bg-fermat-ball.png"
+  }, 
   {
     "speaker": "narrative",
     "name": "",

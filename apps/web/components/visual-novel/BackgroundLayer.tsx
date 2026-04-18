@@ -1,11 +1,13 @@
 import Image from 'next/image';
 
 const images: Record<string, string> = {
-  'bg-lobby.png': '/assets/bg-lobby.webp',
-  'bg-intro.png': '/assets/bg-intro.webp',
+  'bg-lobby.png': '/assets/images/bg-lobby.webp',
+  'bg-lobby-night.png': '/assets/images/bg-lobby-night.png',
+  'bg-intro.png': '/assets/images/bg-intro.webp',
   'bg-mem-1.png': '/assets/images/bg-mem-1.png',
   'bg-mem-2.png': '/assets/images/bg-mem-2.png',
   'bg-mem-3.png': '/assets/images/bg-mem-3.png',
+  'bg-fermat-ball.png': '/assets/images/bg-fermat-ball.png',
   'fermat-png.png': '/assets/images/fermat-png.png',
   'fermat-png-dark.png': '/assets/images/fermat-png-dark.png',
 };
