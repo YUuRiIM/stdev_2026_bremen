@@ -29,11 +29,14 @@ interface TokenResponse {
   identity: string;
 }
 
-async function fetchToken(characterSlug: string): Promise<TokenResponse> {
+async function fetchToken(_subjectSlug: string): Promise<TokenResponse> {
+  // The server route defaults characterId to 'fermat' (char slug). Subject
+  // selection will be added later — agent starts conversation without a
+  // preselected subject and the LLM can call startLecture({topic}) on demand.
   const resp = await fetch('/api/livekit/token', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ characterId: characterSlug }),
+    body: JSON.stringify({}),
   });
   if (!resp.ok) {
     const body = await resp.text();
@@ -113,6 +116,7 @@ export function createLiveKitAgentAdapter(): AgentAdapter {
     }
   };
 
+  let agentReadyFired = false;
   const handleTrackSubscribed = (
     track: RemoteTrack,
     _pub: RemoteTrackPublication,
@@ -124,6 +128,10 @@ export function createLiveKitAgentAdapter(): AgentAdapter {
       el.style.display = 'none';
       document.body.appendChild(el);
       attachedAudioEls.push(el);
+      if (!agentReadyFired) {
+        agentReadyFired = true;
+        handlers.onAgentReady?.();
+      }
     }
   };
 

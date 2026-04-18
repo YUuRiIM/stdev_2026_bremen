@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AffectionGauge } from '@/components/affection/AffectionGauge';
+import { useAffection } from '@/lib/affection/use-affection';
 import { Character, useManifest } from '@/components/character-kit';
 
 const bgLobby = '/assets/images/bg-lobby.png';
@@ -19,7 +21,13 @@ const mainTalking = '/assets/images/main-talking.png';
 function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
-    const fermatManifest = useManifest('/assets/fermat/manifest.json');
+  const { data: affection } = useAffection();
+  const fermatAffection = affection.fermat ?? {
+    slug: 'fermat',
+    score: 0,
+    level: 'stranger' as const,
+  };
+  const fermatManifest = useManifest('/assets/fermat/manifest.json');
 
   const boardPages = useMemo(
     () => [
@@ -92,6 +100,13 @@ function MainLobbyScreen() {
                 zIndex: -1
               }}
             />
+
+            {fermatAffection && (
+              <AffectionGauge
+                score={fermatAffection.score}
+                level={fermatAffection.level}
+              />
+            )}
 
             <button type="button" className="main-lobby-setting">
               ⚙
@@ -315,10 +330,10 @@ function MainLobbyScreen() {
           </div>
 
           <div className="main-lobby-bottom"
-          style={{
-            zIndex:1000,
-          }}>
-            
+            style={{
+              zIndex: 1000,
+            }}>
+
             <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
 
             <div className="main-lobby-actions">

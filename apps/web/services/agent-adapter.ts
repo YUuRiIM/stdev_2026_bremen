@@ -17,6 +17,10 @@ export interface AdapterEvents {
   onUserTranscript?: (text: string, isFinal: boolean) => void;
   onStateChange?: (state: RecordingState) => void;
   onConnectionChange?: (state: ConnectionState) => void;
+  /** Fires the first time a remote audio track subscribes — i.e. the
+   *  agent has joined the room and will start greeting. Use for
+   *  "connecting…" UX gating. */
+  onAgentReady?: () => void;
   /** `lecture.state` data channel — objective 체크리스트 라이브 업데이트. */
   onLectureState?: (state: LectureState) => void;
   /** `lecture.verdict_applied` — 세션 종료 최종 판정. */

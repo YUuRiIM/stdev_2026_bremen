@@ -14,7 +14,7 @@ import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 
 import { composeSystemPrompt } from '@mys/shared/prompt';
-import { loadCharacter } from '@mys/shared/db';
+import { loadCharacter, loadCharacterBySlug } from '@mys/shared/db';
 import { buildAllToolDefs } from '@mys/shared/tools';
 import type { ToolContext } from '@mys/shared/types';
 
@@ -23,6 +23,19 @@ import { createAgentSupabase } from './supabase-client';
 import { MiyeonshiAgent } from './miyeonshi-agent';
 import { resolveEnvPath } from './env-path';
 import { toLiveKitCatalog } from './tool-adapter';
+
+// Diagnostic — confirms process boot + env shape on LiveKit Cloud.
+// stdout/stderr unbuffered so container logs flush without waiting.
+process.stdout.write('[mys-agent] boot ' + new Date().toISOString() + '\n');
+process.stderr.write('[mys-agent] boot-err ' + new Date().toISOString() + '\n');
+console.log('[mys-agent] env present:', {
+  LIVEKIT_URL: !!process.env.LIVEKIT_URL,
+  LIVEKIT_API_KEY: !!process.env.LIVEKIT_API_KEY,
+  LIVEKIT_API_SECRET: !!process.env.LIVEKIT_API_SECRET,
+  DEEPGRAM_API_KEY: !!process.env.DEEPGRAM_API_KEY,
+  GEMINI_API_KEY: !!process.env.GEMINI_API_KEY,
+  NEXT_PUBLIC_SUPABASE_URL: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+});
 
 // Load env from apps/web/.env.local — resolved relative to this file so
 // `pnpm --filter @mys/agent exec` or standalone deploy both work.
@@ -62,7 +75,11 @@ export default defineAgent({
     // JWT pass-through — NEVER a service_role key.
     const supabase = createAgentSupabase(meta.supabaseJwt);
 
-    const character = await loadCharacter(supabase, meta.characterId);
+    // Accept either a UUID or a slug (FE currently passes slug via token route).
+    const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    const character = UUID_RE.test(meta.characterId)
+      ? await loadCharacter(supabase, meta.characterId)
+      : await loadCharacterBySlug(supabase, meta.characterId);
     if (!character) {
       console.error('[agent] character not found', meta.characterId);
       return;
@@ -74,13 +91,21 @@ export default defineAgent({
 
     const publish = async (topic: string, payload: unknown): Promise<void> => {
       const data = new TextEncoder().encode(JSON.stringify(payload));
-      await ctx.room.localParticipant?.publishData(data, { topic });
+      // `reliable` is required by @livekit/rtc-node's proto encoding — omitting
+      // it throws `required field not set`, which silently kills tool calls.
+      await ctx.room.localParticipant?.publishData(data, {
+        topic,
+        reliable: true,
+      });
     };
 
     const ctxRef: { current: ToolContext } = {
       current: {
         userId: meta.userId,
-        characterId: meta.characterId,
+        // Use the resolved UUID, not the slug that came in via participant
+        // metadata. Tools query Postgres tables whose character_id column is
+        // uuid-typed; passing a slug silently returns 0 rows.
+        characterId: character.id,
         sessionId: ctx.room.name ?? crypto.randomUUID(),
         affectionLevel: 'stranger',
         identityMode: meta.identityMode,
@@ -159,11 +184,17 @@ export default defineAgent({
     });
     sessionStarted = true;
 
-    // Greeting — `character.basePersonaPrompt` already defines the tone; a
-    // brief opener keeps the first-turn latency visible for demo.
+    // Greeting — inject a virtual user turn so the conversation history starts
+    // with [user → model] ordering. Gemini's function-calling validator rejects
+    // any tool call that doesn't sit immediately after a user or function
+    // response turn; without this seed, the first LLM completion can crash
+    // with 400 "function call turn comes immediately after a user turn".
+    // Also keep the first turn text-only (persona will naturally stay on
+    // greetings before tools are relevant).
     session.generateReply({
+      userInput: '(교수님 입장)',
       instructions:
-        '교수님이 방금 접속하셨다. 자연스럽게 첫 인사를 건네라. 짧게 2문장 이내.',
+        '교수님이 방금 접속하셨다. 자연스럽게 첫 인사만 건네고 끝내라. 짧게 2문장 이내. 어떠한 도구도 호출하지 마라.',
     });
   },
 });
