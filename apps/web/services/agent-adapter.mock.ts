@@ -1,4 +1,9 @@
 import type {
+  LectureState,
+  LectureVerdictApplied,
+  CutscenePlay,
+} from '@mys/shared/protocol';
+import type {
   AdapterEvents,
   AgentAdapter,
   AgentMessage,
@@ -28,6 +33,36 @@ const SILENCE_MESSAGE: AgentMessage = {
   text: '…그래서, 조건은?',
 };
 
+// 데모 seed와 정렬된 objective statements (conceptKey 기반).
+// 실제 subject id 는 미정이라 UUID 자리엔 null 을 넣음.
+const MOCK_OBJECTIVES: NonNullable<LectureState['objectivesStatus']> = [
+  {
+    id: 'obj_flt_statement',
+    statement:
+      '페르마 소정리의 정리 선언문을 정확히 설명한다 (p가 소수이고 gcd(a,p)=1일 때 a^(p-1) ≡ 1 mod p).',
+    coverage: 0,
+  },
+  {
+    id: 'obj_flt_example',
+    statement:
+      '구체 수치 예시로 정리를 검증한다 (예: 2^4 mod 5 = 1).',
+    coverage: 0,
+  },
+  {
+    id: 'obj_flt_applications',
+    statement:
+      '페르마 소정리의 실제 활용처를 하나 이상 제시한다 (소수 판정, RSA 등).',
+    coverage: 0,
+  },
+];
+
+const MOCK_CUTSCENE: CutscenePlay = {
+  eventKey: 'approved_smile',
+  assetUrl: '/assets/cv-fermat.png',
+  muteTTS: true,
+  ts: 0,
+};
+
 function resolveProfile(override?: MockProfile): MockProfile {
   if (override) return override;
   if (typeof window !== 'undefined') {
@@ -55,6 +90,10 @@ export function createMockAgentAdapter(
   let connectionState: ConnectionState = 'closed';
   let disposed = false;
 
+  // 가변 체크리스트 상태 (cycle 마다 증분 bump).
+  const objectives: NonNullable<LectureState['objectivesStatus']> =
+    MOCK_OBJECTIVES.map((o) => ({ ...o }));
+
   const schedule = (ms: number, fn: () => void) => {
     if (disposed) return;
     const id = setTimeout(() => {
@@ -79,8 +118,32 @@ export function createMockAgentAdapter(
     connectionState = s;
     handlers.onConnectionChange?.(s);
   };
+  const emitLectureState = (
+    phase: LectureState['phase'],
+    includeObjectives = true,
+  ) => {
+    const payload: LectureState = {
+      phase,
+      subjectId: null,
+      objectivesStatus: includeObjectives
+        ? objectives.map((o) => ({ ...o }))
+        : undefined,
+      ts: Date.now(),
+    };
+    handlers.onLectureState?.(payload);
+  };
+  const emitVerdict = (payload: LectureVerdictApplied) =>
+    handlers.onVerdictApplied?.(payload);
+  const emitCutscene = (payload: CutscenePlay) =>
+    handlers.onCutscenePlay?.(payload);
 
-  const runSteadyCycle = (cycleOffsetMs: number) => {
+  const bumpObjective = (idx: number, coverage: number) => {
+    if (idx < 0 || idx >= objectives.length) return;
+    const target = objectives[idx]!;
+    if (coverage > target.coverage) target.coverage = coverage;
+  };
+
+  const runSteadyCycle = (cycleOffsetMs: number, objectiveIdx: number) => {
     schedule(cycleOffsetMs + 0, () => {
       emitState('listening');
       emitTranscript(STEADY_USER_PARTIAL, false);
@@ -93,6 +156,9 @@ export function createMockAgentAdapter(
     schedule(cycleOffsetMs + 4500, () => {
       emitAgent(STEADY_AGENT_MSG);
       emitState('idle');
+      // objective 하나씩 달성 — checkObjective 시뮬레이션.
+      bumpObjective(objectiveIdx, 0.75);
+      emitLectureState('lecturing');
     });
   };
 
@@ -101,7 +167,7 @@ export function createMockAgentAdapter(
       schedule(i * 300, () => emitAgent(BURST_MESSAGES[i]!));
     }
     schedule(1500, () => emitState('idle'));
-    schedule(11500, () => runSteadyCycle(0));
+    schedule(11500, () => runSteadyCycle(0, 0));
   };
 
   const runSilence = () => {
@@ -113,13 +179,27 @@ export function createMockAgentAdapter(
   };
 
   const runSteadyLoop = () => {
-    let cycle = 0;
+    let objectiveIdx = 0;
     const loop = () => {
       if (disposed) return;
-      runSteadyCycle(0);
+      runSteadyCycle(0, objectiveIdx);
+      objectiveIdx += 1;
+      if (objectiveIdx >= objectives.length) {
+        // 모두 달성 → verdict_applied + cutscene + phase=verdicted.
+        schedule(5500, () => {
+          emitVerdict({
+            affectionDelta: 4,
+            affectionLevel: 'acquaintance',
+            episodeUnlocked: 'approved_smile',
+            newlyUnderstood: objectives.map((o) => o.id),
+            ts: Date.now(),
+          });
+          emitCutscene({ ...MOCK_CUTSCENE, ts: Date.now() });
+          emitLectureState('verdicted');
+        });
+        return;
+      }
       schedule(5000, loop);
-      cycle += 1;
-      if (cycle > 100) return;
     };
     loop();
   };
@@ -140,6 +220,8 @@ export function createMockAgentAdapter(
     async startSession(_subjectSlug) {
       if (disposed) return;
       emitConn('connected');
+      // 초기 체크리스트 broadcast.
+      emitLectureState('lecturing');
       const profile = resolveProfile(overrideProfile);
       if (profile === 'burst') runBurst();
       else if (profile === 'silence') runSilence();

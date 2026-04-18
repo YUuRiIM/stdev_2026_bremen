@@ -1,3 +1,9 @@
+import type {
+  LectureState,
+  LectureVerdictApplied,
+  CutscenePlay,
+} from '@mys/shared/protocol';
+
 export type ConnectionState = 'connected' | 'reconnecting' | 'closed';
 export type RecordingState = 'idle' | 'listening' | 'sending' | 'awaiting_agent';
 
@@ -11,6 +17,12 @@ export interface AdapterEvents {
   onUserTranscript?: (text: string, isFinal: boolean) => void;
   onStateChange?: (state: RecordingState) => void;
   onConnectionChange?: (state: ConnectionState) => void;
+  /** `lecture.state` data channel — objective 체크리스트 라이브 업데이트. */
+  onLectureState?: (state: LectureState) => void;
+  /** `lecture.verdict_applied` — 세션 종료 최종 판정. */
+  onVerdictApplied?: (verdict: LectureVerdictApplied) => void;
+  /** `cutscene.play` — 풀스크린 컷씬 (TTS는 agent 측이 mute). */
+  onCutscenePlay?: (cutscene: CutscenePlay) => void;
 }
 
 export type Unsubscribe = () => void;
