@@ -216,17 +216,7 @@ h1 {
 
 /* === index.css (legacy roll-up) === */
 
-/* Responsive Styles */
-@media (max-width: 960px) {
-  .confirm-layout {
-    grid-template-columns: 1fr;
-  }
 
-  .detail-layout,
-  .lobby-body {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Unused Legacy Styles (for future cleanup) */
 .post-it {
@@ -239,16 +229,14 @@ h1 {
   font-size: 0.9rem;
 }
 
-.confirm-layout,
+
 .detail-layout,
 .lobby-body {
   display: grid;
   gap: 24px;
 }
 
-.confirm-layout {
-  grid-template-columns: 1.6fr 1fr;
-}
+
 
 .preview-panel,
 .chapter-board,
@@ -518,16 +506,7 @@ h1 {
   transform: translateY(-2px);
 }
 
-@media (max-width: 960px) {
-  .confirm-layout {
-    grid-template-columns: 1fr;
-  }
 
-  .detail-layout,
-  .lobby-body {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* === HomeScreen.css === */
 .home-grid {

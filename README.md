@@ -18,6 +18,10 @@ corepack prepare pnpm@9 --activate
 
 또는 Homebrew: `brew install pnpm`
 
+윈도우:
+```
+npm install -g pnpm
+```
 ---
 
 ## 설치

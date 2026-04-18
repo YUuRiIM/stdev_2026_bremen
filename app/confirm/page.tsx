@@ -9,7 +9,7 @@ const fermatColorful = '/assets/images/fermat-png-colorful.png'
 const cvFermat = '/assets/images/cv-fermat-nopostit.png'
 const pickButton = '/assets/images/pick-button.png'
 
-function CharacterConfirmScreen () {
+function CharacterConfirmScreen() {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const router = useRouter()
@@ -33,24 +33,24 @@ function CharacterConfirmScreen () {
   }
 
   return (
-    <section
-      className='screen confirm-screen'
-      style={{
-        backgroundImage: `url(${bgPattern})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '100vh',
-        overflow: 'hidden'
-      }}
-    >
-      <div
-        className='confirm-layout'
+    <section className="screen confirm-screen">
+      <img
+        src={bgPattern}
+        alt=""
         style={{
-          position: 'relative',
-          width: '100%',
-          height: '100%',
-          overflow: 'hidden'
+          position: "fixed",
+          inset: 0,
+          width: "100vw",
+          height: "100vh",
+          objectFit: "cover",
+          zIndex: -1
+        }}
+      />
+
+      <div
+        className="confirm-layout"
+        style={{
+          padding: '100px'
         }}
       >
         <article
@@ -59,7 +59,7 @@ function CharacterConfirmScreen () {
             position: 'absolute',
             top: '24px',
             bottom: '24px',
-            left: '10%',
+            left: '15%',
             border: '4px solid #FFA500',
             borderRadius: 0,
             boxSizing: 'border-box',
@@ -104,7 +104,7 @@ function CharacterConfirmScreen () {
           className={`confirm-preview-panel enter-right ${isMounted ? 'enter-active' : ''}`}
           style={{
             position: 'absolute',
-            right: 0,
+            right: '100px',
             bottom: 0,
             width: 'min(38vw, 560px)',
             height: 'calc(100vh - 48px)',
@@ -131,7 +131,7 @@ function CharacterConfirmScreen () {
           />
         </div>
 
-        <Link href='/' className='character-detail__back-button'>
+        <Link href='/select' className='character-detail__back-button'>
           ←
         </Link>
       </div>

@@ -2,46 +2,35 @@ export interface DummyCharacter {
   id: string;
   name: string;
   englishName: string;
-  age: string;
-  email: string;
+  age?: string;
+  email?: string;
   subject: string;
-  education: string;
-  experience: string;
-  awards: string;
+  education?: string;
+  experience?: string;
+  awards?: string;
+  locked?: boolean;
+  lockMessage?: string;
 }
 
 export const characters: DummyCharacter[] = [
   {
-    id: 'ferma',
+    id: 'fermat',
     name: '페르마',
     englishName: 'Fermat',
-    age: '24',
-    email: 'ferma@academy.kr',
     subject: '수학',
-    education: 'MIT 수학과',
-    experience: '연구 조교 3년',
-    awards: '수학 올림피아드 금메달',
   },
   {
-    id: 'nova',
-    name: '노바',
-    englishName: 'Nova',
-    age: '22',
-    email: 'nova@academy.kr',
+    id: 'hawking',
+    name: '호킹',
+    englishName: 'Hawking',
+    subject: '천체물리',
+  },
+  {
+    id: 'elon',
+    name: '일론',
+    englishName: 'Elon',
     subject: '로켓과학',
-    education: '스탠퍼드 항공우주공학',
-    experience: '드론 개발 인턴 2년',
-    awards: '국제 로켓 경진대회 우승',
-  },
-  {
-    id: 'iris',
-    name: '아이리스',
-    englishName: 'Iris',
-    age: '23',
-    email: 'iris@academy.kr',
-    subject: '물리',
-    education: '캘리포니아 대학교 물리학',
-    experience: '양자물리 연구팀',
-    awards: '젊은 과학자 상',
+    locked: true,
+    lockMessage: '[화성 여행] DLC 구매로 획득 가능',
   },
 ];
