@@ -7,6 +7,15 @@ const inter = Inter({ subsets: ['latin'], display: 'swap' });
 export const metadata: Metadata = {
   title: 'Bremen',
   description: 'Visual novel game',
+  icons: {
+    icon: '/assets/images/fermat-profile.png',
+    apple: '/assets/images/fermat-profile.png',
+  },
+  openGraph: {
+    title: 'Bremen',
+    description: 'Visual novel game',
+    images: ['/assets/images/main-fermat.png'],
+  },
 };
 
 export default function RootLayout({
