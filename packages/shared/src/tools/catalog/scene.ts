@@ -1,10 +1,6 @@
 import { z } from 'zod';
 import type { SharedToolDef } from '../types';
-import {
-  EMOTION_CHANGE_TOPIC,
-  EmotionSchema,
-  CUTSCENE_PLAY_TOPIC,
-} from '../../protocol';
+import { CUTSCENE_PLAY_TOPIC } from '../../protocol';
 
 export const playCutscene: SharedToolDef<
   { eventKey: z.ZodString },
@@ -49,40 +45,5 @@ export const playCutscene: SharedToolDef<
     });
 
     return { ok: true, eventKey };
-  },
-};
-
-export const setEmotion: SharedToolDef<
-  {
-    emotion: z.ZodEnum<
-      [
-        'neutral',
-        'happy',
-        'joyful',
-        'embarrassed',
-        'focused',
-        'surprised',
-        'sad',
-        'worried',
-        'annoyed',
-        'affectionate',
-      ]
-    >;
-  },
-  { ok: boolean; emotion: string }
-> = {
-  name: 'setEmotion',
-  description:
-    "Change the character's visible emotion/sprite. Only call when the emotion actually changes; avoid calling during a normal reply.",
-  parameters: z.object({
-    emotion: EmotionSchema,
-  }),
-  minAffection: 'acquaintance',
-  execute: async ({ emotion }, ctx) => {
-    await ctx.publish(EMOTION_CHANGE_TOPIC, {
-      emotion,
-      ts: Date.now(),
-    });
-    return { ok: true, emotion };
   },
 };
