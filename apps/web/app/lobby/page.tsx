@@ -115,187 +115,69 @@ function MainLobbyScreen() {
 
           <div className="main-lobby-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {fermatManifest && (
-              <div className="main-lobby-character">
-                <Character
-                  manifest={fermatManifest}
-                  assetBase="/assets/fermat"
-                  width={700}
+            <img
+              src={fermatFull}
+              alt="페르마"
+              className="main-lobby-character"
+            />
+
+            <div className="main-lobby-board-shell">
+              <div className="main-lobby-board-frame">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={mainWhiteboard}
+                  alt="화이트보드"
+                  className="main-lobby-board-bg"
                 />
-              </div>
-            )}
 
-            <div
-              className="main-lobby-board-shell"
-              style={{
-                position: 'fixed',
-                top: '20px',
-                right: '20px',
-                width: '800px',
-                height: 'calc(100vh - 40px)',
-                zIndex: 10
-              }}
-            >
-              {/* 화이트보드 배경 */}
-              <img
-                src={mainWhiteboard}
-                alt="화이트보드"
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  objectFit: 'contain',
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                }}
-              />
+                <div className="main-lobby-board-viewport">
+                  <div className="main-lobby-board-content">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={mainText}
+                      alt="Chapter 1"
+                      className="main-lobby-board-title-image"
+                    />
 
-              {/* 칠판 내부 실제 표시 영역 */}
+        {boardPages.map((item) => {
+          if (item.type === 'lesson') {
+            return (
               <div
-                className="main-lobby-board-viewport"
-                style={{
-                  position: 'absolute',
-                  top: '12%',
-                  left: '8%',
-                  width: '84%',
-                  height: '68%',
-                  overflowX: 'auto',
-                  overflowY: 'hidden',
-                  zIndex: 2,
-                  scrollbarWidth: 'thin'
-                }}
+                key={item.id}
+                className={`board-node board-node--${item.status}`}
+                style={item.position}
               >
-                <h1
-                  style={{
-                    margin: 0,
-                    fontSize: '32px',
-                    fontWeight: 800,
-                    color: 'black'
-                  }}
-                >
-                  Chapter 1: 사칙연산
-                </h1>
-                {/* 가로 맵 전체 길이 */}
-                <div
-                  className="main-lobby-board-content"
-                  style={{
-                    // minWidth: '1400px',
-                    height: '100%',
-                    position: 'relative',
-                    padding: '28px 30px',
-                    boxSizing: 'border-box'
-                  }}
-                >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.image} alt="" className="board-node__image" />
+                <div className="board-node__label">
+                  {/* <span>{item.titleTop}</span> */}
+                  {/* <strong>{item.titleBottom}</strong> */}
+                </div>
+              </div>
+            );
+          }
 
-                  {/* 레벨 줄 */}
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '30px',
-                      height: '220px',
-                      position: 'relative'
-                    }}
-                  >
-                    {boardPages.map((item, index) => (
-                      <div
-                        key={item.id}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0px'
-                        }}
-                      >
-                        {/* lesson */}
-                        {item.type === 'lesson' ? (
-                          <div
-                            style={{
-                              width: '90px',
-                              display: 'flex',
-                              flexDirection: 'column',
-                              alignItems: 'center',
-                              flexShrink: 0
-                            }}
-                          >
-                            <img
-                              src={item.image}
-                              alt=""
-                              style={{
-                                width:
-                                  item.status === 'current'
-                                    ? '88px'
-                                    : '72px',
-                                height: 'auto',
-                                objectFit: 'contain'
-                              }}
-                            />
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          className="board-quiz-button"
+                          style={item.position}
+                          onClick={() => setIsLessonPopupOpen(true)}
+                        >
+                          <span className="board-quiz-button__teacher">
+                            {item.teacher}
+                          </span>
+                          <span className="board-quiz-button__title">
+                            {item.label}
+                          </span>
+                        </button>
+                      );
+                    })}
 
-                          </div>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() =>
-                              setIsLessonPopupOpen(true)
-                            }
-                            style={{
-                              width: '118px',
-                              border: 'none',
-                              background: 'transparent',
-                              cursor: 'pointer',
-                              padding: 0,
-                              flexShrink: 0
-                            }}
-                          >
-                            <div
-                              style={{
-                                marginBottom: '10px',
-                                padding: '8px',
-                                borderRadius: '10px',
-                                background: '#efefef',
-                                color: '#3d3d3d',
-                                fontSize: '12px',
-                                fontWeight: 700,
-                                lineHeight: 1.25,
-                                boxShadow:
-                                  '0 2px 8px rgba(0,0,0,0.12)'
-                              }}
-                            >
-                              {item.teacher}
-                            </div>
-
-                            <div
-                              style={{
-                                padding: '14px 8px',
-                                borderRadius: '14px',
-                                background:
-                                  'linear-gradient(180deg,#f7c14a,#e7a72f)',
-                                color: '#fff',
-                                fontSize: '20px',
-                                fontWeight: 800,
-                                lineHeight: 1.05,
-                                boxShadow:
-                                  '0 6px 0 rgba(166,118,29,0.45)'
-                              }}
-                            >
-                              {item.label}
-                            </div>
-                          </button>
-                        )}
-
-                        {/* 연결선 */}
-                        {index !== boardPages.length - 1 && (
-                          <div
-                            style={{
-                              width: '80px',
-                              transform: 'translateY(-20px)',
-                              marginLeft: '10px',
-                              borderTop:
-                                '4px dashed rgba(120,120,120,0.7)',
-                              flexShrink: 0
-                            }}
-                          />
-                        )}
-                      </div>
-                    ))}
+                    <div className="board-path board-path--one" />
+                    <div className="board-path board-path--two" />
+                    <div className="board-path board-path--three" />
                   </div>
                 </div>
 
