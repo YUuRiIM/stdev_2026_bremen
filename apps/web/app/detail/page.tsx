@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Character, useManifest } from '@/components/Character';
+import { Character, useManifest } from '@/components/character-kit';
 import { chapterClearStatus } from '@/config/gameConfig';
 
 interface Story {

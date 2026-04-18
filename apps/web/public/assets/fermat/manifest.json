@@ -525,49 +525,162 @@
       }
     },
     {
-      "name": "eyelash",
-      "role": "eyelash",
+      "role": "eyelash_upper",
+      "name": "eyelash_upper_r",
+      "side": "r",
       "group": "head",
       "z": 29,
-      "src": "layers/13_eyelash.png",
+      "src": "layers/eyelash_r_upper.png",
       "bbox": {
-        "left": 316,
-        "top": 120,
-        "right": 424,
-        "bottom": 158
-      }
+        "left": 383,
+        "top": 121,
+        "right": 422,
+        "bottom": 135
+      },
+      "tilt": -0.2174276702282114,
+      "blink_drop_px": 11.0
     },
     {
-      "name": "eyewhite",
+      "role": "eyelash_lower",
+      "name": "eyelash_lower_r",
+      "side": "r",
+      "group": "head",
+      "z": 29,
+      "src": "layers/eyelash_r_lower.png",
+      "bbox": {
+        "left": 388,
+        "top": 137,
+        "right": 406,
+        "bottom": 140
+      },
+      "tilt": -0.2174276702282114
+    },
+    {
+      "role": "eyelash_upper",
+      "name": "eyelash_upper_l",
+      "side": "l",
+      "group": "head",
+      "z": 29,
+      "src": "layers/eyelash_l_upper.png",
+      "bbox": {
+        "left": 317,
+        "top": 137,
+        "right": 356,
+        "bottom": 157
+      },
+      "tilt": -0.32309707306384006,
+      "blink_drop_px": 8.0
+    },
+    {
+      "role": "eyelash_lower",
+      "name": "eyelash_lower_l",
+      "side": "l",
+      "group": "head",
+      "z": 29,
+      "src": "layers/eyelash_l_lower.png",
+      "bbox": {
+        "left": 335,
+        "top": 149,
+        "right": 352,
+        "bottom": 157
+      },
+      "tilt": -0.32309707306384006
+    },
+    {
+      "name": "eyewhite_r",
       "role": "eyewhite",
+      "side": "r",
       "group": "head",
       "z": 30,
-      "src": "layers/14_eyewhite.png",
+      "src": "layers/eyewhite_r.png",
       "bbox": {
-        "left": 326,
+        "left": 386,
         "top": 126,
-        "right": 415,
-        "bottom": 157
-      }
+        "right": 414,
+        "bottom": 139
+      },
+      "tilt": -0.2174276702282114
     },
     {
-      "name": "irides",
+      "name": "eyewhite_l",
+      "role": "eyewhite",
+      "side": "l",
+      "group": "head",
+      "z": 30,
+      "src": "layers/eyewhite_l.png",
+      "bbox": {
+        "left": 327,
+        "top": 141,
+        "right": 352,
+        "bottom": 156
+      },
+      "tilt": -0.32309707306384006
+    },
+    {
+      "name": "irides_r",
       "role": "irides",
+      "side": "r",
       "group": "eyes",
       "z": 31,
-      "src": "layers/15_irides.png",
+      "src": "layers/irides_r.png",
       "bbox": {
-        "left": 332,
-        "top": 125,
-        "right": 408,
-        "bottom": 157
-      }
+        "left": 389,
+        "top": 126,
+        "right": 407,
+        "bottom": 139
+      },
+      "tilt": -0.2174276702282114
+    },
+    {
+      "name": "irides_l",
+      "role": "irides",
+      "side": "l",
+      "group": "eyes",
+      "z": 31,
+      "src": "layers/irides_l.png",
+      "bbox": {
+        "left": 333,
+        "top": 141,
+        "right": 351,
+        "bottom": 156
+      },
+      "tilt": -0.32309707306384006
+    },
+    {
+      "role": "eyelid_closed",
+      "name": "eyelid_closed_r",
+      "side": "r",
+      "group": "eyes",
+      "z": 32,
+      "src": "layers/eyelid_closed_r.png",
+      "bbox": {
+        "left": 386,
+        "top": 126,
+        "right": 414,
+        "bottom": 139
+      },
+      "tilt": -0.2174276702282114
+    },
+    {
+      "role": "eyelid_closed",
+      "name": "eyelid_closed_l",
+      "side": "l",
+      "group": "eyes",
+      "z": 33,
+      "src": "layers/eyelid_closed_l.png",
+      "bbox": {
+        "left": 327,
+        "top": 141,
+        "right": 352,
+        "bottom": 156
+      },
+      "tilt": -0.32309707306384006
     },
     {
       "name": "front hair",
       "role": "front hair",
       "group": "head",
-      "z": 32,
+      "z": 34,
       "src": "layers/16_front_hair.png",
       "bbox": {
         "left": 266,
