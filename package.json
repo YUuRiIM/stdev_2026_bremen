@@ -1,38 +1,24 @@
 {
-  "name": "stdev-2026-bremen",
+  "name": "stdev-2026-bremen-monorepo",
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "framer-motion": "^11.18.2",
-    "next": "^15.0.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "dev": "pnpm --filter @bremen/web dev",
+    "build": "pnpm --filter @bremen/web build",
+    "lint": "pnpm --filter @bremen/web lint",
+    "agent:dev": "pnpm --filter @mys/agent dev",
+    "agent:smoke": "cd apps/agent && SILERO_SKIP_LOAD=1 pnpm exec tsx src/smoke.ts",
+    "shared:typecheck": "pnpm --filter @mys/shared typecheck",
+    "shared:test": "pnpm --filter @mys/shared test",
+    "typecheck": "pnpm -r typecheck"
   },
   "devDependencies": {
-    "@types/node": "^22.9.0",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "eslint": "^9",
-    "eslint-config-next": "^15.0.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "@types/node": "^22.9.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
   }
 }
