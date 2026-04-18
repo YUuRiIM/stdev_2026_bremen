@@ -8,7 +8,7 @@
  * Message directions:
  *   - Client → Agent: AuthRefresh, ChalkboardUpdate, ChalkboardClear,
  *     UserText, CutsceneEnd
- *   - Agent → Client: CutscenePlay, EmotionChange, LectureState,
+ *   - Agent → Client: CutscenePlay, LectureState,
  *     LectureJudgePending, LectureVerdictApplied, ShowFormula,
  *     SuggestTypeInput
  *
@@ -31,7 +31,6 @@
 export * from './auth';
 export * from './chalkboard';
 export * from './cutscene';
-export * from './emotion';
 export * from './formula';
 export * from './lecture';
 
@@ -56,7 +55,6 @@ import {
   CUTSCENE_END_TOPIC,
   CUTSCENE_PLAY_TOPIC,
 } from './cutscene';
-import { EmotionChangeSchema, EMOTION_CHANGE_TOPIC } from './emotion';
 import { ShowFormulaSchema, SHOW_FORMULA_TOPIC } from './formula';
 import {
   LectureJudgePendingSchema,
@@ -76,7 +74,6 @@ export const DATA_CHANNEL_TOPICS = {
   SuggestTypeInput: SUGGEST_TYPE_INPUT_TOPIC,
   CutscenePlay: CUTSCENE_PLAY_TOPIC,
   CutsceneEnd: CUTSCENE_END_TOPIC,
-  EmotionChange: EMOTION_CHANGE_TOPIC,
   ShowFormula: SHOW_FORMULA_TOPIC,
   LectureState: LECTURE_STATE_TOPIC,
   LectureJudgePending: LECTURE_JUDGE_PENDING_TOPIC,
@@ -92,7 +89,6 @@ export const SCHEMAS_BY_TOPIC = {
   [SUGGEST_TYPE_INPUT_TOPIC]: SuggestTypeInputSchema,
   [CUTSCENE_PLAY_TOPIC]: CutscenePlaySchema,
   [CUTSCENE_END_TOPIC]: CutsceneEndSchema,
-  [EMOTION_CHANGE_TOPIC]: EmotionChangeSchema,
   [SHOW_FORMULA_TOPIC]: ShowFormulaSchema,
   [LECTURE_STATE_TOPIC]: LectureStateSchema,
   [LECTURE_JUDGE_PENDING_TOPIC]: LectureJudgePendingSchema,
