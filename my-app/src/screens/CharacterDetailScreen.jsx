@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './CharacterDetailScreen.css';
+import { Character, useManifest } from '../components/Character';
 import { chapterClearStatus } from '../config/gameConfig';
+import bgFermat from '../assets/images/bg-fermat.png';
 import fermatFull from '../assets/images/fermat-full.png';
 import fermatProfile from '../assets/images/fermat-profile.png';
 import hawkingFull from '../assets/images/hawking-full.png';
@@ -65,16 +67,39 @@ const characters = [
 function CharacterDetailScreen() {
   const [selectedCharacterId, setSelectedCharacterId] = useState('fermat');
   const [tab, setTab] = useState('info');
+  const fermatManifest = useManifest('/assets/fermat/manifest.json');
 
   const character = characters.find(c => c.id === selectedCharacterId);
   const isStoryUnlocked = (story) => !!chapterClearStatus[`chapter${story.chapter}`];
+  const isLockedCharacter = selectedCharacterId === 'hawking' || selectedCharacterId === 'elon';
+  const lockMessage = selectedCharacterId === 'hawking'
+    ? '메인 캐릭터 변경으로 획득 가능'
+    : '[화성 여행] DLC 구매로 획득 가능';
+  const backgroundImage = selectedCharacterId === 'fermat' ? bgFermat : character.fullImage;
 
   return (
     <section className="character-detail-screen">
       {/* 배경 + 캐릭터 전신 레이어 */}
-      <div className="character-detail__background">
-        <img src={character.fullImage} alt={`${character.name} 전신`} className="character-detail__full-image" />
+      <div className={`character-detail__background ${isLockedCharacter ? 'blocked' : ''}`}>
+        <img src={backgroundImage} alt={`${character.name} 전신`} className="character-detail__full-image" />
       </div>
+      {selectedCharacterId === 'fermat' && fermatManifest && (
+        <div className="character-detail__character-overlay">
+          <Character
+            manifest={fermatManifest}
+            assetBase="/assets/fermat"
+            width={700}
+          />
+        </div>
+      )}
+      {isLockedCharacter && (
+        <div className="character-detail__locked-overlay">
+          <div className="character-detail__locked-card">
+            <div className="character-detail__lock-icon">🔒</div>
+            <p className="character-detail__locked-text">{lockMessage}</p>
+          </div>
+        </div>
+      )}
 
       {/* 뒤로 가기 버튼 */}
       <Link to="/" className="character-detail__back-button">
@@ -96,7 +121,7 @@ function CharacterDetailScreen() {
       </aside>
 
       {/* 우측 정보 패널 */}
-      <div className="character-detail__info-panel">
+      <div className={`character-detail__info-panel ${isLockedCharacter ? 'blocked' : ''}`}>
         {/* 헤더 */}
         <div className="character-detail__panel-header">
           <h1 className="character-detail__character-name">{character.name}</h1>

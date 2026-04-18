@@ -21,6 +21,24 @@
   object-fit: cover;
 }
 
+.character-detail__character-overlay {
+  position: absolute;
+  left: 10%;
+  bottom: -10px;
+  width: auto;
+  max-width: calc(100% - 60px);
+  max-height: calc(100% - 60px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.character-detail__character-overlay > * {
+  pointer-events: all;
+}
+
 .character-detail__back-button {
   position: absolute;
   top: 24px;
@@ -51,7 +69,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  z-index: 10;
+  z-index: 30;
 }
 
 .character-detail__portrait {
@@ -106,6 +124,45 @@
   opacity: 0.4;
   pointer-events: none;
   z-index: 1;
+}
+
+.character-detail__background.blocked,
+.character-detail__info-panel.blocked {
+  filter: grayscale(1) brightness(0.6);
+}
+
+.character-detail__locked-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.character-detail__locked-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 26px 28px;
+  max-width: 380px;
+  border-radius: 24px;
+  background: rgba(10, 10, 10, 0.52);
+  text-align: center;
+}
+
+.character-detail__lock-icon {
+  font-size: 42px;
+}
+
+.character-detail__locked-text {
+  margin: 0;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1.7;
 }
 
 .character-detail__panel-header,
