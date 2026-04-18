@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const boardImg = '/assets/images/quiz-board.png';
 const correctImg = '/assets/images/quiz-correct.png';
@@ -10,6 +11,8 @@ export default function QuizClient() {
   const [selected, setSelected] = useState<number | null>(null);
   const [result, setResult] = useState<'correct' | 'incorrect' | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const router = useRouter();
 
   const options = [9, 12, 15, 18];
   const correctIndex = 1; // options[1] === 12
@@ -23,6 +26,19 @@ export default function QuizClient() {
     // When user clicked the screen after an incorrect answer, show explanation inside the board
     if (result === 'incorrect' && !showExplanation) {
       setShowExplanation(true);
+      return;
+    }
+
+    // If explanation is already shown, a further click opens the completion popup
+    if (result === 'incorrect' && showExplanation && !showPopup) {
+      setShowPopup(true);
+      return;
+    }
+
+    // If the user answered correctly, clicking the screen should open the completion popup
+    if (result === 'correct' && !showPopup) {
+      setShowPopup(true);
+      return;
     }
   };
 
@@ -116,6 +132,46 @@ export default function QuizClient() {
               <br />
               <br />
               = 12
+            </div>
+          </div>
+        </div>
+      )}
+      {showPopup && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            display: 'grid',
+            placeItems: 'center',
+            background: 'rgba(0,0,0,0.45)',
+            zIndex: 1200,
+          }}
+          onClick={() => setShowPopup(false)}
+        >
+          <div
+            style={{
+              width: 'min(420px, calc(100% - 32px))',
+              background: '#fff',
+              borderRadius: 16,
+              padding: 24,
+              textAlign: 'center',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color:'#333' }}>Chapter 1을 완료하였습니다.</h3>
+            <p style={{ marginTop: 12, color: '#333' }}>다음 챕터로 넘어갑니다!</p>
+            <div style={{ marginTop: 18, display: 'flex', justifyContent: 'center' }}>
+              <button
+                type="button"
+                style={{ padding: '10px 18px', borderRadius: 999, background: '#FEBC2F', color: '#fff', border: 'none', cursor: 'pointer' }}
+                onClick={() => {
+                  router.push('/lobby');
+                }}
+              >
+                확인
+              </button>
             </div>
           </div>
         </div>
