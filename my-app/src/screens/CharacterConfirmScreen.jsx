@@ -1,42 +1,158 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import './CharacterConfirmScreen.css'
+import bgPattern from '../assets/images/bg-pattern.png'
+import fermatColorful from '../assets/images/fermat-png-colorful.png'
+import cvFermat from '../assets/images/cv-fermat-nopostit.png'
+import pickButton from '../assets/images/pick-button.png'
 
-function CharacterConfirmScreen() {
+function CharacterConfirmScreen () {
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const timeout = window.requestAnimationFrame(() => setIsMounted(true))
+    return () => window.cancelAnimationFrame(timeout)
+  }, [])
+
+  const handlePickClick = () => {
+    setIsConfirmOpen(true)
+  }
+
+  const handleConfirm = () => {
+    setIsConfirmOpen(false)
+    navigate('/lobby')
+  }
+
+  const handleCancel = () => {
+    setIsConfirmOpen(false)
+  }
+
   return (
-    <section className="screen screen--confirm">
-      <div className="screen-header">
-        <p className="eyebrow">선발 확정</p>
-        <h1>캐릭터 선택 확인</h1>
-        <p className="screen-description">
-          선택한 캐릭터의 상세 이력서와 일러스트를 확인한 뒤 선발을 확정합니다.
-        </p>
-      </div>
+    <section
+      className='screen confirm-screen'
+      style={{
+        backgroundImage: `url(${bgPattern})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%',
+        height: '100vh',
+        overflow: 'hidden'
+      }}
+    >
+      <div
+        className='confirm-layout'
+        style={{
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          overflow: 'hidden'
+        }}
+      >
+        <article
+          className={`confirm-resume-card confirm-resume-card--large enter-left ${isMounted ? 'enter-active' : ''}`}
+          style={{
+            position: 'absolute',
+            top: '24px',
+            bottom: '24px',
+            left: '10%',
+            border: '4px solid #FFA500',
+            borderRadius: 0,
+            boxSizing: 'border-box',
+            overflow: 'hidden'
+          }}
+        >
+          <img
+            src={cvFermat}
+            alt='이력서'
+            style={{
+              display: 'block',
+              height: '100%',
+              width: 'auto',
+              objectFit: 'contain',
+              margin: 0,
+              padding: 0
+            }}
+          />
 
-      <div className="confirm-layout">
-        <article className="resume-card resume-card--large">
-          <div className="resume-card__title">선택 캐릭터 이력서</div>
-          <div className="resume-card__image resume-card__image--large">(이력서 그림)</div>
-          <div className="resume-card__body">
-            <p><strong>이름</strong> 페르마 (Fermat)</p>
-            <p><strong>나이</strong> 24</p>
-            <p><strong>이메일</strong> ferma@academy.kr</p>
-            <p><strong>학력</strong> MIT 수학과</p>
-            <p><strong>경력</strong> 연구 조교 3년</p>
-            <p><strong>수상</strong> 수학 올림피아드 금메달</p>
-          </div>
+          <button
+            type='button'
+            onClick={handlePickClick}
+            style={{
+              position: 'absolute',
+              right: '16px',
+              bottom: '16px',
+              width: '220px',
+              height: '220px',
+              backgroundImage: `url(${pickButton})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+    backgroundColor: 'transparent',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer'
+            }}
+          />
         </article>
 
-        <div className="preview-panel">
-          <div className="preview-card">
-            <div className="preview-card__title">캐릭터 일러스트</div>
-            <div className="preview-card__image">(전신 일러스트)</div>
-          </div>
-          <Link to="/lobby" className="button button--stamp">
-            선발하기
-          </Link>
+        <div
+          className={`confirm-preview-panel enter-right ${isMounted ? 'enter-active' : ''}`}
+          style={{
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            width: 'min(38vw, 560px)',
+            height: 'calc(100vh - 48px)',
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'flex-end',
+            overflow: 'hidden',
+            margin: 0,
+            padding: 0
+          }}
+        >
+          <img
+            src={fermatColorful}
+            alt='캐릭터 일러스트'
+            style={{
+              display: 'block',
+              width: 'auto',
+              height: '100%',
+              objectFit: 'contain',
+              margin: 0,
+              padding: 0
+            }}
+          />
         </div>
+
+        <Link to='/' className='character-detail__back-button'>
+          ←
+        </Link>
       </div>
+      {isConfirmOpen && (
+        <div className='confirm-dialog-overlay'>
+          <div className='confirm-dialog'>
+            <div className='confirm-dialog__header'>
+              <h2 className='confirm-dialog__title'>캐릭터 선택 안내</h2>
+            </div>
+            <p className='confirm-dialog__description'>
+              <strong>[수학] 과목을 담당하여 학습하고 수업하게 됩니다.</strong>
+              페르마를 선발하겠습니까? 캐릭터는 설정에서 추후 바꿀 수 있습니다.
+            </p>
+            <div className='confirm-dialog__actions'>
+              <button type='button' className='confirm-dialog__button confirm-dialog__button--cancel' onClick={handleCancel}>
+                아니요
+              </button>
+              <button type='button' className='confirm-dialog__button confirm-dialog__button--confirm' onClick={handleConfirm}>
+                네
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
-  );
+  )
 }
 
-export default CharacterConfirmScreen;
+export default CharacterConfirmScreen
