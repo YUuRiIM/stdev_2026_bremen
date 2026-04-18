@@ -1570,9 +1570,9 @@ h1 {
 
 .main-lobby-top {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: flex-start;
-  gap: 16px;
+  gap: 32px;
   margin-bottom: 18px;
 }
 
@@ -1618,13 +1618,14 @@ h1 {
 }
 
 .main-lobby-setting {
-  width: 34px;
-  height: 34px;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  width: 60px;
+  height: 60px;
+  border: 5px solid;
   border-radius: 50%;
   background: rgba(88, 64, 48, 0.72);
   color: white;
   cursor: pointer;
+  font-size: 30px;
 }
 
 .main-lobby-center {
@@ -1644,13 +1645,13 @@ h1 {
   pointer-events: none;
 }
 
-.main-lobby-board-shell {
-  /* 데스크톱: 화이트보드의 오른쪽 끝이 화면 오른쪽에 닿도록 설정 */
+/* .main-lobby-board-shell {
+  /* 데스크톱: 화이트보드의 오른쪽 끝이 화면 오른쪽에 닿도록 설정 
   position: absolute;
   right: 0;
-  top: 12px; /* 더 위로 이동 */
+  top: 12px; /* 더 위로 이동 
   padding-top: 18px;
-  /* 기본 너비는 프레임의 max-width에 따름 */
+  /* 기본 너비는 프레임의 max-width에 따름 
 }
 
 .main-lobby-board-bg {
@@ -1664,7 +1665,7 @@ h1 {
   z-index: 1;
 }
 
-/* 화이트보드 이미지를 약 4cm(≈152px) 위로 올림 */
+/* 화이트보드 이미지를 약 4cm(≈152px) 위로 올림 
 .main-lobby-board-bg {
   transform: translateY(-152px);
 }
@@ -1691,12 +1692,12 @@ h1 {
 
 .main-lobby-board-content {
   position: relative;
-  /* 컨텐츠 너비를 프레임에 맞춰 확장 */
+  /* 컨텐츠 너비를 프레임에 맞춰 확장 
   width: 820px;
   height: 100%;
 }
 
-/* 보드 내부의 모든 컨텐츠를 약 2cm(≈76px) 위로 올려 시각적으로 배경과 맞춤 */
+/* 보드 내부의 모든 컨텐츠를 약 2cm(≈76px) 위로 올려 시각적으로 배경과 맞춤 
 .main-lobby-board-content {
   transform: translateY(-76px);
 }
@@ -1852,7 +1853,7 @@ h1 {
   height: 100%;
   background: #f0ae2c;
   border-radius: 999px;
-}
+} */
 
 .main-lobby-bottom {
   position: absolute;
@@ -1903,10 +1904,12 @@ h1 {
   display: flex;
   align-items: center;
   gap: 12px;
+  z-index: 100;
 }
 
 .main-lobby-action {
-  min-width: 116px;
+  min-width: 200px;
+  height: 100px;
   padding: 16px 24px;
   border-radius: 999px;
   text-decoration: none;
@@ -1915,16 +1918,22 @@ h1 {
   font-weight: 800;
   line-height: 1;
   cursor: pointer;
+  text-align: center;
+  align-items: center;
   box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
 }
 
 .main-lobby-action--ghost {
   background: linear-gradient(180deg, #f2f2f2, #dddddd);
   color: #525252;
+  display: flex;              /* 추가 */
+  justify-content: center;    /* 가로 중앙 */
 }
 
 .main-lobby-action--primary {
-  background: linear-gradient(180deg, #f7c14a, #e7a72f);
+  min-width: 250px;
+  background: #e7a72f;
+  font-size: 32px;
   color: white;
 }
 
