@@ -37,11 +37,15 @@ export interface AgentAdapter {
 export type MockProfile = 'steady' | 'burst' | 'silence';
 
 export function createAgentAdapter(overrideProfile?: MockProfile): AgentAdapter {
-  const envMode = (process.env.NEXT_PUBLIC_AGENT_ADAPTER ?? 'mock') as
+  // Default to real LiveKit adapter. Mock is opt-in via
+  //   NEXT_PUBLIC_AGENT_ADAPTER=mock
+  // or
+  //   ?adapter=mock
+  // (for debug / /lecture/debug component snapshots).
+  const envMode = (process.env.NEXT_PUBLIC_AGENT_ADAPTER ?? 'real') as
     | 'mock'
     | 'real';
 
-  // Runtime override via ?adapter=real query string (dev convenience).
   let mode = envMode;
   if (typeof window !== 'undefined') {
     const urlAdapter = new URLSearchParams(window.location.search).get(
@@ -50,13 +54,13 @@ export function createAgentAdapter(overrideProfile?: MockProfile): AgentAdapter 
     if (urlAdapter === 'real' || urlAdapter === 'mock') mode = urlAdapter;
   }
 
-  if (mode === 'real') {
-    const { createLiveKitAgentAdapter } =
-      require('./agent-adapter.livekit') as typeof import('./agent-adapter.livekit');
-    return createLiveKitAgentAdapter();
+  if (mode === 'mock') {
+    const { createMockAgentAdapter } =
+      require('./agent-adapter.mock') as typeof import('./agent-adapter.mock');
+    return createMockAgentAdapter(overrideProfile);
   }
 
-  const { createMockAgentAdapter } =
-    require('./agent-adapter.mock') as typeof import('./agent-adapter.mock');
-  return createMockAgentAdapter(overrideProfile);
+  const { createLiveKitAgentAdapter } =
+    require('./agent-adapter.livekit') as typeof import('./agent-adapter.livekit');
+  return createLiveKitAgentAdapter();
 }
