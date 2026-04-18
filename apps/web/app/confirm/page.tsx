@@ -1,13 +1,18 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 const bgPattern = '/assets/images/bg-pattern.png'
 const pickButton = '/assets/images/pick-button.png'
 
-const characterMap = {
+const characterMap: Record<string, {
+  name: string
+  subject: string
+  colorful: string
+  resume: string
+}> = {
   fermat: {
     name: '페르마',
     subject: '수학',
@@ -191,4 +196,10 @@ function CharacterConfirmScreen() {
   )
 }
 
-export default CharacterConfirmScreen
+export default function Page() {
+  return (
+    <Suspense fallback={null}>
+      <CharacterConfirmScreen />
+    </Suspense>
+  )
+}
