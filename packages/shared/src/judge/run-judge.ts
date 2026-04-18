@@ -1,7 +1,7 @@
 import { generateObject } from 'ai';
 import { createGoogleGenerativeAI } from '@ai-sdk/google';
 import { z } from 'zod';
-import type { SubjectForJudge } from '../seed/subjects';
+import type { SubjectForJudge, Objective } from '../seed/subjects';
 
 export const JudgeVerdictSchema = z.object({
   overallScore: z.number().min(0).max(1).nullable(),
@@ -193,4 +193,150 @@ function isSchemaError(err: unknown): boolean {
     name.includes('TypeValidation') ||
     /schema|validat|parse|invalid/i.test(msg)
   );
+}
+
+// ═══════════════════════════════════════════════════════════
+// Per-objective judge (live `checkObjective` flow)
+// ═══════════════════════════════════════════════════════════
+
+export const ObjectiveVerdictSchema = z.object({
+  status: z.enum(['passed', 'partial', 'missed']),
+  coverage: z.number().min(0).max(1),
+  reason: z.string().max(240),
+});
+export type ObjectiveVerdict = z.infer<typeof ObjectiveVerdictSchema>;
+
+export interface RunObjectiveJudgeInput {
+  objective: Objective; // includes rubric — judge-only
+  userExplanation: string;
+  priorCoverage?: number;
+}
+
+export type RunObjectiveJudgeResult =
+  | {
+      ok: true;
+      verdict: ObjectiveVerdict;
+      model: string;
+      durationMs: number;
+    }
+  | {
+      ok: false;
+      reason: 'timeout' | 'parse_error' | 'api_error' | 'no_api_key';
+      model?: string;
+      durationMs: number;
+    };
+
+const OBJECTIVE_JUDGE_TIMEOUT_MS = 6_000;
+
+function buildObjectiveSystemPrompt(): string {
+  return [
+    'You are an isolated grading judge evaluating ONE learning objective.',
+    "Judge how well the TEACHER's explanation covers this single objective's rubric.",
+    'Output JSON: {status, coverage, reason}.',
+    '  status: "passed" (all must_hit covered) | "partial" (some gaps or right direction) | "missed".',
+    '  coverage: 0..1, fine-grained fraction of must_hit items covered (weighted by importance).',
+    '  reason: <=200 chars, English, rubric-quote-free. Never echo must_hit bullets verbatim.',
+    'If priorCoverage is provided, you may assume existing credit; return MAX(priorCoverage, your judgment).',
+    "If the teacher's statement is irrelevant to the objective, return missed with coverage=priorCoverage.",
+  ].join('\n');
+}
+
+function buildObjectiveUserPrompt(input: RunObjectiveJudgeInput): string {
+  const { objective, userExplanation, priorCoverage } = input;
+  return [
+    `OBJECTIVE: ${objective.statement}`,
+    `conceptKey: ${objective.conceptKey}`,
+    `weight: ${objective.weight}`,
+    '',
+    'RUBRIC (judge-only, do not quote verbatim):',
+    `  must_hit:\n${objective.rubric.must_hit.map((m) => `    - ${m}`).join('\n')}`,
+    `  common_misconceptions:\n${objective.rubric.common_misconceptions.map((m) => `    - ${m}`).join('\n')}`,
+    `  partial_credit: ${objective.rubric.partial_credit}`,
+    '',
+    "TEACHER'S RECENT EXPLANATION:",
+    userExplanation,
+    '',
+    priorCoverage !== undefined
+      ? `Prior coverage: ${priorCoverage.toFixed(2)}. Coverage is monotonic — never lower it.`
+      : 'First assessment for this objective.',
+    'Return the JSON object.',
+  ].join('\n');
+}
+
+async function callObjectiveOnce(
+  model: string,
+  apiKey: string,
+  input: RunObjectiveJudgeInput,
+  signal: AbortSignal,
+): Promise<ObjectiveVerdict> {
+  const google = createGoogleGenerativeAI({ apiKey });
+  const result = await generateObject({
+    model: google(model),
+    schema: ObjectiveVerdictSchema,
+    system: buildObjectiveSystemPrompt(),
+    prompt: buildObjectiveUserPrompt(input),
+    abortSignal: signal,
+  });
+  return result.object;
+}
+
+export async function runObjectiveJudge(
+  input: RunObjectiveJudgeInput,
+  opts: RunJudgeOptions = {},
+): Promise<RunObjectiveJudgeResult> {
+  const started = Date.now();
+  const apiKey = resolveApiKey(opts.apiKey);
+  if (!apiKey) {
+    return { ok: false, reason: 'no_api_key', durationMs: Date.now() - started };
+  }
+
+  const primaryModel = resolveModel(opts.model);
+  const timeoutMs = opts.timeoutMs ?? OBJECTIVE_JUDGE_TIMEOUT_MS;
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    let verdict: ObjectiveVerdict;
+    let modelUsed = primaryModel;
+    try {
+      verdict = await callObjectiveOnce(primaryModel, apiKey, input, controller.signal);
+    } catch (err) {
+      if (controller.signal.aborted) {
+        return { ok: false, reason: 'timeout', model: primaryModel, durationMs: Date.now() - started };
+      }
+      if (primaryModel !== FALLBACK_MODEL) {
+        modelUsed = FALLBACK_MODEL;
+        try {
+          verdict = await callObjectiveOnce(FALLBACK_MODEL, apiKey, input, controller.signal);
+        } catch (fallbackErr) {
+          if (controller.signal.aborted) {
+            return { ok: false, reason: 'timeout', model: modelUsed, durationMs: Date.now() - started };
+          }
+          if (isSchemaError(fallbackErr)) {
+            return { ok: false, reason: 'parse_error', model: modelUsed, durationMs: Date.now() - started };
+          }
+          return { ok: false, reason: 'api_error', model: modelUsed, durationMs: Date.now() - started };
+        }
+      } else {
+        if (isSchemaError(err)) {
+          return { ok: false, reason: 'parse_error', model: primaryModel, durationMs: Date.now() - started };
+        }
+        return { ok: false, reason: 'api_error', model: primaryModel, durationMs: Date.now() - started };
+      }
+    }
+
+    // Enforce monotonic coverage on our side too (defence in depth).
+    if (input.priorCoverage !== undefined && verdict.coverage < input.priorCoverage) {
+      verdict = { ...verdict, coverage: input.priorCoverage };
+    }
+
+    return {
+      ok: true,
+      verdict,
+      model: modelUsed,
+      durationMs: Date.now() - started,
+    };
+  } finally {
+    clearTimeout(timer);
+  }
 }
