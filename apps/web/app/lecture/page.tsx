@@ -7,6 +7,7 @@ import { AgentBubble } from '@/components/lecture/AgentBubble';
 import { CharacterStage } from '@/components/lecture/CharacterStage';
 import { EndSessionButton } from '@/components/lecture/EndSessionButton';
 import { LectureScene } from '@/components/lecture/LectureScene';
+import { ObjectiveChecklist } from '@/components/lecture/ObjectiveChecklist';
 import { RecordingIndicator } from '@/components/lecture/RecordingIndicator';
 import { SubjectHeader } from '@/components/lecture/SubjectHeader';
 import { UserTranscript } from '@/components/lecture/UserTranscript';
@@ -47,6 +48,18 @@ export default function LecturePage() {
       onConnectionChange: (conn) => {
         if (cancelled) return;
         dispatch({ type: 'CONN', state: conn });
+      },
+      onLectureState: (lectureState) => {
+        if (cancelled) return;
+        dispatch({ type: 'LECTURE_STATE', state: lectureState });
+      },
+      onVerdictApplied: (verdict) => {
+        if (cancelled) return;
+        dispatch({ type: 'VERDICT_APPLIED', verdict });
+      },
+      onCutscenePlay: (cutscene) => {
+        if (cancelled) return;
+        dispatch({ type: 'CUTSCENE_PLAY', cutscene });
       },
     });
 
@@ -117,6 +130,9 @@ export default function LecturePage() {
 
       <div className="relative flex flex-1 items-end">
         <CharacterStage />
+        <div className="pointer-events-auto absolute left-6 top-6 md:left-10">
+          <ObjectiveChecklist objectives={state.objectivesStatus} />
+        </div>
         <div className="pointer-events-none absolute right-6 top-6 hidden md:block">
           <AgentBubble message={state.agentMessage} />
         </div>

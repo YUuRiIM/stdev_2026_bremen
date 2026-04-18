@@ -6,11 +6,13 @@ import { useMemo } from 'react';
 import { AgentBubble } from '@/components/lecture/AgentBubble';
 import { CharacterStage } from '@/components/lecture/CharacterStage';
 import { EndSessionButton } from '@/components/lecture/EndSessionButton';
+import { ObjectiveChecklist } from '@/components/lecture/ObjectiveChecklist';
 import { RecordingIndicator } from '@/components/lecture/RecordingIndicator';
 import { SubjectHeader } from '@/components/lecture/SubjectHeader';
 import { UserTranscript } from '@/components/lecture/UserTranscript';
 import { LECTURE_SUBJECTS } from '@/data/lecture-subjects';
 import type { AgentMessage, RecordingState } from '@/services/agent-adapter';
+import type { ObjectiveStatus } from '@/services/session-state';
 
 const REC_STATES: RecordingState[] = [
   'idle',
@@ -28,6 +30,33 @@ const SAMPLE_AGENT_SHORT: AgentMessage = {
   kind: 'question',
   text: '서로소 조건은 어디에 쓰였나?',
 };
+
+const SAMPLE_OBJECTIVES_PROGRESS: ObjectiveStatus[] = [
+  {
+    id: 'obj_flt_statement',
+    statement:
+      '페르마 소정리의 정리 선언문을 정확히 설명한다 (p가 소수이고 gcd(a,p)=1일 때 a^(p-1) ≡ 1 mod p).',
+    coverage: 0.85,
+  },
+  {
+    id: 'obj_flt_example',
+    statement:
+      '구체 수치 예시로 정리를 검증한다 (예: 2^4 mod 5 = 1).',
+    coverage: 0.5,
+  },
+  {
+    id: 'obj_flt_applications',
+    statement:
+      '페르마 소정리의 실제 활용처를 하나 이상 제시한다 (소수 판정, RSA 등).',
+    coverage: 0,
+  },
+];
+
+const SAMPLE_OBJECTIVES_FRESH: ObjectiveStatus[] =
+  SAMPLE_OBJECTIVES_PROGRESS.map((o) => ({ ...o, coverage: 0 }));
+
+const SAMPLE_OBJECTIVES_COMPLETE: ObjectiveStatus[] =
+  SAMPLE_OBJECTIVES_PROGRESS.map((o) => ({ ...o, coverage: 0.9 }));
 
 export default function LectureDebugPage() {
   const subject = useMemo(() => LECTURE_SUBJECTS[0]!, []);
@@ -107,6 +136,17 @@ export default function LectureDebugPage() {
 
         <DebugCell title="EndSessionButton">
           <EndSessionButton onEnd={() => alert('끝내기 클릭 — debug')} />
+        </DebugCell>
+
+        <DebugCell
+          title="ObjectiveChecklist (fresh / progress / complete)"
+          className="md:col-span-2"
+        >
+          <div className="flex flex-col gap-4 md:flex-row">
+            <ObjectiveChecklist objectives={SAMPLE_OBJECTIVES_FRESH} />
+            <ObjectiveChecklist objectives={SAMPLE_OBJECTIVES_PROGRESS} />
+            <ObjectiveChecklist objectives={SAMPLE_OBJECTIVES_COMPLETE} />
+          </div>
         </DebugCell>
 
         <DebugCell title="CharacterStage (live manifest)">
