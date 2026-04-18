@@ -1,0 +1,54 @@
+/* preflight 미포함. 토큰 + 수동 scope reset + components/utilities */
+@tailwind components;
+@tailwind utilities;
+
+.lecture-scope {
+  --background: 0 0% 100%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96.1%;
+  --secondary-foreground: 222.2 47.4% 11.2%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 222.2 84% 4.9%;
+  --radius: 0.75rem;
+}
+
+/* 수동 scope reset (preflight 대체) */
+.lecture-scope,
+.lecture-scope *,
+.lecture-scope *::before,
+.lecture-scope *::after {
+  box-sizing: border-box;
+  border: 0 solid hsl(var(--border));
+}
+
+.lecture-scope h1,
+.lecture-scope h2,
+.lecture-scope h3,
+.lecture-scope p {
+  margin: 0;
+}
+
+.lecture-scope button {
+  font: inherit;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.lecture-scope svg {
+  display: inline-block;
+  vertical-align: middle;
+}
