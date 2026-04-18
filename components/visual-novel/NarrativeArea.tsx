@@ -5,9 +5,10 @@ type Props = {
   onNext: () => void;
 };
 
-export default function NarrativeArea({ text, onNext }: Props) {
+export default function NarrativeArea({ text }: Props) {
+  // Click bubbles to <section onClick={next}>; clicking anywhere advances.
   return (
-    <div className="narrative-area" onClick={(e) => e.stopPropagation()}>
+    <div className="narrative-area">
       <p className="narrative-text">
         {text.split('\n').map((line, i) => (
           <span key={i}>
@@ -16,7 +17,7 @@ export default function NarrativeArea({ text, onNext }: Props) {
           </span>
         ))}
       </p>
-      <button className="next-icon" onClick={onNext}>
+      <button className="next-icon" aria-label="다음">
         ▶
       </button>
     </div>
