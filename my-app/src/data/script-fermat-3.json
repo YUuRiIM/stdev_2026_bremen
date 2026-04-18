@@ -1,0 +1,17 @@
+[
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "세 번째 이야기로 들어가겠습니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": true,
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "페르마의 세 번째 이야기가 시작됩니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": false,
+    "backgroundImage": "bg-lobby.png"
+  }
+]

@@ -33,7 +33,7 @@ function App() {
             <Route path="/confirm" element={<CharacterConfirmScreen />} />
             <Route path="/lobby" element={<MainLobbyScreen />} />
             <Route path="/detail" element={<CharacterDetailScreen />} />
-            <Route path="/visual-novel" element={<VisualNovelScreen />} />
+            <Route path="/visual-novel/:scriptId" element={<VisualNovelScreen />} />
             <Route path="*" element={<HomeScreen />} />
           </Routes>
         </main>

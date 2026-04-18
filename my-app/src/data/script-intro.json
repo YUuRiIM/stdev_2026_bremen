@@ -1,0 +1,17 @@
+[
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "안녕하세요, 교수님. 저는 페르마라고 합니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": true,
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "연구실에 도착한 교수님은 페르마를 만납니다.",
+    "characterImage": "fermat-png.png",
+    "isSpeaking": false,
+    "backgroundImage": "bg-lobby.png"
+  }
+]

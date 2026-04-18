@@ -1,6 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import scriptData from '../data/script.json';
+import scriptIntro from '../data/script-intro.json';
+import scriptFermat1 from '../data/script-fermat-1.json';
+import scriptFermat2 from '../data/script-fermat-2.json';
+import scriptFermat3 from '../data/script-fermat-3.json';
+import scriptFermat4 from '../data/script-fermat-4.json';
 import bgLobby from '../assets/images/bg-lobby.png';
 import fermatPng from '../assets/images/fermat-png.png';
 import fermatPngDark from '../assets/images/fermat-png-dark.png';
@@ -11,15 +16,26 @@ const images = {
   'fermat-png-dark.png': fermatPngDark,
 };
 
+const scripts = {
+  'intro': scriptIntro,
+  'fermat-1': scriptFermat1,
+  'fermat-2': scriptFermat2,
+  'fermat-3': scriptFermat3,
+  'fermat-4': scriptFermat4,
+  'default': scriptData,
+};
+
 function VisualNovelScreen() {
+  const { scriptId } = useParams();
+  const script = scripts[scriptId] || scripts['default'];
   const [index, setIndex] = useState(0);
   const [showSkipModal, setShowSkipModal] = useState(false);
   const navigate = useNavigate();
 
-  const current = scriptData[index];
+  const current = script[index];
 
   const next = () => {
-    if (index < scriptData.length - 1) {
+    if (index < script.length - 1) {
       setIndex(index + 1);
     } else {
       navigate('/');
@@ -71,14 +87,28 @@ function VisualNovelScreen() {
       {current.speaker === 'character' && (
         <div className="dialogue-box" onClick={(e) => e.stopPropagation()}>
           <div className="speaker-name">{current.name}</div>
-          <p className="dialogue-text">{current.text}</p>
+          <p className="dialogue-text">
+            {current.text.split('\n').map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < current.text.split('\n').length - 1 && <br />}
+              </span>
+            ))}
+          </p>
           <button className="next-icon" onClick={next}>▶</button>
         </div>
       )}
 
       {current.speaker === 'narrative' && (
         <div className="narrative-area" onClick={(e) => e.stopPropagation()}>
-          <p className="narrative-text">{current.text}</p>
+          <p className="narrative-text">
+            {current.text.split('\n').map((line, i) => (
+              <span key={i}>
+                {line}
+                {i < current.text.split('\n').length - 1 && <br />}
+              </span>
+            ))}
+          </p>
           <button className="next-icon" onClick={next}>▶</button>
         </div>
       )}

@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 
 function HomeScreen() {
+  const scripts = [
+    { id: 'intro', title: '인트로', description: '연구실 도착' },
+    { id: 'fermat-1', title: '페르마 이야기 1', description: '수학의 세계' },
+    { id: 'fermat-2', title: '페르마 이야기 2', description: '두 번째 이야기' },
+    { id: 'fermat-3', title: '페르마 이야기 3', description: '세 번째 이야기' },
+    { id: 'fermat-4', title: '페르마 이야기 4', description: '마지막 이야기' },
+  ];
+
   return (
     <section className="screen screen--home">
       <div className="panel panel--wide">
@@ -31,10 +39,12 @@ function HomeScreen() {
             <strong>캐릭터 상세 화면</strong>
             <span>기본 정보 / 인연 스토리 탭</span>
           </Link>
-          <Link to="/visual-novel" className="home-card">
-            <strong>비주얼 노벨 화면</strong>
-            <span>대화/선택지 분기 UI</span>
-          </Link>
+          {scripts.map((script) => (
+            <Link key={script.id} to={`/visual-novel/${script.id}`} className="home-card">
+              <strong>{script.title}</strong>
+              <span>{script.description}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
