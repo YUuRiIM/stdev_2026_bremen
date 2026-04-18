@@ -1636,13 +1636,12 @@ h1 {
 .main-lobby-character {
   position: fixed;
   /* 기존에서 3cm 왼쪽으로 이동: calc(80px + 5cm - 3cm) -> calc(80px + 2cm) */
-  left: 15%;
+  left: 5%;
   bottom: 0;
   min-height: 70vh;
   max-height: 90vh;
   object-fit: contain;
   z-index: 3;
-  pointer-events: none;
 }
 
 /* .main-lobby-board-shell {
@@ -1858,20 +1857,18 @@ h1 {
 .main-lobby-bottom {
   position: absolute;
   left: 0;
-  right: 0;
-  /* 아래로 2cm(≈76px) 내림: 기존 120px -> 44px */
+  right: 40px;
   bottom: 44px;
   display: flex;
   justify-content: space-between;
   align-items: end;
   gap: 20px;
-  padding: 0 24px;
   z-index: 5;
 }
 
 .main-lobby-dialogue {
   color: #fff;
-  max-width: 320px;
+  max-width: 200px;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
@@ -1889,15 +1886,14 @@ h1 {
 .main-lobby-dialogue__image {
   display: block;
   /* 1.5배 확대: 기존 max 320px -> 480px */
-  max-width: 480px;
-  width: min(480px, 60vw);
+  max-width: 300px;
   height: auto;
   /* 이미지가 캐릭터 위에 보이도록 z-index를 높임 */
   position: relative;
   z-index: 6;
   margin: 0;
   /* 오른쪽으로 약 3cm 추가 이동 (기존 위치에서 더 이동) */
-  transform: translateX(calc(114px + 3cm));
+  transform: translateX(280px);
 }
 
 .main-lobby-actions {

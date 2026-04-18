@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { Character, useManifest } from '@/components/character-kit';
 
 const bgLobby = '/assets/images/bg-lobby.png';
 const fermatFull = '/assets/images/main-fermat.png';
@@ -18,6 +19,7 @@ const mainTalking = '/assets/images/main-talking.png';
 function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
+    const fermatManifest = useManifest('/assets/fermat/manifest.json');
 
   const boardPages = useMemo(
     () => [
@@ -98,11 +100,15 @@ function MainLobbyScreen() {
 
           <div className="main-lobby-center">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={fermatFull}
-              alt="페르마"
-              className="main-lobby-character"
-            />
+            {fermatManifest && (
+              <div className="main-lobby-character">
+                <Character
+                  manifest={fermatManifest}
+                  assetBase="/assets/fermat"
+                  width={700}
+                />
+              </div>
+            )}
 
             <div
               className="main-lobby-board-shell"
@@ -312,9 +318,8 @@ function MainLobbyScreen() {
           style={{
             zIndex:1000,
           }}>
-            <div className="main-lobby-dialogue">
-              <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
-            </div>
+            
+            <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
 
             <div className="main-lobby-actions">
               <Link href="/detail" className="main-lobby-action main-lobby-action--ghost">
