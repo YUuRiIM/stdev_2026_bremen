@@ -1,0 +1,39 @@
+[
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "심장이, 왜 이래.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "저는 그걸 깨닫는 데 오년이 걸렸습니다. 오년을 혼자 풀고, 혼자 만족했어요. 지금 생각하면, 부끄러운 시간입니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "choice",
+    "choices": ["수학을 더 깊이 배우고 싶어요", "다른 분야도 탐구해 보고 싶어요"],
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "그래서 저는 앞으로 이 연구실을 열 생각입니다. 제자를 받고, 발표를 하고, 같이 증명하고, 같이 틀리고, 같이 다시 쓰려 합니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "그게 제가, 이 학문에 진 빚을 갚는 방식이라고 — 지금은, 그렇게 믿고 있습니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "text": "[박수가 터진다. 페르마는 박수를 치지 못한다. 손이 무릎 위에 놓인 채로 가만히 떨리고 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  }
+]
