@@ -12,7 +12,10 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 function LoginScreen() {
   const searchParams = useSearchParams();
-  const nextPath = searchParams.get('next') ?? '/lecture';
+  // Only forward `next` if middleware set it from a deep-link intent.
+  // Without it, /auth/callback routes first-timers to the intro and
+  // returning users to the lobby.
+  const nextPath = searchParams.get('next');
 
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
@@ -32,7 +35,9 @@ function LoginScreen() {
         typeof window !== 'undefined'
           ? window.location.origin
           : process.env.NEXT_PUBLIC_APP_URL ?? '';
-      const emailRedirectTo = `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
+      const emailRedirectTo = nextPath
+        ? `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`
+        : `${origin}/auth/callback`;
 
       const { error } = await supabase.auth.signInWithOtp({
         email: trimmed,
