@@ -32,11 +32,13 @@ export default function BackgroundLayer({ backgroundImage, characterImage }: Pro
       </div>
       <div className="character-layer">
         {characterImage && images[characterImage] && (
-          <Image
+          // next/image `fill` requires a sized parent; character-layer has
+          // `height: 85%; width: auto` (content-driven) so `fill` would collapse.
+          // Keep as <img> for natural aspect-ratio sizing (same as legacy CRA).
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={images[characterImage]}
             alt="페르마 캐릭터 스프라이트"
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
             className="character-image"
           />
         )}
