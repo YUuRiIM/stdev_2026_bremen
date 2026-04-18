@@ -33,6 +33,7 @@ export * from './chalkboard';
 export * from './cutscene';
 export * from './formula';
 export * from './lecture';
+export * from './user-transcript';
 
 import { z } from 'zod';
 import {
@@ -64,6 +65,7 @@ import {
   LECTURE_STATE_TOPIC,
   LECTURE_VERDICT_APPLIED_TOPIC,
 } from './lecture';
+import { UserTranscriptSchema, USER_TRANSCRIPT_TOPIC } from './user-transcript';
 
 /** All valid data-channel topics. Use for exhaustive switch checks. */
 export const DATA_CHANNEL_TOPICS = {
@@ -78,6 +80,7 @@ export const DATA_CHANNEL_TOPICS = {
   LectureState: LECTURE_STATE_TOPIC,
   LectureJudgePending: LECTURE_JUDGE_PENDING_TOPIC,
   LectureVerdictApplied: LECTURE_VERDICT_APPLIED_TOPIC,
+  UserTranscript: USER_TRANSCRIPT_TOPIC,
 } as const;
 
 /** Schema registry keyed by topic string. */
@@ -90,6 +93,7 @@ export const SCHEMAS_BY_TOPIC = {
   [CUTSCENE_PLAY_TOPIC]: CutscenePlaySchema,
   [CUTSCENE_END_TOPIC]: CutsceneEndSchema,
   [SHOW_FORMULA_TOPIC]: ShowFormulaSchema,
+  [USER_TRANSCRIPT_TOPIC]: UserTranscriptSchema,
   [LECTURE_STATE_TOPIC]: LectureStateSchema,
   [LECTURE_JUDGE_PENDING_TOPIC]: LectureJudgePendingSchema,
   [LECTURE_VERDICT_APPLIED_TOPIC]: LectureVerdictAppliedSchema,

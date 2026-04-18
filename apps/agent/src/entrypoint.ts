@@ -142,6 +142,17 @@ export default defineAgent({
       },
     );
 
+    // Agent → Client: broadcast user STT transcripts so FE can render live
+    // caption (interim + final). `user_input_transcribed` fires for both
+    // partial and final segments from the STT plugin.
+    session.on(voice.AgentSessionEventTypes.UserInputTranscribed, (ev) => {
+      void publish('user.transcript', {
+        text: ev.transcript,
+        isFinal: ev.isFinal,
+        ts: Date.now(),
+      });
+    });
+
     await session.start({
       agent: new MiyeonshiAgent({ instructions, tools }),
       room: ctx.room,
