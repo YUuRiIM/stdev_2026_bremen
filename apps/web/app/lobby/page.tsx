@@ -13,6 +13,7 @@ const mainNickname = '/assets/images/main_nickname.png';
 const mainCircle1 = '/assets/images/main-circle1.png';
 const mainCircle2 = '/assets/images/main-circle2.png';
 const mainCircle3 = '/assets/images/main-circle3.png';
+const mainTalking = '/assets/images/main-talking.png';
 
 function MainLobbyScreen() {
   const router = useRouter();
@@ -70,15 +71,10 @@ function MainLobbyScreen() {
               className="main-lobby-user"
               style={{ backgroundImage: `url(${mainNickname})` }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={fermatProfile}
-                alt="프로필"
-                className="main-lobby-user__avatar"
-              />
+              {/* 아바타 이미지 제거: main-nickname 위의 작은 원 이미지 삭제 */}
               <div className="main-lobby-user__info">
-                <strong>닉네임</strong>
-                <span>Lv. 100</span>
+                {/* <strong>닉네임</strong> */}
+                {/* <span>Lv. 100</span> */}
               </div>
             </div>
 
@@ -164,8 +160,9 @@ function MainLobbyScreen() {
 
           <div className="main-lobby-bottom">
             <div className="main-lobby-dialogue">
-              <div className="main-lobby-dialogue__name">페르마</div>
-              <p>좋은 아침이에요 교수님.</p>
+              {/* <div className="main-lobby-dialogue__name">페르마</div> */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
             </div>
 
             <div className="main-lobby-actions">
@@ -189,8 +186,8 @@ function MainLobbyScreen() {
       {isLessonPopupOpen && (
         <div className="main-lobby-modal-overlay">
           <div className="main-lobby-modal">
-            <h3>Chapter 1 학습</h3>
-            <p>1-3 곱셈 수업 화면으로 이동할까요?</p>
+            <h3>Chapter 1 -  시작</h3>
+            <p>수업을 시작할까요?</p>
 
             <div className="main-lobby-modal__buttons">
               <button
