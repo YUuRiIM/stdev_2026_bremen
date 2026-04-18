@@ -10,7 +10,7 @@
   align-items: center;
   gap: 16px;
   padding: 18px 24px;
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(15, 23, 42, 0.2);
   border-bottom: 1px solid rgba(148, 163, 184, 0.12);
   position: sticky;
   top: 0;

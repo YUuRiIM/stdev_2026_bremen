@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import './HomeScreen.css';
 
 function HomeScreen() {
   const scripts = [
@@ -34,6 +35,10 @@ function HomeScreen() {
           <Link to="/lobby" className="home-card">
             <strong>메인 로비 화면</strong>
             <span>베이스캠프, 프로필, 스테이지 보드</span>
+          </Link>
+          <Link to="/lobby" className="home-card">
+            <strong>전화 화면</strong>
+            <span>전화 화면</span>
           </Link>
           <Link to="/detail" className="home-card">
             <strong>캐릭터 상세 화면</strong>

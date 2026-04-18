@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './VisualNovelScreen.css';
 import scriptData from '../data/script.json';
 import scriptIntro from '../data/script-intro.json';
 import scriptFermat1 from '../data/script-fermat-1.json';

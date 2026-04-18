@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './CharacterDetailScreen.css';
+import { chapterClearStatus } from '../config/gameConfig';
 import fermatFull from '../assets/images/fermat-full.png';
 import fermatProfile from '../assets/images/fermat-profile.png';
 import hawkingFull from '../assets/images/hawking-full.png';
@@ -15,27 +17,30 @@ const characters = [
     profileImage: fermatProfile,
     fullImage: fermatFull,
     age: '24',
-    university: 'MIT',
-    height: '170cm',
-    description: '페르마는 순수 수학의 아름다움에 매료된 천재입니다. 그녀의 증명은 우아하고 간결하며, 복잡한 문제도 본질적인 통찰력으로 풀어냅니다. 강의는 엄격하지만, 학생들이 스스로 깨달을 때까지 기꺼이 기다립니다.',
+    university: 'University of Orleans',
+    height: '168cm',
+    description: '프랑스 출신 천재 대학원생으로, 최연소 연구조교로 주목받고 있다. 차분하고 냉철한 성격이지만, 재능 있는 사람에게는 은근히 관심을 보인다. 수론과 기하학에 특히 강하며, “증명하지 못한 건 아직 포기하지 않았다는 뜻이야”라는 말을 자주 한다.',
     stories: [
-      { id: 1, title: '수학의 여왕', description: '오일러 추측을 마침내 증명한 날의 이야기입니다.', locked: false },
-      { id: 2, title: '증명의 아름다움', description: '한 장의 냅킨에 모든 것을 담아낸 순간입니다.', locked: true },
+      { id: 1, chapter: 1, title: '천재 교수와 아마추어 공주님'},
+      { id: 2, chapter: 2, title: '새벽, 연구실, 지도' },
+      { id: 3, chapter: 3, title: '졸업' },
+      { id: 4, chapter: 4, title: '여백' },
     ]
   },
   {
     id: 'hawking',
     name: '호킹',
-    subject: '물리',
+    subject: '천체물리',
     profileImage: hawkingProfile,
     fullImage: hawkingFull,
-    age: '26',
-    university: 'Cambridge',
+    age: '23',
+    university: 'Oxford',
     height: '175cm',
-    description: '호킹은 우주의 신비를 탐구하는 물리학자입니다. 블랙홀의 특이점부터 우주 초기의 양자 요동까지, 그의 통찰력은 물리학의 경계를 확장했습니다. 학생들을 우주의 경이로움으로 이끕니다.',
+    description: '호킹은 우주의 신비를 탐구하는 물리학자이다. 아픈 몸에도 불구하고 블랙홀의 특이점부터 우주 초기의 양자 요동까지, 그의 통찰력은 물리학의 경계를 확장했다.',
     stories: [
-      { id: 1, title: '블랙홀의 복사', description: '블랙홀도 증발한다는 것을 깨달은 순간입니다.', locked: false },
-      { id: 2, title: '우주의 근원', description: '빅뱅 이전에는 무엇이 있었을까요?', locked: true },
+      { id: 1, chapter: 1, title: '병약 미소녀', description: '블랙홀도 증발한다는 것을 깨달은 순간입니다.' },
+      { id: 2, chapter: 2, title: '우주의 근원', description: '빅뱅 이전에는 무엇이 있었을까요?' },
+      { id: 3, chapter: 3, title: '시간의 교차', description: '시간과 공간의 경계에 다가선 순간입니다.' },
     ]
   },
   {
@@ -45,12 +50,14 @@ const characters = [
     profileImage: elonProfile,
     fullImage: elonFull,
     age: '25',
-    university: 'Stanford',
+    university: 'University of Pennsylvania',
     height: '180cm',
-    description: '일론은 불가능을 가능으로 만드는 엔지니어입니다. 그의 목표는 화성이고, 그 길을 막는 모든 난제를 직접 풀어냅니다. 열정적이고 대담하며, 팀을 극한까지 끌어올리는 리더입니다.',
+    description: '불가능이라는 단어는 일론에게는 존재하지 않는다. 화성에서 거주할 날을 꿈꾸며 그 길을 막는 모든 난제를 직접 풀어내는 열정적이고 대담한, 이 시대의 몇 안되는 개척가이다.',
     stories: [
-      { id: 1, title: '재사용 가능한 로켓', description: '첫 번째 1단계 로켓 착륙에 성공한 날입니다.', locked: false },
-      { id: 2, title: '화성으로의 여정', description: '다음 세대의 우주 여행자들을 위한 꿈입니다.', locked: true },
+      { id: 1, chapter: 1, title: '재사용', description: '첫 번째 1단계 로켓 착륙에 성공한 날입니다.' },
+      { id: 2, chapter: 2, title: '화성으로의 여정', description: '다음 세대의 우주 여행자들을 위한 꿈입니다.' },
+      { id: 3, chapter: 3, title: '스윙 바이', description: '지구와 우주를 이어주는 새로운 에너지 기반을 설계합니다.' },
+      { id: 4, chapter: 4, title: '화성 데이트', description: '미래를 연결하는 인공위성 네트워크를 완성합니다.' },
     ]
   }
 ];
@@ -60,6 +67,7 @@ function CharacterDetailScreen() {
   const [tab, setTab] = useState('info');
 
   const character = characters.find(c => c.id === selectedCharacterId);
+  const isStoryUnlocked = (story) => !!chapterClearStatus[`chapter${story.chapter}`];
 
   return (
     <section className="character-detail-screen">
@@ -122,15 +130,30 @@ function CharacterDetailScreen() {
           ) : (
             <div className="character-detail__content">
               <div className="character-detail__story-list">
-                {character.stories.map((story) => (
-                  <div
-                    key={story.id}
-                    className={`character-detail__story-card ${story.locked ? 'character-detail__story-card--locked' : ''}`}
-                  >
-                    <strong>{story.title}</strong>
-                    {!story.locked && <button className="character-detail__play-button">재생</button>}
-                  </div>
-                ))}
+                {character.stories.map((story) => {
+                  const unlocked = isStoryUnlocked(story);
+                  return (
+                    <div
+                      key={story.id}
+                      className={`character-detail__story-card ${unlocked ? 'character-detail__story-card--unlocked' : 'character-detail__story-card--locked'}`}
+                    >
+                      <div className="character-detail__story-row">
+                        <span className="character-detail__story-title">{story.title}</span>
+                        <button
+                          className="character-detail__play-button"
+                          type="button"
+                          disabled={!unlocked}
+                          aria-label="play story"
+                        >
+                          ▶
+                        </button>
+                      </div>
+                      {!unlocked && (
+                        <div className="character-detail__lock-badge">Chapter {story.chapter} 클리어 필요</div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
