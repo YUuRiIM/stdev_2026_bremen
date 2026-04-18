@@ -1,24 +1,44 @@
-import logo from './logo.svg';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import HomeScreen from './screens/HomeScreen';
+import CharacterSelectScreen from './screens/CharacterSelectScreen';
+import CharacterConfirmScreen from './screens/CharacterConfirmScreen';
+import MainLobbyScreen from './screens/MainLobbyScreen';
+import CharacterDetailScreen from './screens/CharacterDetailScreen';
+import VisualNovelScreen from './screens/VisualNovelScreen';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="app-layout">
+        <header className="app-topbar">
+          <div className="brand-group">
+            <div className="brand-mark">UI</div>
+            <div>
+              <div className="brand-title">Game UI Lab</div>
+              <div className="brand-caption">언제든 홈으로 돌아갈 수 있습니다</div>
+            </div>
+          </div>
+          <nav className="app-topnav">
+            <Link to="/" className="nav-chip">
+              HOME
+            </Link>
+          </nav>
+        </header>
+
+        <main className="app-main">
+          <Routes>
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/select" element={<CharacterSelectScreen />} />
+            <Route path="/confirm" element={<CharacterConfirmScreen />} />
+            <Route path="/lobby" element={<MainLobbyScreen />} />
+            <Route path="/detail" element={<CharacterDetailScreen />} />
+            <Route path="/visual-novel" element={<VisualNovelScreen />} />
+            <Route path="*" element={<HomeScreen />} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 

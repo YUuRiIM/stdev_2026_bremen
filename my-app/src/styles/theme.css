@@ -1,0 +1,18 @@
+:root {
+  --background: #0f172a;
+  --surface: #14233f;
+  --surface-soft: #1f2d4f;
+  --surface-strong: #0f172a;
+  --accent: #FEBC2F;
+  --accent-soft: #FFD680;
+  --text-primary: #e2e8f0;
+  --text-secondary: #94a3b8;
+  --border: #334155;
+  --danger: #FF6868;
+  --success: #22c55e;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  --radius: 24px;
+  --font: 'Inter', sans-serif;
+}
+
+/* 공용 디자인 변수: 색상만 바꾸면 전체 앱 톤이 바뀝니다. */
