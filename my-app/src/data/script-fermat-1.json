@@ -1137,112 +1137,96 @@
     "speaker": "character",
     "name": "페르마",
     "text": "……페르마입니다.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "정수론 좋아하고요. 아주 오랫동안, 혼자 공부했습니다.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "……이제는, 혼자 말고, 같이 공부하고 싶어서 왔습니다.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[랩실 선배들의 작은 박수. 아이즐이 엄지를 척.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "좋습니다. 잘 오셨어요.",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[박사가 노트북을 연다. 프로젝터가 켜진다. 화이트보드에는 지난 랩미팅의 증명이 반쯤 지워진 채 남아 있다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "그럼 — 랩미팅, 시작할까요?",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[페르마, 자리에 다시 앉는다. 노트를 편다. 숨을 조용히, 깊게 들이쉰다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "……교수님.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "저, 성 밖으로 나왔어요.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "공주 같은 건, 이제 됐어요.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "당신처럼 — 누군가와, 함께 증명하는 사람이, 되고 싶어요.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "그러니까요, 교수님.",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[페르마, 얼굴을 든다. 눈이 맑다.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "──네, 교수님!",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[햇빛이 화이트보드의 흰 여백 위로 떨어진다. 새 증명이 쓰이기를 기다리듯이.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-1.png"
   }
 ]

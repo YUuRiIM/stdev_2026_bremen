@@ -7,11 +7,20 @@ import scriptFermat2 from '../data/script-fermat-2.json';
 import scriptFermat3 from '../data/script-fermat-3.json';
 import scriptFermat4 from '../data/script-fermat-4.json';
 import bgLobby from '../assets/images/bg-lobby.png';
+import bgIntro from '../assets/images/bg-intro.png';
+import bgMem1 from '../assets/images/bg-mem-1.png';
+import bgMem2 from '../assets/images/bg-mem-2.png';
+import bgMem3 from '../assets/images/bg-mem-3.png';
 import fermatPng from '../assets/images/fermat-png.png';
 import fermatPngDark from '../assets/images/fermat-png-dark.png';
 
 const images = {
   'bg-lobby.png': bgLobby,
+  'bg-intro.png': bgIntro,
+  'bg-mem-1.png': bgMem1,
+  'bg-mem-2.png': bgMem2,
+  'bg-mem-3.png': bgMem3,
+  // 'bg-mem-4.png': bgMem4,
   'fermat-png.png': fermatPng,
   'fermat-png-dark.png': fermatPngDark,
 };

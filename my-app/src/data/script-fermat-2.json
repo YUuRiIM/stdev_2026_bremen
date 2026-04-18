@@ -1200,71 +1200,60 @@
     "speaker": "narrative",
     "name": "",
     "text": "[넘어진 페르마가, 소파에 앉아 있던 교수 위로 쏟아진다. 페르마의 손바닥 두 개가 교수 양옆 소파 쿠션을 짚는다. 코앞에 교수의 얼굴. 놀란 눈.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "……!",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "…….",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "…….",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "(가까워.)",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "(여기서 내 심장 소리, 교수님한테 들리는 거 아니야?)",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "narrative",
     "name": "",
     "text": "[정지된 3초. 세상에서 가장 긴 3초.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "죄, 죄송합니다 교수님!!!",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "character",
     "name": "페르마",
     "text": "죄송!! 진짜 죄송!! 제가, 제가 마커에 — 아, 아까 제가 떨어뜨린 그 마커에 — 발이, 발이……!!",
-    "characterImage": "fermat-png.png",
-    "backgroundImage": "bg-lobby.png"
+    "backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "narrative",
     "name": "",
-    "text": "[페르마가 벌떡 몸을 일으킨다. 너무 급하게 일어나서 이번엔 소파 팔걸이에 허벅지를 부딪친다. \"윽!\" 하고 작게 앓는 소리.]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
+    "text": "[페르마가 벌떡 몸을 일으킨다. 너무 급하게 일어나서 이번엔 소파 팔걸이에 허벅지를 부딪친다. \"윽!\" 하고 작게 앓는 소리.]","backgroundImage": "bg-mem-2.png"
   },
   {
     "speaker": "narrative",

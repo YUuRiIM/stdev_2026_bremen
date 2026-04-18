@@ -64,17 +64,21 @@ def parse_script(file_path):
 import os
 import json
 
-for i in range(1, 5):
-    txt_file = f"script-fermat-{i}.txt"
-    json_file = f"script-fermat-{i}.json"
+# script = parse_script('script-intro.txt') 
+# with open('script-intro.json', 'w', encoding='utf-8') as f: json.dump(script, f, ensure_ascii=False, indent=2) 
+# print('JSON 변환 완료')
 
-    # 파일 없으면 스킵
-    if not os.path.exists(txt_file):
-        continue
+# for i in range(1, 1):
+#     txt_file = f"script-fermat-{i}.txt"
+#     json_file = f"script-fermat-{i}.json"
 
-    script = parse_script(txt_file)
+#     # 파일 없으면 스킵
+#     if not os.path.exists(txt_file):
+#         continue
 
-    with open(json_file, 'w', encoding='utf-8') as f:
-        json.dump(script, f, ensure_ascii=False, indent=2)
+#     script = parse_script(txt_file)
 
-    print(f"{json_file} 변환 완료")
+#     with open(json_file, 'w', encoding='utf-8') as f:
+#         json.dump(script, f, ensure_ascii=False, indent=2)
+
+#     print(f"{json_file} 변환 완료")
