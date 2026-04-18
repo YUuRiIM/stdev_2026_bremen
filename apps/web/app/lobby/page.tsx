@@ -83,6 +83,7 @@ function MainLobbyScreen() {
               alt=""
               style={{
                 position: "relative",
+                left: "20px",
                 width: "300px",
                 height: "auto",
                 objectFit: "cover",
@@ -104,63 +105,60 @@ function MainLobbyScreen() {
             />
 
             <div className="main-lobby-board-shell">
-              <div className="main-lobby-board-frame">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={mainWhiteboard}
-                  alt="화이트보드"
-                  className="main-lobby-board-bg"
-                />
+              <img
+                src={mainWhiteboard}
+                alt="화이트보드"
+                className="main-lobby-board-bg"
+              />
 
-                <div className="main-lobby-board-viewport">
-                  <div className="main-lobby-board-content">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={mainText}
-                      alt="Chapter 1"
-                      className="main-lobby-board-title-image"
-                    />
+              <div className="main-lobby-board-viewport">
+                <div className="main-lobby-board-content">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={mainText}
+                    alt="Chapter 1"
+                    className="main-lobby-board-title-image"
+                  />
 
-                    {boardPages.map((item) => {
-                      if (item.type === 'lesson') {
-                        return (
-                          <div
-                            key={item.id}
-                            className={`board-node board-node--${item.status}`}
-                            style={item.position}
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src={item.image} alt="" className="board-node__image" />
-                            <div className="board-node__label">
-                              <span>{item.titleTop}</span>
-                              <strong>{item.titleBottom}</strong>
-                            </div>
-                          </div>
-                        );
-                      }
-
+                  {boardPages.map((item) => {
+                    if (item.type === 'lesson') {
                       return (
-                        <button
+                        <div
                           key={item.id}
-                          type="button"
-                          className="board-quiz-button"
+                          className={`board-node board-node--${item.status}`}
                           style={item.position}
-                          onClick={() => setIsLessonPopupOpen(true)}
                         >
-                          <span className="board-quiz-button__teacher">
-                            {item.teacher}
-                          </span>
-                          <span className="board-quiz-button__title">
-                            {item.label}
-                          </span>
-                        </button>
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={item.image} alt="" className="board-node__image" />
+                          <div className="board-node__label">
+                            <span>{item.titleTop}</span>
+                            <strong>{item.titleBottom}</strong>
+                          </div>
+                        </div>
                       );
-                    })}
+                    }
 
-                    <div className="board-path board-path--one" />
-                    <div className="board-path board-path--two" />
-                    <div className="board-path board-path--three" />
-                  </div>
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className="board-quiz-button"
+                        style={item.position}
+                        onClick={() => setIsLessonPopupOpen(true)}
+                      >
+                        <span className="board-quiz-button__teacher">
+                          {item.teacher}
+                        </span>
+                        <span className="board-quiz-button__title">
+                          {item.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+
+                  <div className="board-path board-path--one" />
+                  <div className="board-path board-path--two" />
+                  <div className="board-path board-path--three" />
                 </div>
               </div>
 
