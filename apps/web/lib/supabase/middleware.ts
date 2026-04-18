@@ -41,21 +41,18 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protected routes — redirect to /login if no session.
+  // Auth-required by default. Only /login, /auth/*, and /api/livekit/token
+  // (which self-gates and has a demo fallback) stay public.
   const path = request.nextUrl.pathname;
-  const needsAuth = path.startsWith('/lecture');
   const isPublic =
-    path === '/' ||
     path.startsWith('/login') ||
     path.startsWith('/auth/') ||
-    path.startsWith('/_next') ||
-    path.startsWith('/assets') ||
-    path.startsWith('/api/livekit/token') === false && path.startsWith('/api/'); // allow all other APIs to self-gate
+    path.startsWith('/api/livekit/token');
 
-  if (needsAuth && !user && !isPublic) {
+  if (!user && !isPublic) {
     const redirect = request.nextUrl.clone();
     redirect.pathname = '/login';
-    redirect.searchParams.set('next', path);
+    redirect.searchParams.set('next', path === '/' ? '/lecture' : path);
     return NextResponse.redirect(redirect);
   }
 
