@@ -1,10 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { AgentBubble } from '@/components/lecture/AgentBubble';
 import { CharacterStage } from '@/components/lecture/CharacterStage';
+import { CutsceneOverlay } from '@/components/lecture/CutsceneOverlay';
 import { EndSessionButton } from '@/components/lecture/EndSessionButton';
 import { ObjectiveChecklist } from '@/components/lecture/ObjectiveChecklist';
 import { RecordingIndicator } from '@/components/lecture/RecordingIndicator';
@@ -13,6 +14,7 @@ import { UserTranscript } from '@/components/lecture/UserTranscript';
 import { LECTURE_SUBJECTS } from '@/data/lecture-subjects';
 import type { AgentMessage, RecordingState } from '@/services/agent-adapter';
 import type { ObjectiveStatus } from '@/services/session-state';
+import type { CutscenePlay } from '@mys/shared/protocol';
 
 const REC_STATES: RecordingState[] = [
   'idle',
@@ -58,8 +60,18 @@ const SAMPLE_OBJECTIVES_FRESH: ObjectiveStatus[] =
 const SAMPLE_OBJECTIVES_COMPLETE: ObjectiveStatus[] =
   SAMPLE_OBJECTIVES_PROGRESS.map((o) => ({ ...o, coverage: 0.9 }));
 
+const SAMPLE_CUTSCENE: CutscenePlay = {
+  eventKey: 'approved_smile',
+  assetUrl: '/assets/cv-fermat.png',
+  muteTTS: true,
+  ts: 0,
+};
+
 export default function LectureDebugPage() {
   const subject = useMemo(() => LECTURE_SUBJECTS[0]!, []);
+  const [previewCutscene, setPreviewCutscene] = useState<CutscenePlay | null>(
+    null,
+  );
 
   return (
     <main className="lecture-scope min-h-screen w-full bg-slate-950 px-6 py-10 text-white md:px-10">
@@ -138,6 +150,21 @@ export default function LectureDebugPage() {
           <EndSessionButton onEnd={() => alert('끝내기 클릭 — debug')} />
         </DebugCell>
 
+        <DebugCell title="CutsceneOverlay (preview)">
+          <div className="flex flex-col gap-3">
+            <button
+              type="button"
+              onClick={() => setPreviewCutscene({ ...SAMPLE_CUTSCENE, ts: Date.now() })}
+              className="self-start rounded-full bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-amber-300"
+            >
+              approved_smile 재생
+            </button>
+            <p className="text-xs text-slate-400">
+              탭하거나 esc/enter로 닫음. 자동 6s 후 닫힘.
+            </p>
+          </div>
+        </DebugCell>
+
         <DebugCell
           title="ObjectiveChecklist (fresh / progress / complete)"
           className="md:col-span-2"
@@ -154,6 +181,11 @@ export default function LectureDebugPage() {
             <CharacterStage />
           </div>
         </DebugCell>
+
+        <CutsceneOverlay
+          cutscene={previewCutscene}
+          onEnd={() => setPreviewCutscene(null)}
+        />
 
         <DebugCell title="LectureScene (bg + overlay via /lecture)" className="md:col-span-2">
           <p className="text-sm text-slate-300">
