@@ -84,22 +84,22 @@ const PIECE_CFG: Record<
   string,
   { delay: number; K: number; touch: number; touchY: number; spring: { stiffness: number; damping: number; mass: number } }
 > = {
-  chest_l_r1_out:  { delay: 0,  K: 0.0030, touch: 0.10, touchY: -0.7, spring: EDGE },
-  chest_l_r1_in:   { delay: 6,  K: 0.0028, touch: 0.09, touchY: -0.7, spring: EDGE },
-  chest_l_r2_out:  { delay: 0,  K: 0.0085, touch: 0.38, touchY: 5.0,  spring: MAIN },
-  chest_l_r2_in:   { delay: 8,  K: 0.0068, touch: 0.29, touchY: 4.0,  spring: MAIN },
-  chest_l_r3_out:  { delay: 12, K: 0.0078, touch: 0.35, touchY: 4.6,  spring: MAIN },
-  chest_l_r3_in:   { delay: 18, K: 0.0062, touch: 0.26, touchY: 3.4,  spring: MAIN },
-  chest_l_r4_out:  { delay: 26, K: 0.0045, touch: 0.16, touchY: 2.3,  spring: FAST },
-  chest_l_r4_in:   { delay: 32, K: 0.0036, touch: 0.12, touchY: 1.7,  spring: FAST },
-  chest_r_r1_out:  { delay: 40, K: 0.0030, touch: 0.10, touchY: -0.7, spring: EDGE },
-  chest_r_r1_in:   { delay: 46, K: 0.0028, touch: 0.09, touchY: -0.7, spring: EDGE },
-  chest_r_r2_out:  { delay: 40, K: 0.0085, touch: 0.38, touchY: 5.0,  spring: MAIN },
-  chest_r_r2_in:   { delay: 48, K: 0.0068, touch: 0.29, touchY: 4.0,  spring: MAIN },
-  chest_r_r3_out:  { delay: 52, K: 0.0078, touch: 0.35, touchY: 4.6,  spring: MAIN },
-  chest_r_r3_in:   { delay: 58, K: 0.0062, touch: 0.26, touchY: 3.4,  spring: MAIN },
-  chest_r_r4_out:  { delay: 66, K: 0.0045, touch: 0.16, touchY: 2.3,  spring: FAST },
-  chest_r_r4_in:   { delay: 72, K: 0.0036, touch: 0.12, touchY: 1.7,  spring: FAST },
+  chest_l_r1_out:  { delay: 0,  K: 0.0022, touch: 0.07, touchY: -0.5, spring: EDGE },
+  chest_l_r1_in:   { delay: 6,  K: 0.0020, touch: 0.06, touchY: -0.5, spring: EDGE },
+  chest_l_r2_out:  { delay: 0,  K: 0.0060, touch: 0.26, touchY: 3.5,  spring: MAIN },
+  chest_l_r2_in:   { delay: 8,  K: 0.0048, touch: 0.20, touchY: 2.8,  spring: MAIN },
+  chest_l_r3_out:  { delay: 12, K: 0.0055, touch: 0.24, touchY: 3.2,  spring: MAIN },
+  chest_l_r3_in:   { delay: 18, K: 0.0044, touch: 0.18, touchY: 2.4,  spring: MAIN },
+  chest_l_r4_out:  { delay: 26, K: 0.0032, touch: 0.11, touchY: 1.6,  spring: FAST },
+  chest_l_r4_in:   { delay: 32, K: 0.0025, touch: 0.08, touchY: 1.2,  spring: FAST },
+  chest_r_r1_out:  { delay: 40, K: 0.0022, touch: 0.07, touchY: -0.5, spring: EDGE },
+  chest_r_r1_in:   { delay: 46, K: 0.0020, touch: 0.06, touchY: -0.5, spring: EDGE },
+  chest_r_r2_out:  { delay: 40, K: 0.0060, touch: 0.26, touchY: 3.5,  spring: MAIN },
+  chest_r_r2_in:   { delay: 48, K: 0.0048, touch: 0.20, touchY: 2.8,  spring: MAIN },
+  chest_r_r3_out:  { delay: 52, K: 0.0055, touch: 0.24, touchY: 3.2,  spring: MAIN },
+  chest_r_r3_in:   { delay: 58, K: 0.0044, touch: 0.18, touchY: 2.4,  spring: MAIN },
+  chest_r_r4_out:  { delay: 66, K: 0.0032, touch: 0.11, touchY: 1.6,  spring: FAST },
+  chest_r_r4_in:   { delay: 72, K: 0.0025, touch: 0.08, touchY: 1.2,  spring: FAST },
 };
 const PIECE_IDS = Object.keys(PIECE_CFG);
 
@@ -307,16 +307,13 @@ export function Character({
 
   const runBreathing = useCallback(() => {
     if (breathingRef.current) breathingRef.current.stop();
-    // Deeper, slightly slower breath — bigger amplitude with asymmetric inhale/exhale
-    // (inhale rises quickly, exhale settles longer) reads as a real breath cycle.
-    breathingRef.current = animate(bodyY, [0, -2, -7.5, -5, 0], {
-      duration: 5.2,
+    breathingRef.current = animate(bodyY, [0, -4.5, 0], {
+      duration: 4.4,
       repeat: Infinity,
       ease: "easeInOut",
-      times: [0, 0.28, 0.5, 0.72, 1],
     });
     armCtl.start({
-      rotate: [0, -0.2, 0.15, -0.1, 0],
+      rotate: [0, -0.25, 0.2, -0.15, 0],
       transition: { duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
     });
   }, [armCtl, bodyY]);
@@ -336,7 +333,6 @@ export function Character({
         await sleep(2400 + Math.random() * 3600);
         if (cancelled || reactingRef.current) continue;
         const pick = Math.random();
-        // Head rotation removed. Idle variety comes from single/double blinks.
         if (pick < 0.55) {
           await blinkCtl.start({
             scaleY: [1, 0.08, 1],
@@ -348,7 +344,6 @@ export function Character({
             transition: { duration: 0.48, times: [0, 0.22, 0.5, 0.72, 1] },
           });
         } else {
-          // Slow "hold-eyes-closed" blink — reads as a sigh or contemplation beat.
           await blinkCtl.start({
             scaleY: [1, 0.08, 0.08, 1],
             transition: { duration: 0.7, times: [0, 0.2, 0.7, 1], ease: "easeInOut" },
@@ -403,7 +398,6 @@ export function Character({
         ease,
         times: [0, 0.18, 0.42, 0.62, 0.82, 1],
       }),
-      // Head stays still on touch — only chest + body bounce + blink.
       headCtl.start({ rotate: 0, transition: { duration: 0.1 } }),
       armCtl.start({
         rotate: [0, -0.2, 0.15, -0.1, 0.05, 0],
