@@ -1,3 +1,17 @@
+/* globals.css */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+html,
+body,
+button,
+input,
+textarea,
+select,
+* {
+  font-family: 'Pretendard', sans-serif;
+}
+
 /* === theme.css === */
 :root {
   --background: #0f172a;
@@ -1926,6 +1940,8 @@ h1 {
   color: #525252;
   display: flex;              /* 추가 */
   justify-content: center;    /* 가로 중앙 */
+  font-size: 32px;
+  border: 5px solid #fff
 }
 
 .main-lobby-action--primary {
@@ -1933,6 +1949,7 @@ h1 {
   background: #e7a72f;
   font-size: 32px;
   color: white;
+  border: 5px solid #fff
 }
 
 .main-lobby-action--primary span {

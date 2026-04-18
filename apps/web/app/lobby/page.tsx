@@ -341,6 +341,11 @@ function MainLobbyScreen() {
             <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
 
             <div className="main-lobby-actions">
+              
+              <Link href="/gallery" className="main-lobby-action main-lobby-action--ghost">
+                갤러리
+              </Link>
+
               <Link href="/detail" className="main-lobby-action main-lobby-action--ghost">
                 캐릭터
               </Link>
