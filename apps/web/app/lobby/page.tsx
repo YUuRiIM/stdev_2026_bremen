@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { AffectionGauge } from '@/components/affection/AffectionGauge';
+import { useAffection } from '@/lib/affection/use-affection';
 
 const bgLobby = '/assets/images/bg-lobby.png';
 const fermatFull = '/assets/images/main-fermat.png';
@@ -18,6 +20,12 @@ const mainTalking = '/assets/images/main-talking.png';
 function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
+  const { data: affection } = useAffection();
+  const fermatAffection = affection.fermat ?? {
+    slug: 'fermat',
+    score: 0,
+    level: 'stranger' as const,
+  };
 
   const boardPages = useMemo(
     () => [
@@ -90,6 +98,13 @@ function MainLobbyScreen() {
                 zIndex: -1
               }}
             />
+
+            {fermatAffection && (
+              <AffectionGauge
+                score={fermatAffection.score}
+                level={fermatAffection.level}
+              />
+            )}
 
             <button type="button" className="main-lobby-setting">
               ⚙

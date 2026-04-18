@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Character, useManifest } from '@/components/character-kit';
+import { AffectionGauge } from '@/components/affection/AffectionGauge';
+import { useAffection } from '@/lib/affection/use-affection';
 import { chapterClearStatus } from '@/config/gameConfig';
 
 interface Story {
@@ -83,6 +85,12 @@ function CharacterDetailScreen() {
   const [selectedCharacterId, setSelectedCharacterId] = useState('fermat');
   const [tab, setTab] = useState('info');
   const fermatManifest = useManifest('/assets/fermat/manifest.json');
+  const { data: affection } = useAffection();
+  const selectedAffection = affection[selectedCharacterId] ?? {
+    slug: selectedCharacterId,
+    score: 0,
+    level: 'stranger' as const,
+  };
 
   const character = characters.find((c) => c.id === selectedCharacterId)!;
   const isStoryUnlocked = (story: Story) =>
@@ -143,6 +151,13 @@ function CharacterDetailScreen() {
         <div className="character-detail__panel-header">
           <h1 className="character-detail__character-name">{character.name}</h1>
           <p className="character-detail__character-subject">{character.subject}</p>
+          {selectedAffection && (
+            <AffectionGauge
+              score={selectedAffection.score}
+              level={selectedAffection.level}
+              className="character-detail__affection"
+            />
+          )}
         </div>
 
         {/* 콘텐츠 영역 */}
