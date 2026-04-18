@@ -220,6 +220,9 @@ export function createMockAgentAdapter(
     async startSession(_subjectSlug) {
       if (disposed) return;
       emitConn('connected');
+      // Pretend agent finishes joining ~800ms after connect (matches the
+      // "connecting…" overlay duration we want shown).
+      schedule(800, () => handlers.onAgentReady?.());
       // 초기 체크리스트 broadcast.
       emitLectureState('lecturing');
       const profile = resolveProfile(overrideProfile);

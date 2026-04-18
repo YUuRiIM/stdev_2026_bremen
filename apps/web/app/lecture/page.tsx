@@ -62,6 +62,10 @@ export default function LecturePage() {
         if (cancelled) return;
         dispatch({ type: 'CUTSCENE_PLAY', cutscene });
       },
+      onAgentReady: () => {
+        if (cancelled) return;
+        dispatch({ type: 'AGENT_READY' });
+      },
     });
 
     dispatch({ type: 'ACTIVATE' });
@@ -154,6 +158,26 @@ export default function LecturePage() {
         cutscene={state.activeCutscene}
         onEnd={() => dispatch({ type: 'CUTSCENE_END' })}
       />
+
+      {state.status === 'active' && !state.agentReady && (
+        <div
+          data-testid="lecture-connecting-overlay"
+          className="pointer-events-none absolute inset-0 z-[1800] flex items-center justify-center bg-slate-950/65 backdrop-blur-sm"
+        >
+          <div className="pointer-events-auto flex flex-col items-center gap-4 rounded-2xl border border-white/15 bg-slate-900/80 px-8 py-7 shadow-2xl">
+            <div
+              aria-hidden
+              className="h-9 w-9 animate-spin rounded-full border-[3px] border-white/20 border-t-amber-300"
+            />
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.28em] text-amber-300">
+              Connecting
+            </p>
+            <p className="text-center text-base text-white">
+              페르마가 연구실로 들어오는 중이에요…
+            </p>
+          </div>
+        </div>
+      )}
     </LectureScene>
   );
 }
