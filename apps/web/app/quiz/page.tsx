@@ -1,7 +1,8 @@
-import QuizClient from './quizclients'
+import QuizClient from './quizclients';
+import Link from 'next/link';
 
 const bgPattern = '/assets/images/bg-pattern.png'
- 
+
 export const metadata = {
   title: 'Quiz',
 }
@@ -10,17 +11,33 @@ export default function QuizPage() {
   return (
     <main
       style={{
-        minHeight: '100vh',
+
+        position: 'fixed',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundImage: `url(${bgPattern})`,
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
         padding: '48px',
       }}
     >
+      <Link href="/lobby" className="character-detail__back-button">
+        ←
+      </Link>
+      <img
+        src={bgPattern}
+        alt=""
+        style={{
+          position: 'fixed',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -1
+        }}
+      />
       <QuizClient />
     </main>
   )

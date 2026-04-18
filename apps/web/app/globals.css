@@ -1204,8 +1204,8 @@ h1 {
 
 /* === LessonScreen (from index.css legacy roll-up) === */
 .lesson-screen {
+  position: fixed;
   width: 100%;
-  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1223,7 +1223,7 @@ h1 {
   background-position: center;
   border-radius: 24px;
   overflow: hidden;
-  padding: 48px 56px 32px 64px;
+  padding: 48px 56px 32px 120px;
   color: #171717;
 }
 
@@ -1382,7 +1382,7 @@ h1 {
 }
 
 .lesson-footer {
-  margin-top: 16px;
+  margin-bottom: 0px;
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -1397,11 +1397,13 @@ h1 {
 
 .lesson-finish-button {
   min-width: 180px;
+  height: 80px;
+  justify-content: center;
   border: none;
   border-radius: 999px;
   background: linear-gradient(180deg, #f8c24c, #ec9f2f);
   color: #fff;
-  padding: 18px 30px;
+  /* padding: 18px 30px; */
   font-size: 1.6rem;
   font-weight: 800;
   cursor: pointer;

@@ -73,6 +73,10 @@ function LessonScreen() {
 
   return (
     <section className="lesson-screen">
+      
+      <Link href="/lobby" className="character-detail__back-button">
+        ←
+      </Link>
       <div className="lesson-board" style={{ backgroundImage: `url(${lessonBg})` }}>
         <header className="lesson-board__top">
           <div className="lesson-badge">{current.badge}</div>
@@ -142,9 +146,7 @@ function LessonScreen() {
         )}
 
         <div className="lesson-footer">
-          <Link href="/lobby" className="lesson-back-link">
-            메인 로비로
-          </Link>
+          <div></div>
 
           <button type="button" className="lesson-finish-button" onClick={goNext}>
             {isLast ? '수업 종료' : '다음'}

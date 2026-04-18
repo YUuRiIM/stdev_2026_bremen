@@ -127,7 +127,7 @@ function CharacterDetailScreen() {
       )}
 
       {/* 뒤로 가기 버튼 */}
-      <Link href="/" className="character-detail__back-button">
+      <Link href="/lobby" className="character-detail__back-button">
         ←
       </Link>
 

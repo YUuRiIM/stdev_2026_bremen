@@ -21,6 +21,7 @@ const mainTalking = '/assets/images/main-talking.png';
 function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
+  const [isPopupQuiz, setIsPopupQuiz] = useState(false);
   const { data: affection } = useAffection();
   const fermatAffection = affection.fermat ?? {
     slug: 'fermat',
@@ -231,10 +232,13 @@ function MainLobbyScreen() {
 
                           </div>
                         ) : (
+                          // QUIZ
                           <button
                             type="button"
-                            onClick={() =>
-                              setIsLessonPopupOpen(true)
+                            onClick={() => {
+                              setIsPopupQuiz(true);
+                              setIsLessonPopupOpen(true);
+                            }
                             }
                             style={{
                               width: '118px',
@@ -344,7 +348,10 @@ function MainLobbyScreen() {
               <button
                 type="button"
                 className="main-lobby-action main-lobby-action--primary"
-                onClick={() => setIsLessonPopupOpen(true)}
+                onClick={() => {
+                              setIsPopupQuiz(false);
+                              setIsLessonPopupOpen(true);
+                            }}
               >
                 수업 시작
                 <span>Chapter 1 퀴즈</span>
@@ -372,7 +379,14 @@ function MainLobbyScreen() {
               <button
                 type="button"
                 className="main-lobby-modal__button main-lobby-modal__button--primary"
-                onClick={() => router.push('/lesson/basic-multiplication')}
+                onClick={() => {
+                  if(!isPopupQuiz){
+                    router.push('/lesson/basic-multiplication')
+                  }
+                  else{
+                    router.push('/quiz')
+                  }
+                }}
               >
                 시작하기
               </button>
