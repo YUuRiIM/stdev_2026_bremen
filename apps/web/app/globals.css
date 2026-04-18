@@ -1553,9 +1553,9 @@ h1 {
 
 /* === board (upstream 7454586 index.css additions) === */
 .main-lobby-screen {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
+  position: fixed;
+  width: 100vw;
+  /* min-height: 100vh; */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1565,8 +1565,7 @@ h1 {
 .main-lobby-overlay {
   position: relative;
   min-height: 100vh;
-  padding: 18px 20px 24px;
-  background: rgba(0, 0, 0, 0.12);
+  padding: 24px 24px 24px 24px;
 }
 
 .main-lobby-top {
@@ -1634,17 +1633,14 @@ h1 {
 }
 
 .main-lobby-character {
-  position: absolute;
+  position: fixed;
   /* 기존에서 3cm 왼쪽으로 이동: calc(80px + 5cm - 3cm) -> calc(80px + 2cm) */
-  left: calc(80px + 2cm);
-  bottom: 0; /* 맨 아래가 화면 맨 아래에 닿도록 */
-  /* 현재보다 1.5배 크기: 420px -> 630px, 36vw -> 54vw */
-  width: min(630px, 54vw);
-  max-height: 78vh;
+  left: 15%;
+  bottom: 0;
+  min-height: 70vh;
+  max-height: 90vh;
   object-fit: contain;
   z-index: 3;
-  /* 화면 아래로 3cm(≈114px) 이동: 캐릭터를 더 아래로 내림 */
-  transform: translateY(114px);
   pointer-events: none;
 }
 

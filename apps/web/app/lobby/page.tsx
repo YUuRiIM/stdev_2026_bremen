@@ -63,20 +63,32 @@ function MainLobbyScreen() {
     <>
       <section
         className="main-lobby-screen"
-        style={{ backgroundImage: `url(${bgLobby})` }}
       >
+        <img
+          src={bgLobby}
+          alt=""
+          style={{
+            position: "fixed",
+            inset: 0,
+            width: "100vw",
+            height: "100vh",
+            objectFit: "cover",
+            zIndex: -1
+          }}
+        />
         <div className="main-lobby-overlay">
           <div className="main-lobby-top">
-            <div
-              className="main-lobby-user"
-              style={{ backgroundImage: `url(${mainNickname})` }}
-            >
-              {/* 아바타 이미지 제거: main-nickname 위의 작은 원 이미지 삭제 */}
-              <div className="main-lobby-user__info">
-                {/* <strong>닉네임</strong> */}
-                {/* <span>Lv. 100</span> */}
-              </div>
-            </div>
+            <img
+              src={mainNickname}
+              alt=""
+              style={{
+                position: "relative",
+                width: "300px",
+                height: "auto",
+                objectFit: "cover",
+                zIndex: -1
+              }}
+            />
 
             <button type="button" className="main-lobby-setting">
               ⚙
@@ -92,70 +104,70 @@ function MainLobbyScreen() {
             />
 
             <div className="main-lobby-board-shell">
-  <div className="main-lobby-board-frame">
-    {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img
-      src={mainWhiteboard}
-      alt="화이트보드"
-      className="main-lobby-board-bg"
-    />
-
-    <div className="main-lobby-board-viewport">
-      <div className="main-lobby-board-content">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={mainText}
-          alt="Chapter 1"
-          className="main-lobby-board-title-image"
-        />
-
-        {boardPages.map((item) => {
-          if (item.type === 'lesson') {
-            return (
-              <div
-                key={item.id}
-                className={`board-node board-node--${item.status}`}
-                style={item.position}
-              >
+              <div className="main-lobby-board-frame">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.image} alt="" className="board-node__image" />
-                <div className="board-node__label">
-                  <span>{item.titleTop}</span>
-                  <strong>{item.titleBottom}</strong>
+                <img
+                  src={mainWhiteboard}
+                  alt="화이트보드"
+                  className="main-lobby-board-bg"
+                />
+
+                <div className="main-lobby-board-viewport">
+                  <div className="main-lobby-board-content">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={mainText}
+                      alt="Chapter 1"
+                      className="main-lobby-board-title-image"
+                    />
+
+                    {boardPages.map((item) => {
+                      if (item.type === 'lesson') {
+                        return (
+                          <div
+                            key={item.id}
+                            className={`board-node board-node--${item.status}`}
+                            style={item.position}
+                          >
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src={item.image} alt="" className="board-node__image" />
+                            <div className="board-node__label">
+                              <span>{item.titleTop}</span>
+                              <strong>{item.titleBottom}</strong>
+                            </div>
+                          </div>
+                        );
+                      }
+
+                      return (
+                        <button
+                          key={item.id}
+                          type="button"
+                          className="board-quiz-button"
+                          style={item.position}
+                          onClick={() => setIsLessonPopupOpen(true)}
+                        >
+                          <span className="board-quiz-button__teacher">
+                            {item.teacher}
+                          </span>
+                          <span className="board-quiz-button__title">
+                            {item.label}
+                          </span>
+                        </button>
+                      );
+                    })}
+
+                    <div className="board-path board-path--one" />
+                    <div className="board-path board-path--two" />
+                    <div className="board-path board-path--three" />
+                  </div>
                 </div>
               </div>
-            );
-          }
 
-          return (
-            <button
-              key={item.id}
-              type="button"
-              className="board-quiz-button"
-              style={item.position}
-              onClick={() => setIsLessonPopupOpen(true)}
-            >
-              <span className="board-quiz-button__teacher">
-                {item.teacher}
-              </span>
-              <span className="board-quiz-button__title">
-                {item.label}
-              </span>
-            </button>
-          );
-        })}
-
-        <div className="board-path board-path--one" />
-        <div className="board-path board-path--two" />
-        <div className="board-path board-path--three" />
-      </div>
-    </div>
-  </div>
-
-  <div className="main-lobby-scroll-indicator">
-    <span />
-  </div>
-</div>
+              <div className="main-lobby-scroll-indicator">
+                <span />
+              </div>
+            </div>
           </div>
 
           <div className="main-lobby-bottom">
