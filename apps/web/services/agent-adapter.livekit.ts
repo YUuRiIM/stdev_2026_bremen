@@ -13,6 +13,7 @@ import type {
   CutscenePlay,
   LectureState,
   LectureVerdictApplied,
+  UserTranscript,
 } from '@mys/shared/protocol';
 import type {
   AdapterEvents,
@@ -99,6 +100,11 @@ export function createLiveKitAgentAdapter(): AgentAdapter {
       case 'cutscene.play':
         handlers.onCutscenePlay?.(parsed.data as CutscenePlay);
         break;
+      case 'user.transcript': {
+        const t = parsed.data as UserTranscript;
+        handlers.onUserTranscript?.(t.text, t.isFinal);
+        break;
+      }
       // Other topics (chalkboard, show_formula, user_text, auth.refresh,
       // judge_pending, suggest_type_input, cutscene.end) are not wired to
       // adapter events yet — FE consumers for those land in follow-up PRs.

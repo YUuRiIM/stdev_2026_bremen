@@ -6,7 +6,7 @@
 
 ---
 
-## 11개 메시지 — 한눈에
+## 12개 메시지 — 한눈에
 
 ### Client → Agent
 
@@ -23,6 +23,7 @@
 | Topic | Schema | 용도 |
 |---|---|---|
 | `cutscene.play` | `CutscenePlaySchema` | 영상/이미지 재생 요청 (muteTTS 포함) |
+| `user.transcript` | `UserTranscriptSchema` | 유저 음성 STT 라이브 캡션 (interim+final) |
 | `formula.show` | `ShowFormulaSchema` | LaTeX 화면에 + TTS는 `speakAs`만 |
 | `lecture.state` | `LectureStateSchema` | 강의 phase + objectives coverage |
 | `lecture.judge_pending` | `LectureJudgePendingSchema` | 채점 중/재시도 advisory |
