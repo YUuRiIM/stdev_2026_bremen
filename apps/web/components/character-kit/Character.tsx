@@ -26,6 +26,14 @@ export interface CharacterLayer {
   z: number;
   src: string;
   bbox: { left: number; top: number; right: number; bottom: number };
+  /** Optional side for split eye layers. Present on eyewhite/eyelash/irides
+   * after extract_psd.py's split pass. */
+  side?: "l" | "r";
+  /** Radians, principal-axis angle of the eye silhouette. Only present on
+   * side-split eye layers. */
+  tilt?: number;
+  /** Canvas pixels the upper eyelash should translate downward at full blink. */
+  blink_drop_px?: number;
 }
 
 export interface CharacterManifest {
@@ -50,7 +58,14 @@ export interface CharacterProps {
   onReact?: () => void;
 }
 
-const EYE_ROLES = new Set(["eyewhite", "eyelash", "irides"]);
+const EYE_ROLES = new Set([
+  "eyewhite",
+  "eyelash",
+  "eyelash_upper",
+  "eyelash_lower",
+  "eyelid_closed",
+  "irides",
+]);
 const HEAD_ROLES = new Set([
   "back hair",
   "front hair",
@@ -60,6 +75,9 @@ const HEAD_ROLES = new Set([
   "headwear",
   "eyebrow",
   "eyelash",
+  "eyelash_upper",
+  "eyelash_lower",
+  "eyelid_closed",
   "eyewhite",
   "eyewear",
   "nose",
@@ -84,22 +102,22 @@ const PIECE_CFG: Record<
   string,
   { delay: number; K: number; touch: number; touchY: number; spring: { stiffness: number; damping: number; mass: number } }
 > = {
-  chest_l_r1_out:  { delay: 0,  K: 0.0022, touch: 0.07, touchY: -0.5, spring: EDGE },
-  chest_l_r1_in:   { delay: 6,  K: 0.0020, touch: 0.06, touchY: -0.5, spring: EDGE },
-  chest_l_r2_out:  { delay: 0,  K: 0.0060, touch: 0.26, touchY: 3.5,  spring: MAIN },
-  chest_l_r2_in:   { delay: 8,  K: 0.0048, touch: 0.20, touchY: 2.8,  spring: MAIN },
-  chest_l_r3_out:  { delay: 12, K: 0.0055, touch: 0.24, touchY: 3.2,  spring: MAIN },
-  chest_l_r3_in:   { delay: 18, K: 0.0044, touch: 0.18, touchY: 2.4,  spring: MAIN },
-  chest_l_r4_out:  { delay: 26, K: 0.0032, touch: 0.11, touchY: 1.6,  spring: FAST },
-  chest_l_r4_in:   { delay: 32, K: 0.0025, touch: 0.08, touchY: 1.2,  spring: FAST },
-  chest_r_r1_out:  { delay: 40, K: 0.0022, touch: 0.07, touchY: -0.5, spring: EDGE },
-  chest_r_r1_in:   { delay: 46, K: 0.0020, touch: 0.06, touchY: -0.5, spring: EDGE },
-  chest_r_r2_out:  { delay: 40, K: 0.0060, touch: 0.26, touchY: 3.5,  spring: MAIN },
-  chest_r_r2_in:   { delay: 48, K: 0.0048, touch: 0.20, touchY: 2.8,  spring: MAIN },
-  chest_r_r3_out:  { delay: 52, K: 0.0055, touch: 0.24, touchY: 3.2,  spring: MAIN },
-  chest_r_r3_in:   { delay: 58, K: 0.0044, touch: 0.18, touchY: 2.4,  spring: MAIN },
-  chest_r_r4_out:  { delay: 66, K: 0.0032, touch: 0.11, touchY: 1.6,  spring: FAST },
-  chest_r_r4_in:   { delay: 72, K: 0.0025, touch: 0.08, touchY: 1.2,  spring: FAST },
+  chest_l_r1_out:  { delay: 0,  K: 0.0030, touch: 0.10, touchY: -0.7, spring: EDGE },
+  chest_l_r1_in:   { delay: 6,  K: 0.0028, touch: 0.09, touchY: -0.7, spring: EDGE },
+  chest_l_r2_out:  { delay: 0,  K: 0.0085, touch: 0.38, touchY: 5.0,  spring: MAIN },
+  chest_l_r2_in:   { delay: 8,  K: 0.0068, touch: 0.29, touchY: 4.0,  spring: MAIN },
+  chest_l_r3_out:  { delay: 12, K: 0.0078, touch: 0.35, touchY: 4.6,  spring: MAIN },
+  chest_l_r3_in:   { delay: 18, K: 0.0062, touch: 0.26, touchY: 3.4,  spring: MAIN },
+  chest_l_r4_out:  { delay: 26, K: 0.0045, touch: 0.16, touchY: 2.3,  spring: FAST },
+  chest_l_r4_in:   { delay: 32, K: 0.0036, touch: 0.12, touchY: 1.7,  spring: FAST },
+  chest_r_r1_out:  { delay: 40, K: 0.0030, touch: 0.10, touchY: -0.7, spring: EDGE },
+  chest_r_r1_in:   { delay: 46, K: 0.0028, touch: 0.09, touchY: -0.7, spring: EDGE },
+  chest_r_r2_out:  { delay: 40, K: 0.0085, touch: 0.38, touchY: 5.0,  spring: MAIN },
+  chest_r_r2_in:   { delay: 48, K: 0.0068, touch: 0.29, touchY: 4.0,  spring: MAIN },
+  chest_r_r3_out:  { delay: 52, K: 0.0078, touch: 0.35, touchY: 4.6,  spring: MAIN },
+  chest_r_r3_in:   { delay: 58, K: 0.0062, touch: 0.26, touchY: 3.4,  spring: MAIN },
+  chest_r_r4_out:  { delay: 66, K: 0.0045, touch: 0.16, touchY: 2.3,  spring: FAST },
+  chest_r_r4_in:   { delay: 72, K: 0.0036, touch: 0.12, touchY: 1.7,  spring: FAST },
 };
 const PIECE_IDS = Object.keys(PIECE_CFG);
 
@@ -178,7 +196,6 @@ type ChestScales = Record<
 >;
 type ChestImpulses = Record<string, MotionValue<number>>;
 
-/* eslint-disable react-hooks/rules-of-hooks -- PIECE_IDS is a compile-time constant array, so hook order is stable across renders. */
 function useChestSprings(
   bodyY: MotionValue<number>,
 ): { scales: ChestScales; impulses: ChestImpulses; yImpulses: ChestImpulses } {
@@ -246,7 +263,6 @@ function useChestSprings(
   }
   return { scales, impulses, yImpulses };
 }
-/* eslint-enable react-hooks/rules-of-hooks */
 
 export function Character({
   manifest,
@@ -294,26 +310,107 @@ export function Character({
     mass: 0.4,
   });
 
+  // Per-side iris travel limits, expressed as a fraction of the character canvas
+  // (matches how bbox percentages resolve inside the render container). The
+  // useTransform clamps below re-scale to container px on every frame.
+  const irisLimitsFrac = useMemo(() => {
+    const out: { l: { x: number; y: number }; r: { x: number; y: number } } = {
+      l: { x: 0, y: 0 },
+      r: { x: 0, y: 0 },
+    };
+    for (const side of ["l", "r"] as const) {
+      const ew = manifest.layers.find((l) => l.role === "eyewhite" && l.side === side);
+      const ir = manifest.layers.find((l) => l.role === "irides" && l.side === side);
+      if (!ew || !ir) continue;
+      const ewW = ew.bbox.right - ew.bbox.left;
+      const ewH = ew.bbox.bottom - ew.bbox.top;
+      const irW = ir.bbox.right - ir.bbox.left;
+      const irH = ir.bbox.bottom - ir.bbox.top;
+      out[side].x = Math.max(0, (ewW - irW) / 2) / manifest.width;
+      out[side].y = Math.max(0, (ewH - irH) / 2) / manifest.height;
+    }
+    return out;
+  }, [manifest]);
+
+  const eyeXL = useTransform(() => {
+    const el = rootRef.current;
+    const raw = eyeX.get();
+    const frac = irisLimitsFrac.l.x;
+    if (!el || frac <= 0) return 0;
+    const lim = frac * el.getBoundingClientRect().width;
+    return Math.max(-lim, Math.min(lim, raw));
+  });
+  const eyeXR = useTransform(() => {
+    const el = rootRef.current;
+    const raw = eyeX.get();
+    const frac = irisLimitsFrac.r.x;
+    if (!el || frac <= 0) return 0;
+    const lim = frac * el.getBoundingClientRect().width;
+    return Math.max(-lim, Math.min(lim, raw));
+  });
+  const eyeYL = useTransform(() => {
+    const el = rootRef.current;
+    const raw = eyeY.get();
+    const frac = irisLimitsFrac.l.y;
+    if (!el || frac <= 0) return 0;
+    const lim = frac * el.getBoundingClientRect().height;
+    return Math.max(-lim, Math.min(lim, raw));
+  });
+  const eyeYR = useTransform(() => {
+    const el = rootRef.current;
+    const raw = eyeY.get();
+    const frac = irisLimitsFrac.r.y;
+    if (!el || frac <= 0) return 0;
+    const lim = frac * el.getBoundingClientRect().height;
+    return Math.max(-lim, Math.min(lim, raw));
+  });
+
   const bodyY = useMotionValue(0);
   const { scales: chestScales, impulses: chestImpulses, yImpulses: chestYImpulses } = useChestSprings(bodyY);
 
   const rootCtl = useAnimation();
   const armCtl = useAnimation();
   const headCtl = useAnimation();
-  const blinkCtl = useAnimation();
+
+  // Blink is now a 0..1 progress motion value; each eye-layer role derives its
+  // own motion from it (scaleY for eyewhite/iris, y for upper eyelash, opacity
+  // for the generated eyelid_closed overlay).
+  const blinkT = useMotionValue(0);
+  const eyeScaleY = useTransform(blinkT, [0, 1], [1, 0.12]);
+  // Everything behind the closing lid (iris + eyewhite + the untranslated upper
+  // lash) fades out quickly so the closed state is carried solely by
+  // eyelid_closed sliding down.
+  const eyeOpacity = useTransform(blinkT, [0, 0.15, 0.4], [1, 1, 0]);
+  const upperLashOpacity = useTransform(blinkT, [0, 0.15, 0.4], [1, 1, 0]);
+  const eyelidOpacity = useTransform(blinkT, [0, 0.1, 0.5], [0, 0.2, 1]);
+  const upperDrops = useMemo(() => {
+    const m: { l: number; r: number } = { l: 0, r: 0 };
+    for (const l of manifest.layers) {
+      if (l.role === "eyelash_upper" && (l.side === "l" || l.side === "r") && typeof l.blink_drop_px === "number") {
+        m[l.side] = l.blink_drop_px;
+      }
+    }
+    return m;
+  }, [manifest]);
+  const LID_DROP_SCALE = 0.55;
+  const lidYL = useTransform(blinkT, (v) => v * upperDrops.l * LID_DROP_SCALE);
+  const lidYR = useTransform(blinkT, (v) => v * upperDrops.r * LID_DROP_SCALE);
 
   const reactingRef = useRef(false);
   const breathingRef = useRef<ReturnType<typeof animate> | null>(null);
 
   const runBreathing = useCallback(() => {
     if (breathingRef.current) breathingRef.current.stop();
-    breathingRef.current = animate(bodyY, [0, -4.5, 0], {
-      duration: 4.4,
+    // Deeper, slightly slower breath — bigger amplitude with asymmetric inhale/exhale
+    // (inhale rises quickly, exhale settles longer) reads as a real breath cycle.
+    breathingRef.current = animate(bodyY, [0, -2, -7.5, -5, 0], {
+      duration: 5.2,
       repeat: Infinity,
       ease: "easeInOut",
+      times: [0, 0.28, 0.5, 0.72, 1],
     });
     armCtl.start({
-      rotate: [0, -0.25, 0.2, -0.15, 0],
+      rotate: [0, -0.2, 0.15, -0.1, 0],
       transition: { duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 0.4 },
     });
   }, [armCtl, bodyY]);
@@ -334,19 +431,21 @@ export function Character({
         if (cancelled || reactingRef.current) continue;
         const pick = Math.random();
         if (pick < 0.55) {
-          await blinkCtl.start({
-            scaleY: [1, 0.08, 1],
-            transition: { duration: 0.18, times: [0, 0.5, 1], ease: [0.76, 0, 0.24, 1] },
+          await animate(blinkT, [0, 1, 0], {
+            duration: 0.18,
+            times: [0, 0.5, 1],
+            ease: [0.76, 0, 0.24, 1],
           });
         } else if (pick < 0.85) {
-          await blinkCtl.start({
-            scaleY: [1, 0.08, 1, 0.08, 1],
-            transition: { duration: 0.48, times: [0, 0.22, 0.5, 0.72, 1] },
+          await animate(blinkT, [0, 1, 0, 1, 0], {
+            duration: 0.48,
+            times: [0, 0.22, 0.5, 0.72, 1],
           });
         } else {
-          await blinkCtl.start({
-            scaleY: [1, 0.08, 0.08, 1],
-            transition: { duration: 0.7, times: [0, 0.2, 0.7, 1], ease: "easeInOut" },
+          await animate(blinkT, [0, 1, 1, 0], {
+            duration: 0.7,
+            times: [0, 0.2, 0.7, 1],
+            ease: "easeInOut",
           });
         }
       }
@@ -355,7 +454,7 @@ export function Character({
     return () => {
       cancelled = true;
     };
-  }, [idleEnabled, headCtl, blinkCtl]);
+  }, [idleEnabled, headCtl, blinkT]);
 
   const twitch = useCallback(async () => {
     if (reactingRef.current) return;
@@ -398,14 +497,15 @@ export function Character({
         ease,
         times: [0, 0.18, 0.42, 0.62, 0.82, 1],
       }),
-      headCtl.start({ rotate: 0, transition: { duration: 0.1 } }),
+      // Head stays still on touch — only chest + body bounce + blink.
+      headCtl.start({ rotate: 0, transition: { duration: 0.0 } }),
       armCtl.start({
         rotate: [0, -0.2, 0.15, -0.1, 0.05, 0],
         transition: { duration: dur, ease, times: [0, 0.2, 0.45, 0.68, 0.88, 1] },
       }),
-      blinkCtl.start({
-        scaleY: [1, 0.25, 1],
-        transition: { duration: 0.28, times: [0, 0.4, 1] },
+      animate(blinkT, [0, 0.6, 0], {
+        duration: 0.28,
+        times: [0, 0.4, 1],
       }),
       rootCtl.start({
         scale: [1, 0.994, 1.002, 1],
@@ -415,7 +515,7 @@ export function Character({
     ]);
     reactingRef.current = false;
     runBreathing();
-  }, [rootCtl, armCtl, headCtl, blinkCtl, bodyY, runBreathing, onReact, chestImpulses]);
+  }, [rootCtl, armCtl, headCtl, blinkT, bodyY, runBreathing, onReact, chestImpulses]);
 
   const pivots = useMemo(() => computePivots(manifest), [manifest]);
 
@@ -438,16 +538,60 @@ export function Character({
 
   type Node =
     | { kind: "layer"; layer: CharacterLayer }
-    | { kind: "eye"; z: number; layers: CharacterLayer[] };
+    | {
+        kind: "eye";
+        z: number;
+        key: string;
+        layers: CharacterLayer[];
+        pivot: Pivot;
+        tiltDeg: number;
+      };
 
   const insideNodes = useMemo<Node[]>(() => {
     const nodes: Node[] = [];
     let eyeRun: { layers: CharacterLayer[]; zMax: number } | null = null;
+
     const flush = () => {
       if (!eyeRun) return;
-      nodes.push({ kind: "eye", z: eyeRun.zMax, layers: eyeRun.layers });
+      const run = eyeRun;
       eyeRun = null;
+      // If layers carry `side`, split by side so each eye rotates around its own pivot.
+      const bySide: Record<string, CharacterLayer[]> = {};
+      const legacy: CharacterLayer[] = [];
+      for (const l of run.layers) {
+        if (l.side === "l" || l.side === "r") {
+          (bySide[l.side] ||= []).push(l);
+        } else {
+          legacy.push(l);
+        }
+      }
+      const emitGroup = (layers: CharacterLayer[], keySuffix: string) => {
+        if (!layers.length) return;
+        // Pivot: prefer eyewhite bbox center, fallback to irides, fallback to eyelash.
+        const prefs = ["eyewhite", "irides", "eyelash_upper", "eyelash", "eyelash_lower", "eyelid_closed"];
+        let pivotLayer: CharacterLayer | undefined;
+        for (const role of prefs) {
+          pivotLayer = layers.find((l) => l.role === role);
+          if (pivotLayer) break;
+        }
+        const bb = (pivotLayer ?? layers[0]).bbox;
+        const pivot: Pivot = { x: (bb.left + bb.right) / 2, y: (bb.top + bb.bottom) / 2 };
+        const tilt = layers.find((l) => typeof l.tilt === "number")?.tilt ?? 0;
+        const zMax = layers.reduce((m, l) => Math.max(m, l.z), layers[0].z);
+        nodes.push({
+          kind: "eye",
+          z: zMax,
+          key: `eye-${keySuffix}-${zMax}`,
+          layers,
+          pivot,
+          tiltDeg: (tilt * 180) / Math.PI,
+        });
+      };
+      if (legacy.length) emitGroup(legacy, "all");
+      if (bySide.l) emitGroup(bySide.l, "l");
+      if (bySide.r) emitGroup(bySide.r, "r");
     };
+
     for (const l of headLayers) {
       if (EYE_ROLES.has(l.role)) {
         if (!eyeRun) eyeRun = { layers: [], zMax: l.z };
@@ -482,7 +626,6 @@ export function Character({
   const headOrigin = pctOrigin(pivots.head, manifest);
   const armOrigin = pctOrigin(pivots.arm, manifest);
   const bodyOrigin = pctOrigin(pivots.body, manifest);
-  const eyeOrigin = pctOrigin(pivots.eye, manifest);
 
   const renderPlain = (layer: CharacterLayer, prefix = "layer") => (
     <img
@@ -527,12 +670,8 @@ export function Character({
       );
     }
     if (layer.role === "chest" || layer.role === "chest_l") {
-      // Legacy fallback for pre-ring chest layers. Current manifests use chest_l_r[1-4]_{in,out}.
-      const legacyScales = chestScales as unknown as Record<string, { scaleX: MotionValue<number>; scaleY: MotionValue<number>; y: MotionValue<number> }>;
-      const legacyPivots = pivots as unknown as Record<string, { x: number; y: number }>;
-      const fallback = legacyScales.chest_l_mid ?? legacyScales[PIECE_IDS[0]!]!;
-      const { scaleX, scaleY } = fallback;
-      const origin = pctOrigin(legacyPivots.chest_l_mid ?? { x: 0.5, y: 0.5 }, manifest);
+      const { scaleX, scaleY } = (chestScales as Record<string, ChestScales[string]>).chest_l_mid;
+      const origin = pctOrigin((pivots as Record<string, Pivot>).chest_l_mid, manifest);
       return (
         <motion.div
           key={`chest-legacy-${layer.z}`}
@@ -543,11 +682,8 @@ export function Character({
       );
     }
     if (layer.role === "chest_r") {
-      const legacyScales = chestScales as unknown as Record<string, { scaleX: MotionValue<number>; scaleY: MotionValue<number>; y: MotionValue<number> }>;
-      const legacyPivots = pivots as unknown as Record<string, { x: number; y: number }>;
-      const fallback = legacyScales.chest_r_mid ?? legacyScales[PIECE_IDS[0]!]!;
-      const { scaleX, scaleY } = fallback;
-      const origin = pctOrigin(legacyPivots.chest_r_mid ?? { x: 0.5, y: 0.5 }, manifest);
+      const { scaleX, scaleY } = (chestScales as Record<string, ChestScales[string]>).chest_r_mid;
+      const origin = pctOrigin((pivots as Record<string, Pivot>).chest_r_mid, manifest);
       return (
         <motion.div
           key={`chest-legacy-${layer.z}`}
@@ -560,27 +696,88 @@ export function Character({
     return renderPlain(layer, "outside");
   };
 
-  const renderEyeGroup = (group: Extract<Node, { kind: "eye" }>) => (
-    <motion.div
-      key={`eye-${group.z}`}
-      style={{ ...wrapperFill, transformOrigin: eyeOrigin, zIndex: group.z }}
-      animate={blinkCtl}
-    >
-      {group.layers.map((l) =>
-        l.role === "irides" ? (
-          <IrisLayer key={`iris-${l.z}`} layer={l} manifest={manifest} assetBase={assetBase} x={eyeX} y={eyeY} />
-        ) : (
-          <img
-            key={`eyepart-${l.z}`}
-            src={`${assetBase}/${l.src}`}
-            draggable={false}
-            style={{ ...layerStyle(l, manifest), zIndex: l.z }}
-            alt=""
-          />
-        ),
-      )}
-    </motion.div>
-  );
+  const renderEyeGroup = (group: Extract<Node, { kind: "eye" }>) => {
+    const origin = pctOrigin(group.pivot, manifest);
+    // Each role animates differently: eyewhite/iris/legacy-eyelash scale Y toward
+    // the eye center; eyelash_upper slides down by its precomputed drop_px;
+    // eyelid_closed fades in from the auto-generated arc overlay; eyelash_lower
+    // stays put.
+    return (
+      <div key={group.key} style={{ ...wrapperFill, zIndex: group.z }}>
+        {group.layers.map((l) => {
+          const base = layerStyle(l, manifest);
+          const keyBase = `${l.role}-${l.side ?? ""}-${l.z}`;
+          const role = l.role;
+          if (role === "eyewhite" || role === "eyelash") {
+            return (
+              <motion.div
+                key={keyBase}
+                style={{
+                  ...wrapperFill,
+                  transformOrigin: origin,
+                  scaleY: eyeScaleY,
+                  opacity: eyeOpacity,
+                  zIndex: l.z,
+                }}
+              >
+                <img src={`${assetBase}/${l.src}`} draggable={false} style={base} alt="" />
+              </motion.div>
+            );
+          }
+          if (role === "irides") {
+            const ix = l.side === "r" ? eyeXR : l.side === "l" ? eyeXL : eyeX;
+            const iy = l.side === "r" ? eyeYR : l.side === "l" ? eyeYL : eyeY;
+            return (
+              <motion.div
+                key={keyBase}
+                style={{
+                  ...wrapperFill,
+                  transformOrigin: origin,
+                  scaleY: eyeScaleY,
+                  opacity: eyeOpacity,
+                  zIndex: l.z,
+                }}
+              >
+                <IrisLayer layer={l} manifest={manifest} assetBase={assetBase} x={ix} y={iy} />
+              </motion.div>
+            );
+          }
+          if (role === "eyelash_upper") {
+            return (
+              <motion.div
+                key={keyBase}
+                style={{ ...wrapperFill, opacity: upperLashOpacity, zIndex: l.z }}
+              >
+                <img src={`${assetBase}/${l.src}`} draggable={false} style={base} alt="" />
+              </motion.div>
+            );
+          }
+          if (role === "eyelid_closed") {
+            const yMv = l.side === "r" ? lidYR : lidYL;
+            return (
+              <motion.img
+                key={keyBase}
+                src={`${assetBase}/${l.src}`}
+                draggable={false}
+                style={{ ...base, zIndex: l.z, opacity: eyelidOpacity, y: yMv }}
+                alt=""
+              />
+            );
+          }
+          // eyelash_lower and any other static eye layer.
+          return (
+            <img
+              key={keyBase}
+              src={`${assetBase}/${l.src}`}
+              draggable={false}
+              style={{ ...base, zIndex: l.z }}
+              alt=""
+            />
+          );
+        })}
+      </div>
+    );
+  };
 
   return (
     <motion.div
