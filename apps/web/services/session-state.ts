@@ -27,6 +27,9 @@ export interface SessionState {
   latestTranscript: UserTranscript | null;
   recordingState: RecordingState;
   connectionState: ConnectionState;
+  /** Agent가 room에 join + audio track이 attach 됐는지. true 가 되기 전엔
+   *  "연결 중…" 오버레이 노출. */
+  agentReady: boolean;
   /** 강의 phase (idle/lecturing/judging/verdicted). */
   lecturePhase: LectureState['phase'];
   /** 체크리스트 — `checkObjective` 가 증분 갱신. */
@@ -42,6 +45,7 @@ export type SessionAction =
   | { type: 'TRANSCRIPT'; text: string; isFinal: boolean }
   | { type: 'STATE'; state: RecordingState }
   | { type: 'CONN'; state: ConnectionState }
+  | { type: 'AGENT_READY' }
   | { type: 'LECTURE_STATE'; state: LectureState }
   | { type: 'VERDICT_APPLIED'; verdict: LectureVerdictApplied }
   | { type: 'CUTSCENE_PLAY'; cutscene: CutscenePlay }
@@ -55,6 +59,7 @@ export const initialSessionState: SessionState = {
   latestTranscript: null,
   recordingState: 'idle',
   connectionState: 'closed',
+  agentReady: false,
   lecturePhase: 'idle',
   objectivesStatus: [],
   verdict: null,
@@ -77,6 +82,8 @@ export function sessionReducer(
       return { ...state, recordingState: action.state };
     case 'CONN':
       return { ...state, connectionState: action.state };
+    case 'AGENT_READY':
+      return { ...state, agentReady: true };
     case 'LECTURE_STATE':
       return {
         ...state,
