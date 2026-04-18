@@ -1,0 +1,47 @@
+{
+  "name": "@mys/shared",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./db": "./src/db/index.ts",
+    "./db/schema": "./src/db/schema.ts",
+    "./identity": "./src/identity/index.ts",
+    "./prompt": "./src/prompt/index.ts",
+    "./protocol": "./src/protocol/index.ts",
+    "./seed": "./src/seed/index.ts",
+    "./seed/characters": "./src/seed/characters.ts",
+    "./seed/subjects": "./src/seed/subjects.ts",
+    "./seed/quizzes": "./src/seed/quizzes.ts",
+    "./types": "./src/types.ts",
+    "./tools": "./src/tools/index.ts",
+    "./tools/*": "./src/tools/*.ts",
+    "./judge": "./src/judge/index.ts",
+    "./judge/*": "./src/judge/*.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test src/judge/__tests__/affection-rules.test.ts src/judge/__tests__/apply-verdict.test.ts src/judge/__tests__/run-judge.test.ts",
+    "lint": "echo 'no lint configured'",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx scripts/seed.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/google": "^3.0.63",
+    "@supabase/supabase-js": "^2.46.1",
+    "ai": "^6.0.162",
+    "drizzle-orm": "^0.36.4",
+    "nanoid": "^5.0.9",
+    "postgres": "^3.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.28.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

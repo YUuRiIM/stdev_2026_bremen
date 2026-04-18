@@ -1,0 +1,31 @@
+{
+  "name": "@mys/agent",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/entrypoint.ts dev",
+    "start": "node dist/entrypoint.js start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@mys/shared": "workspace:*",
+    "@livekit/agents": "^1.2.7",
+    "@livekit/agents-plugin-deepgram": "^1.2.7",
+    "@livekit/agents-plugin-elevenlabs": "^1.2.7",
+    "@livekit/agents-plugin-google": "^1.2.7",
+    "@livekit/agents-plugin-silero": "^1.2.7",
+    "@supabase/supabase-js": "^2.46.1",
+    "dotenv": "^16.4.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}
