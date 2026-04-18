@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef } from 'react';
 
 import { AgentBubble } from '@/components/lecture/AgentBubble';
 import { CharacterStage } from '@/components/lecture/CharacterStage';
+import { CutsceneOverlay } from '@/components/lecture/CutsceneOverlay';
 import { EndSessionButton } from '@/components/lecture/EndSessionButton';
 import { LectureScene } from '@/components/lecture/LectureScene';
 import { ObjectiveChecklist } from '@/components/lecture/ObjectiveChecklist';
@@ -148,6 +149,11 @@ export default function LecturePage() {
         </div>
         <EndSessionButton onEnd={handleEnd} />
       </footer>
+
+      <CutsceneOverlay
+        cutscene={state.activeCutscene}
+        onEnd={() => dispatch({ type: 'CUTSCENE_END' })}
+      />
     </LectureScene>
   );
 }
