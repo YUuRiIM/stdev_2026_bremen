@@ -37,14 +37,23 @@ export interface AgentAdapter {
 export type MockProfile = 'steady' | 'burst' | 'silence';
 
 export function createAgentAdapter(overrideProfile?: MockProfile): AgentAdapter {
-  const envProfile = (process.env.NEXT_PUBLIC_AGENT_ADAPTER ?? 'mock') as
+  const envMode = (process.env.NEXT_PUBLIC_AGENT_ADAPTER ?? 'mock') as
     | 'mock'
     | 'real';
 
-  if (envProfile === 'real') {
-    throw new Error(
-      '[agent-adapter] real adapter not implemented in v1. Set NEXT_PUBLIC_AGENT_ADAPTER=mock.',
+  // Runtime override via ?adapter=real query string (dev convenience).
+  let mode = envMode;
+  if (typeof window !== 'undefined') {
+    const urlAdapter = new URLSearchParams(window.location.search).get(
+      'adapter',
     );
+    if (urlAdapter === 'real' || urlAdapter === 'mock') mode = urlAdapter;
+  }
+
+  if (mode === 'real') {
+    const { createLiveKitAgentAdapter } =
+      require('./agent-adapter.livekit') as typeof import('./agent-adapter.livekit');
+    return createLiveKitAgentAdapter();
   }
 
   const { createMockAgentAdapter } =
