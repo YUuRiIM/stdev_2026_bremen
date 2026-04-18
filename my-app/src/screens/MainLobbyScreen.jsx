@@ -41,7 +41,7 @@ function MainLobbyScreen() {
         <Link to="/detail" className="bottom-nav__item">
           캐릭터
         </Link>
-        <Link to="/visual-novel" className="bottom-nav__item bottom-nav__item--accent">
+        <Link to="/lesson/basic-multiplication" className="bottom-nav__item bottom-nav__item--accent">
           수업 시작
         </Link>
       </div>
@@ -50,3 +50,5 @@ function MainLobbyScreen() {
 }
 
 export default MainLobbyScreen;
+
+
