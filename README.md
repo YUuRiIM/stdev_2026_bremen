@@ -1,73 +1,109 @@
-# Getting Started with Create React App
+# stdev_2026_bremen
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Next.js 15 (App Router) + React 19 + TypeScript + pnpm. Migrated from CRA in Stack 0 + Stack 1 PRs (see git history).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 요구 사항
 
-### `npm install`
-it will make node_modules folder
+- **Node.js** 20.11+ (권장 22 LTS)
+- **pnpm** 9+ (package.json `packageManager` 필드에 고정됨)
 
-### `npm start`
+pnpm 미설치 시:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+corepack enable
+corepack prepare pnpm@9 --activate
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+또는 Homebrew: `brew install pnpm`
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 설치
 
-### `npm run build`
+```bash
+git clone git@github.com:YUuRiIM/stdev_2026_bremen.git
+cd stdev_2026_bremen
+pnpm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 개발 서버 띄우기
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+pnpm dev
+```
 
-### `npm run eject`
+→ http://localhost:3000 에서 열림. 파일 저장 시 HMR 자동 반영.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 주요 라우트
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| 경로 | 화면 |
+|---|---|
+| `/` | 홈 (디버깅 진입 카드) |
+| `/select` | 캐릭터 선택 |
+| `/confirm` | 선택 확인 (pick button → confirm dialog → `/lobby`) |
+| `/lobby` | 메인 로비 (chapter board + stage map) |
+| `/detail` | 캐릭터 상세 (사이드바 + 프로필 패널) |
+| `/lesson/basic-multiplication` | 레슨 샘플 |
+| `/visual-novel/[scriptId]` | 비주얼 노벨 (intro / fermat-1 ~ 4) |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 빌드 & 배포
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+pnpm build     # .next/ 생성
+pnpm start     # 프로덕션 서버 (포트 3000)
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`.next/` + `public/` + `node_modules/` 외에는 정적 asset 없음.
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 프로젝트 구조
 
-### Analyzing the Bundle Size
+```
+app/                    # Next.js App Router pages
+  layout.tsx            # 루트 레이아웃 (Inter font)
+  page.tsx              # HomeScreen
+  select/page.tsx
+  confirm/page.tsx
+  lobby/page.tsx
+  detail/page.tsx
+  lesson/basic-multiplication/page.tsx
+  visual-novel/[scriptId]/page.tsx
+  not-found.tsx
+  globals.css           # 통합 스타일 (theme + common + per-screen)
+components/
+  Character.tsx         # 4-layer composite 캐릭터 렌더러
+  visual-novel/         # DialogueBox, NarrativeArea, SkipModal, ChoiceList, BackgroundLayer
+data/                   # 스크립트 JSON + dummy characters (TS)
+config/                 # gameConfig.js (deprecated after Stack 2)
+public/                 # 정적 에셋 (favicon, manifest, /assets/**)
+  assets/
+    *.png               # 플랫 캐릭터/배경 이미지
+    *.webp              # bg-intro, bg-lobby (최적화)
+    fermat/             # Character.tsx 레이어 시스템 (manifest.json + layers/)
+scripts/                # convert_script.py (authoring 도구, 런타임 외)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## 작업 브랜치 참고
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- `main` — 릴리즈 브랜치
+- `my-app-legacy` — CRA 시절 스냅샷 (롤백 레퍼런스; 병합 금지)
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 후속 Phase (예정)
 
-### Deployment
+- **Stack 2**: Zustand 게임 상태 (호감도 + 진행도 + localStorage persist) + Tailwind/shadcn 셋업
+- **Stack 3**: 레슨/퀴즈 시스템 (Figma 기반 신규 화면)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+상세 계획은 stdev2026 모노레포의 `.omc/plans/fe-nextjs-migration-phase-1-7-2026-04-18.md` 참고.
