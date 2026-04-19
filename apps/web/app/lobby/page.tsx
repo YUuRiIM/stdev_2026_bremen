@@ -96,17 +96,9 @@ const CHAPTERS: ChapterDef[] = [
     title: 'Chapter 2: 분수',
     topic: '분수',
     subjectSlug: 'basic-fractions',
-    board: [
-      // Chapter 2 은 음성 강의만 준비됨 — 수업/퀴즈 데이터는 다음 스프린트.
-      // 보드는 "바로 강의하기" 안내 라벨 1개만 배치해 빈 느낌을 줄인다.
-      {
-        id: 'chapter2-lecture-hint',
-        type: 'quiz',
-        label: 'Chapter 2\n강의',
-        teacher: '페르마\n분수 · 등가 · 덧뺄셈',
-        position: { left: '300px', top: '160px' },
-      },
-    ],
+    // Chapter 2 는 음성 강의만 준비됨 (수업/퀴즈 콘텐츠는 다음 스프린트).
+    // 보드는 비워두고, 진입은 하단 "강의하기" 버튼에서만 허용.
+    board: [],
   },
 ];
 
@@ -490,20 +482,12 @@ function MainLobbyScreen() {
 
                           </div>
                         ) : (
-                          // QUIZ — Ch1 에선 수업 완료 후에만 열림.
-                          // Ch2+ 는 강의 바로 진입하는 힌트 카드.
+                          // QUIZ — 수업 완료 후에만 열림. 클릭 시 시작 팝업
+                          // (isPopupQuiz=true) → /quiz.
                           <button
                             type="button"
-                            disabled={
-                              currentChapter.chapterNumber === 1 && !isLessonDone
-                            }
+                            disabled={!isLessonDone}
                             onClick={() => {
-                              if (currentChapter.chapterNumber !== 1) {
-                                router.push(
-                                  `/lecture?subject=${currentChapter.subjectSlug}`,
-                                );
-                                return;
-                              }
                               if (!isLessonDone) return;
                               setIsPopupQuiz(true);
                               setIsLessonPopupOpen(true);
@@ -512,23 +496,11 @@ function MainLobbyScreen() {
                               width: '118px',
                               border: 'none',
                               background: 'transparent',
-                              cursor:
-                                currentChapter.chapterNumber !== 1 ||
-                                  isLessonDone
-                                  ? 'pointer'
-                                  : 'not-allowed',
+                              cursor: isLessonDone ? 'pointer' : 'not-allowed',
                               padding: 0,
                               flexShrink: 0,
-                              opacity:
-                                currentChapter.chapterNumber !== 1 ||
-                                  isLessonDone
-                                  ? 1
-                                  : 0.45,
-                              filter:
-                                currentChapter.chapterNumber !== 1 ||
-                                  isLessonDone
-                                  ? 'none'
-                                  : 'grayscale(0.7)',
+                              opacity: isLessonDone ? 1 : 0.45,
+                              filter: isLessonDone ? 'none' : 'grayscale(0.7)',
                             }}
                           >
                             <div
@@ -678,8 +650,15 @@ function MainLobbyScreen() {
       {isLessonPopupOpen && (
         <div className="main-lobby-modal-overlay">
           <div className="main-lobby-modal">
-            <h3>Chapter 1 -  시작</h3>
-            <p>수업을 시작할까요?</p>
+            <h3>
+              Chapter {currentChapter.chapterNumber} ·{' '}
+              {isPopupQuiz ? '퀴즈' : '수업'} 시작
+            </h3>
+            <p>
+              {isPopupQuiz
+                ? '4문제 퀴즈를 풀어볼까요? 70% 이상 맞히면 강의가 해금됩니다.'
+                : '수업을 시작할까요? 끝내면 퀴즈가 해금됩니다.'}
+            </p>
 
             <div className="main-lobby-modal__buttons">
               <button

@@ -96,6 +96,7 @@ export default function GalleryScreen() {
               );
             }}
             style={{
+              position: 'relative',
               aspectRatio: '16 / 9',
               width: '45vw',
               cursor: card.locked ? 'not-allowed' : 'pointer',
@@ -103,17 +104,84 @@ export default function GalleryScreen() {
               borderRadius: '24px',
               border: '6px solid white',
               boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-              filter: card.locked ? 'grayscale(1)' : 'none',
               transition: 'transform 0.2s',
             }}
-            onMouseEnter={(e) => !card.locked && (e.currentTarget.style.transform = 'scale(1.03)')}
-            onMouseLeave={(e) => !card.locked && (e.currentTarget.style.transform = 'scale(1)')}
+            onMouseEnter={(e) =>
+              !card.locked && (e.currentTarget.style.transform = 'scale(1.03)')
+            }
+            onMouseLeave={(e) =>
+              !card.locked && (e.currentTarget.style.transform = 'scale(1)')
+            }
           >
             <img
               src={card.image}
               alt={card.id}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                // Lock state: blur + darken slightly so the silhouette stays
+                // visible but the detail is obscured. Unlocked: crisp.
+                filter: card.locked ? 'blur(14px) brightness(0.72)' : 'none',
+                transform: card.locked ? 'scale(1.06)' : 'none',
+                transition: 'filter 0.3s',
+              }}
             />
+            {/* VIDEO indicator — shows on both locked and unlocked video cards
+                so users know there's an animated cutscene here. */}
+            {card.video && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 12,
+                  left: 12,
+                  background: 'rgba(0,0,0,0.55)',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  padding: '4px 10px',
+                  borderRadius: 999,
+                  backdropFilter: 'blur(4px)',
+                }}
+              >
+                ▶ 영상
+              </div>
+            )}
+            {/* Lock overlay — blur already dims content; this adds the lock
+                plate with a hint about the unlock requirement. */}
+            {card.locked && (
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  gap: 8,
+                  background:
+                    'linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.5))',
+                }}
+              >
+                <div style={{ fontSize: 48, lineHeight: 1 }}>🔒</div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                    textShadow: '0 2px 6px rgba(0,0,0,0.6)',
+                  }}
+                >
+                  {card.alwaysLocked
+                    ? '[DLC] 추가 캐릭터'
+                    : card.requiresChapterLecture !== null
+                      ? `Chapter ${card.requiresChapterLecture} 강의 완료 시 해금`
+                      : '잠금'}
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

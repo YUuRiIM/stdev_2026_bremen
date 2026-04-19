@@ -94,6 +94,23 @@ function VisualNovelScreen() {
 
   const isChoiceMode = current.speaker === 'choice';
 
+  // Keyboard shortcut — Space / Enter advances dialogue (skip in choice
+  // mode since a selection is required, and while the skip modal is open).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (showSkipModal || isChoiceMode) return;
+      if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+        e.preventDefault();
+        next();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+    // `next` closes over index/script, so depend on those; React will
+    // re-attach the listener with the freshest closure each frame.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [index, script, showSkipModal, isChoiceMode]);
+
   return (
     <section className="visual-novel" onClick={!isChoiceMode ? next : undefined}>
       <BackgroundLayer
