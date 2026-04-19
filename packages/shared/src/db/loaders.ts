@@ -123,6 +123,53 @@ async function loadSubjectRaw(
   };
 }
 
+/**
+ * Lookup a subject by its human-readable topic (case-insensitive `contains`
+ * match; same semantic startLecture uses when the LLM provides a `topic` arg).
+ * Preference order when multiple rows match:
+ *   1. exact (case-insensitive) match
+ *   2. row whose character_id matches `characterId` (if provided)
+ *   3. first candidate
+ */
+async function loadSubjectRawByTopic(
+  supabase: SupabaseClient,
+  topic: string,
+  characterId: string | null,
+): Promise<LoadedSubjectRaw | null> {
+  const normalized = topic.trim().toLowerCase();
+  if (!normalized) return null;
+
+  const filter = characterId
+    ? `character_id.eq.${characterId},character_id.is.null`
+    : 'character_id.is.null';
+  const { data, error } = await supabase
+    .from('subjects')
+    .select('id, topic, keyterms, objectives, prerequisites, difficulty, character_id')
+    .or(filter);
+  if (error) throw new Error(`loadSubjectByTopic failed: ${error.message}`);
+  if (!data || data.length === 0) return null;
+
+  const matches = data.filter((row) =>
+    (row.topic as string).toLowerCase().includes(normalized),
+  );
+  if (matches.length === 0) return null;
+
+  const exact = matches.find(
+    (row) => (row.topic as string).toLowerCase() === normalized,
+  );
+  const characterMatch = matches.find((row) => row.character_id === characterId);
+  const picked = exact ?? characterMatch ?? matches[0]!;
+  return {
+    id: picked.id,
+    topic: picked.topic,
+    keyterms: (picked.keyterms as string[]) ?? [],
+    objectives: (picked.objectives as Objective[]) ?? [],
+    prerequisites: (picked.prerequisites as string[]) ?? [],
+    difficulty: picked.difficulty,
+    characterId: picked.character_id,
+  };
+}
+
 // SubjectSeed.characterId is typed as null | 'fermat' literal (Demo MVP);
 // coerce any non-null character_id to 'fermat' until the union broadens.
 function narrowCharacterId(raw: string | null): null | 'fermat' {
@@ -144,6 +191,32 @@ export async function loadSubjectForStudent(
     prerequisites: raw.prerequisites,
     difficulty: raw.difficulty,
   });
+}
+
+/**
+ * Topic-keyed variant of {@link loadSubjectForStudent}. Used when the client
+ * pre-selects a subject (via /lecture?subject=<slug>) and the agent wants to
+ * seed its system prompt with that subject at session start.
+ *
+ * Returns null if no DB row matches the topic — caller should fall back to the
+ * "no active subject, ask the user" path.
+ */
+export async function loadSubjectForStudentByTopic(
+  supabase: SupabaseClient,
+  topic: string,
+  characterId: string | null,
+): Promise<(SubjectPublic & { id: string }) | null> {
+  const raw = await loadSubjectRawByTopic(supabase, topic, characterId);
+  if (!raw) return null;
+  const stripped = stripRubricsForStudent({
+    characterId: narrowCharacterId(raw.characterId),
+    topic: raw.topic,
+    keyterms: raw.keyterms,
+    objectives: raw.objectives,
+    prerequisites: raw.prerequisites,
+    difficulty: raw.difficulty,
+  });
+  return { ...stripped, id: raw.id };
 }
 
 // Includes rubric. ONLY call from the isolated judge LLM module.
