@@ -7,6 +7,8 @@ const images: Record<string, string> = {
   'bg-mem-1.png': '/assets/images/bg-mem-1.png',
   'bg-mem-2.png': '/assets/images/bg-mem-2.png',
   'bg-mem-3.png': '/assets/images/bg-mem-3.png',
+  'bg-fermat-mem4-1.png': '/assets/images/bg-fermat-mem4-1.png',
+  'bg-fermat-mem4-2.png': '/assets/images/bg-fermat-mem4-2.png',
   'bg-fermat-ball.png': '/assets/images/bg-fermat-ball.png',
   'fermat-png.png': '/assets/images/fermat-png.png',
   'fermat-png-dark.png': '/assets/images/fermat-png-dark.png',

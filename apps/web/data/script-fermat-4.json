@@ -1,17 +1,1988 @@
 [
   {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[2년 후. 겨울. 연구실. 창밖엔 가늘게 눈이 날린다. 책상 위엔 두꺼운 학위논문 초안 세 권. 빨간 펜 자국이 페이지마다 새빨갛다. 페르마, 턱을 괸 채 모니터를 응시하고 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
     "speaker": "character",
     "name": "페르마",
-    "text": "마지막 이야기를 들려드리겠습니다.",
+    "text": "……졸업이라.",
     "characterImage": "fermat-png.png",
-    "isSpeaking": true,
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(2년 만에. 수학의 공주답게, 라고 아이즐 선배가 놀렸었지.)",
+    "characterImage": "fermat-png.png",
     "backgroundImage": "bg-lobby.png"
   },
   {
     "speaker": "narrative",
-    "text": "페르마의 마지막 이야기가 전개됩니다.",
-    "characterImage": "fermat-png.png",
-    "isSpeaking": false,
+    "name": "",
+    "text": "[책상 서랍을 살짝 연다. 맨 아래, 오래된 노트. 1년차 첫날에 쓰기 시작한 그 노트. 이제는 페이지가 거의 다 찼다.]",
+    "characterImage": "fermat-png-dark.png",
     "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "> 2026년 봄학기, 1일차. 페르마. 이젠 익명이 아님.\n2026년 봄학기, 14일차. 덮쳐서, 죄송.\n2026년 봄학기, 30일차. 팔포. 말하다가 끊김. 내일 다시 할 수 있을까?\n…\n2027년 가을학기, 112일차. 교수님이 내 증명에 \"여백이 부족하다\"고 적어주심. 무슨 뜻이지.\n…\n>",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 마지막 비어 있는 페이지를 펼친다. 잠시 펜을 든 채 멈춰 있다가, 결국 아무것도 쓰지 못하고 노트를 덮는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "그때, 그 MT 때. 끝까지 말을 했어야 했는데.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "\"교수님 같은 사람이 되고 싶었어요\"까지는, 했어.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "그다음 문장이, 아직도 입 밖에 안 나와.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[창밖에 눈이 조금 굵어진다. 페르마, 한숨을 쉬고 다시 빨간 펜을 든다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……일단, 디펜스부터 하자.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(\"이따\"가, 너무 길어졌네.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[점심시간. 랩실 앞 복도의 자판기. 페르마, 커피 캔 하나를 뽑고 있는데 뒤에서 1년차 후배가 달려온다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 선배님!! 벌써 곧 디펜스시죠??",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……응. 다음 주 목요일.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 와 진짜 축하드려요!! 2년 만에 학위라니, 역시 천재답네요!",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "천재는 무슨. 졸업할 수 있을지도 몰라.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 에이~ 교수님이 엄청 아끼시던데요 선배?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……엄청 아끼시는 거랑, 디펜스 통과시켜주시는 건 별개야. 교수님이 얼마나 엄밀한 분인지, 너도 알지.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 맞아요…… 교수님 빨간 펜 공포 시리즈…….",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "내 논문 초안 지금 빨간색 반 검은색 반이야.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: ………건투를 빕니다 선배.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "고마워.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[후배, 잠시 페르마를 빤히 보다가 머뭇거리며 묻는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 선배. 졸업하면 포닥은 어디로 가세요? 아니면 바로 어디 교수직? 이 연구실 2년차에 벌써 조교수 제안 세 군데 들어왔다고 듣긴 했는데…….",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "…….",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "아직 안 정했어.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 왜요? 선배쯤 되면 제일 좋은 데 골라가면 되잖아요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……그게, 그렇게 간단한 게 아니더라.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 사랑하는 사람이라도 있으세요 선배?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……!",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[커피 캔이 자판기 구멍에서 튀어나오다가 손에서 미끄러질 뻔한다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "후배, 너 요즘 드라마 너무 많이 봐.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 헤헤. 선배 얼굴 빨개졌는데요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "자판기 앞이 추워서 그래.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A: 복도 히터 켜져 있는데요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……연구실 가서 논문이나 봐라.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 커피 캔을 들고 황급히 걸어간다. 후배, 그 뒷모습을 보고 씩 웃는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "랩후배 A (속마음): (진짜 있으시네.)",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[그날 새벽. 연구실. 시계는 3시 2분. 페르마, 노트북 앞에 구부정하게 앉아 있다. 책상 위에는 빈 커피 컵 셋, 반쯤 비운 커피 컵 하나. 옆에는 빨간 펜이 지친 듯 누워 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……왜 이 장마다 이렇게 지적이 많으신 거야.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(교수님의 빨간 펜은, 틀렸다고 적는 게 아니야. \"여기, 네가 더 갈 수 있어\"라고 적는 거야.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(그걸 알아서, 반박할 수도 없어.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[기지개를 켠다. 커피를 한 모금. 이미 식었다. 그런데도 손에 쥔 컵이 따뜻하다고 느껴질 만큼, 밤이 차다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……졸려.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "나, 졸업할 수 있는 거지?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(\"천재 페르마, 2년차 박사과정에서 디펜스 실패\"라는 기사가, 2027년 검색창에 뜨면, 나는 진짜 다시 성 안으로 숨을 거야.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[고개를 잠깐 책상에 박는다. 잠깐이라고 생각했는데, 눈꺼풀이 무거워진다. 그때.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "딸칵.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[문이 열린다. 익숙한 소리. 페르마, 고개를 번쩍 든다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……!",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "페르마 학생은, 아직도 있었군요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교, 교수님.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 들어선다. 1년 전 새벽과 거의 같은 옷차림. 얇은 니트, 두꺼운 원서 한 권. 그런데 그 사이 페르마의 키가 아주 조금 자란 건지, 아니면 페르마 쪽이 달라진 건지 — 교수는 그때보다 조금 작게 느껴진다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "디펜스가 코앞이니, 이 시간이 당연하긴 하겠네요. 저도 디펜스 기간에는 밤새는 게 일상이었습니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……교수님도요?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네. 제 학위논문 초안이, 제 지도교수님한테 빨간색 반, 검은색 반으로 돌아왔던 기억이 있어요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "………그거, 지금 저한테도 일어나고 있어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……제가 그랬습니까.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "아주 많이요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마가 논문 초안의 한 페이지를 들어 보인다. 거의 전부가 붉다. 교수가 웃음을 참지 못하고 슬쩍 고개를 돌린다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……제 지도 방식이, 결국 저를 닮아가고 있네요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "좋은 지도 방식이에요. 무서울 뿐이지.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "무서우셨어요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……아니요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "진짜로는, 하나도 무섭지 않았어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 익숙하게 커피 머신 쪽으로 걸어가, 두 잔을 내린다. 한 잔은 페르마 책상에, 한 잔은 자기 자리에. 그리고 늘 앉던 소파 옆 의자에 걸터앉는다. 1년 전이라면 어색했을 동선이, 지금은 너무 자연스럽다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "논문, 거의 다 된 것 같은데요. 제가 빨간색을 그만 좀 넣어야, 페르마 학생이 쉬실 수 있을 것 같고.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "아니에요. 교수님 덕분에, 이 논문 몇 단계는 더 단단해졌어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……제가, 혼자 풀었다고 착각하는 부분을 — 교수님이 전부 짚어내셨어요. \"여기서 네가 쓴 '자명하다'는, 사실 자명하지 않다\"고.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그 말 처음 들었을 때, 좀 분했어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……분하셨어요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네. 왜냐하면요, 저 1년 전에 — 교수님 ICM 논문 읽으면서, 정확히 똑같은 문장에서 막혔었거든요. \"자명하다\"는, 그 한 줄에서.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그 문장이, 1년 만에 제 논문에도 적혀 있었어요. 제가 다른 사람한테 똑같은 짓을 하고 있었어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "…….",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "자주 있는 일입니다. 똑똑해질수록, \"자명하다\"는 말로 숨기는 게 많아져요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그래서 교수님이, 제 여백에 \"여백이 부족하다\"고 쓰셨던 거예요?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……기억하세요, 그거.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "기억해요. 2학기 가을, 제가 제출한 미니 논문 옆에 — 빨간 펜으로, 딱 한 줄.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "「이 여백은, 당신이 생각하는 것보다 좁다.」",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "…….",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "페르마 학생 이름이 이름이라, 그 말장난을 안 할 수가 없어서요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……!",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교수님, 저 그거, 2주 동안 무슨 뜻인지 고민했어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "하하. 그 뜻이, 지금은 이해가 되세요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "제가 혼자 다 채웠다고 생각한 여백이, 사실 반도 안 채워져 있었다는 뜻. 맞죠?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "정답입니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 머그잔을 천천히 내려놓는다. 창밖, 가로등 불빛 아래 눈송이가 느리게 떨어지고 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그런데 페르마 학생. 이 시간에 제가 여기 들어오는 건, 사실 오랜만이네요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네. 1년 반 전, 그때 이후로 처음이신 것 같아요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그땐, 제가 페르마 학생의 증명에 두 줄을 채워드렸죠.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "오늘은 페르마 학생이, 저한테 뭐 하나 채워주실 수 있을까요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……팔포에서.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "끊기셨던 말씀이, 있지 않으셨어요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 커피를 든 손이 멈춘다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……기억하시네요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "2년이 지났는데도요. 제가 \"이따 마저 해주실래요\"라고 말한 건, 그때가 처음이자 마지막이었어요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그 말을 꺼내놓고 2년을 기다린 게, 제가 할 일이었는지는 잘 모르겠지만.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 머그잔을 책상 위에 조용히 내려놓는다. 손끝이 떨리는 걸 숨기지 않는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……그럼, 지금 해도 될까요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "…….",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……교수님.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저, 세미나 날 ── 교수님이 \"성 밖으로 나오시라\"고 하셨을 때.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그거, 저한테 하신 말씀인 줄 알았어요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저 혼자 착각한 거겠지만, 그날 강당에, 저만 들은 줄 알았어요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "…….",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그래서 저, 성 밖으로 나왔어요. 그건 교수님도 아시잖아요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "근데, 여기서부터가 — 그때 MT에서 못 한 말인데요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[숨을 고른다. 한 번. 두 번.]",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저, 성 밖에 나온 게, 교수님 때문만은 아니었어요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……네?",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저는 — 교수님 옆에 서고 싶어서, 나왔어요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "같이 걷고 싶어서요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "\"당신 같은 사람이 되고 싶다\"가, 2년 전의 제가 할 수 있었던 최선의 말이었는데.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "지금은, 그 말이 부족했다는 걸 알아요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저는 교수님 \"같은\" 사람이 되고 싶었던 게 아니에요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교수님 \"옆의\" 사람이, 되고 싶었던 거예요.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[정적. 눈송이가 창에 부딪히는 소리만 들린다. 교수가 오래 페르마를 바라본다. 눈을 피하지 않는다.]",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……페르마 학생.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "저는 그 말, 2년 동안 기다렸습니다.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……!",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "디펜스부터 통과하시고. 그 이야기는 그다음에, 제대로 합시다.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네. 네, 교수님.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(가슴이. 가슴이 너무 빨리 뛰어서. 이 새벽에 심장이 터지면, 원인 규명이 참 애매할 텐데.)",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 미소를 숨기지 못한 채 문 쪽으로 걸어간다. 나가기 직전, 돌아본다.]",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그리고 한 가지 더.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네.",
+    "backgroundImage": "bg-fermat-mem4-1.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "논문 첨부 5장의 보조정리 4.7. ──그거, 제가 아직 빨간 펜 안 댔어요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……! 아직 안 봐주신 데가 있어요??",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "오늘 안으로 봐서, 내일 돌려드릴게요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그러니까, 너무 안 주무시면, 곤란합니다. 디펜스 날, 피곤하시면 안 되잖아요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[문이 닫힌다. 페르마, 책상 앞에서 한참 동안 머그잔만 내려다보고 있다. 그러다 결국 — 책상에 얼굴을 파묻고, 작게, 아주 작게 웃는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "……이 사람.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "2년을 기다렸다고 말하는 사람이, 마지막엔 보조정리 이야기로 끊어버리네.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "그게 너무. 그게 너무 교수님다워서.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "……나, 디펜스, 꼭 붙어야겠다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[목요일 오후. 대학 본관 디펜스 룸. 다섯 명의 심사위원. 가운데 자리에 교수. 양옆으로 외부 심사위원 네 명. 정면 스크린에 띄워진 페르마의 발표 슬라이드 1번.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "사회자: 그럼 페르마 학생, 발표 시작해 주십시오.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네. 안녕하십니까, 페르마입니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[목소리가 떨리지 않는다. 스스로도 놀랄 만큼.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(괜찮아. 2년 전의 나한테, 이걸 설명한다고 생각하자. 냅킨에 풀이 올리던 그 애한테.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "본 논문은, 특정 조건 하의 대수체에서 ── 단수 구조의 해상도에 관한 연구입니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[발표가 흘러간다. 40분. 페르마의 슬라이드는 빈틈이 없다. 외부 심사위원 A가 손을 든다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "심사위원 A: 페르마 학생, 3장의 주정리 — 이 경우의 분기가 하나 빠진 것 아닙니까? 합성수에서의 처리가 안 보이는데요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "좋은 지적입니다. 합성수 케이스는 부록 B의 보조정리 4.7에서 별도로 처리했습니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[슬라이드를 넘긴다. 심사위원 A가 슬라이드를 천천히 본다. 눈빛이 바뀐다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "심사위원 A: ……이, 이 방식으로 우회하신 겁니까?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네. 직접 처리가 기술적으로 불가능해서, 한 단계 추상화된 공간에서의 동치 증명을 통해 우회했습니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "심사위원 A: 흥미롭군요. ……통과시킬 만한 방식입니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수의 입꼬리가 아주 살짝 움직이는 걸 페르마는 본다. 본인만 안다. 보조정리 4.7. 오늘 새벽에 교수가 돌려준 그것이다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(교수님. 그 두 줄, 또 당신이 채워주셨네요.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(괜찮아요. 다음 여백부터는, 제가 채울게요.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[질의응답이 끝난다. 심사위원들이 페르마를 밖에 잠시 내보낸다. 페르마는 복도 벤치에 앉아 있다. 손가락으로 무릎을 톡, 톡, 톡. 페르마의 맥박이 그 리듬에 맞춰 뛴다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[30분 후. 문이 열린다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "사회자: 페르마 학생, 들어오세요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마가 걸어 들어간다. 심사위원 다섯이 일어선다. 교수가 앞으로 한 걸음 나온다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "페르마 학생의 박사학위 디펜스를 ── 승인합니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……!",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "축하드립니다, 박사님.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네. ……감사합니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(박사님, 이래.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "(교수님 입에서 그 단어가, 내 이름 뒤에 붙는다.)",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 고개를 숙인다. 눈가가 뜨겁다. 하지만 울지는 않는다. 디펜스 룸에서 울 순 없다. 그 정도의 긍지는, 수학의 공주로 살아온 사람에게 아직 남아 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[디펜스 후. 연구실. 저녁. 랩실 식구들이 \"축하 맥주\"를 한 캔씩 돌리고, 아이즐 선배가 페르마의 머리 위에 꽃다발을 장난스럽게 올려놓는다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 박사 페르마 만세!\n랩 선배 B: 만세!!\n랩후배 A: 선배 축하드려요 진심으로!!",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……고마워, 다들.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……진짜, 다들.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[잠시 후, 축하 자리가 끝나고 사람들이 빠져나간다. 아이즐이 문 앞에서 손을 흔든다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 페르마, 교수님 방 가봐. 너 기다리고 계셔.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……어떻게 알아요 선배?",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 3년 동안 이 랩실에서 뭐 하나 모르고 있을 거 같니 내가?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……선배가 제일 무서워요 저.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 그래, 그래. 가봐. 모범생아.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 교수실 앞. 노크.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교수님, 페르마입니다.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "들어오세요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[문을 연다. 교수실. 책으로 빽빽한 벽. 창가에 놓인 단출한 소파. 교수가 찻잔 두 개를 놓고 기다리고 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "앉으세요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 소파 끝에 걸터앉는다. 2년 전의 새벽, 팔포의 테라스. 그때의 자세랑 거의 똑같다. 그런데 공기는 완전히 다르다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "이제, 앞으로 어떻게 하실 생각이세요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……진로 말씀이시죠.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "제안 받은 데가 몇 군데 있긴 해요. 미국에 포닥 자리 하나. 국내 국립대에 조교수직 두 개. 해외 IT 기업 리서치랩에서도 연락이 왔고요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "전부 좋은 자리네요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네, 좋은 자리예요. 근데요, 교수님.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저, 그 자리들 전부, 고사할까 해요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……이유가?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 주머니에서 무언가를 꺼낸다. 낡고 낡은 흰 종이. 접혀 있던 자국이 여기저기. 한쪽 귀퉁이는 구겨졌다가 다시 펴져 있다. 식당 냅킨. 2년 전, 로펌 사무실에서 수학 포럼 난제를 풀던 그 냅킨이다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……이건.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "이거, 제가 법률 인턴 하던 시절에, 한 문제 풀다가 ── 반만 풀고 덮은 거예요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "냅킨 한 장에, 한 줄이 모자라서 못 끝낸 증명이 있거든요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "냅킨이, 너무 좁아서요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……페르마 학생.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "아, 그 이름 덕에 이 농담 평생 써먹을 수 있다고 하셨죠.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "용서하세요. 제가 당시 잠을 못 자서요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……푸흣.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 냅킨을 교수 쪽으로 살짝 민다. 교수가 조심스럽게 그걸 든다. 읽어 내려간다. 한참.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……이거, 꽤나 깊이 들어간 정리인데요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "네. 제가 2년 전에, 이게 얼마나 깊은지도 모르고 덤볐었어요. 냅킨 한 장이면 끝날 줄 알았어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……수학의 공주였으니까요, 그때의 저는.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "…….",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그런데 교수님, 저 이제 공주가 아니거든요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "공주는 자기 방에서 제일 똑똑한 사람이에요. 근데 제가 지금 원하는 건, 누군가 옆자리에 앉을 사람이 있는 사람이에요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "그래서, 이 정리.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "이거, 교수님이랑 같이, 평생을 걸어서 풀고 싶어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "냅킨 한 장이 아니라. 논문 수십 편을 걸고. 여백이 부족할 때마다 새 페이지를 얹어가면서요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 냅킨을 천천히 내려놓는다. 페르마의 얼굴을 한참 본다. 그리고 — 미소 짓는다. 2년 내내 페르마가 훔쳐보던, 그 조용하고 단정한 미소다. 그런데 오늘은, 거기에 기쁨이 덧씌워져 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……냅킨이 좁다, 라.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "후대의 수학자들이, 그 한 줄 때문에 300년을 고생했는데요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……그럼 교수님이랑 저랑은, 300년은 안 걸리게 해봐요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……하하.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "그럼, 페르마 박사님.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "저희 연구실, 공식적으로 ── 남아주시겠습니까.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "저 아직 교수님이랑, 연구하고 싶어요. 옆자리에서요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……환영합니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[교수가 손을 내민다. 페르마가 그 손을 맞잡는다. 2년 전, 비치발리볼 승리 후에 잡았던 손과 같은 손. 그런데 이번엔, 페르마가 먼저 세게 쥔다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[반년 뒤, 페르마의 학위 수여식. 학장의 축사가 끝나고, 가운을 입은 페르마가 단상에서 내려온다. 객석 앞쪽에 교수가 앉아 있다. 평소 안 들고 다니던 꽃 한 송이를 들고.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "축하드립니다, 페르마 박사님.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……또 그 호칭.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "적응하셔야죠.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……네, 네. 감사합니다 교수님.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[그리고 1년이 더 지난다. 다시 가을.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[연구실 문 앞. 새 명패가 걸려 있다. 두 개.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "> OOO 교수 (연구실장) 페르마 조교수",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 새 명패 앞에 서서 한참을 본다. 손가락으로 자기 이름을 한 번 쓸어본다. 그리고 문을 연다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 왔어 페르마? ……아니지, 페르마 \"교수님.\"",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "선배, 저 그냥 페르마로 해주세요. 어색해요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 안 돼. 조교수님한테 함부로 반말하면 안 되지. 페르마 \"교수님.\"",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……선배.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 농담이야. 환영해, 조교수 페르마.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[아이즐이 어깨를 툭 친다. 페르마가 자기 새 자리에 앉는다. 책상 위에 새 명판, 새 노트북, 그리고 ── 서랍 제일 위 칸에 조심스럽게 넣은, 낡은 노트 한 권. 책상 오른쪽에는, 액자에 넣은 작은 종이 한 장이 놓여 있다. 그 시절의 냅킨. 반쯤 풀린 증명.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[랩미팅 테이블. 교수가 들어온다. 오늘은 교수가 발표자다. 페르마는 심사석 쪽에 앉아 있다. 2년 전의 그 자리, 반대편.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "오늘 제가 발표할 내용은, 제 공동연구자인 페르마 조교수와 함께 작업 중인 ── 주제에 관한 중간 보고입니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[슬라이드 1번. 제목이 떠 있다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "> \"냅킨의 정리에 관하여: 여백을 채우는 시도 I\"\n> \n> OOO · 페르마\n>",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 슬라이드를 보고 작게 웃는다. 아이즐이 옆에서 팔꿈치로 쿡 찌른다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐 (속삭이며): 야. 제목 저거, 네 생각이지?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "페르마 (속삭이며): ……반반이요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "아이즐: 음 ── 부부공저 느낌 나는데.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "선배 제발요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[발표가 시작된다. 교수가 칠판 앞에서 식을 써 내려간다. 3분쯤 지났을 때, 교수가 분필을 들고 멈춘다. 고개를 돌린다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……페르마 조교수님. 이 보조정리, 여기서 이렇게 넘어가도 될까요?",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마가 자리에서 일어나, 칠판 앞으로 걸어간다. 분필을 건네받는다. 2년 전의 새벽, 마커를 건네받던 그 자세랑 같다. 그런데 이번엔, 교수가 페르마의 증명을 기다리는 쪽이다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "여기서 한 단계 우회하셔야 해요. 이 부분에, 여백이 좀 부족하거든요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[칠판에 두 줄을 채운다. 교수가 그 두 줄을 조용히 읽고 — 고개를 끄덕인다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……깔끔하네요. 감사합니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "별말씀을요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 자기 자리로 돌아온다. 칠판에 페르마의 손글씨와 교수의 손글씨가 섞여 있다. 누구 글씨인지 이제는 딱히 구분할 필요가 없어 보인다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[발표가 끝나고 사람들이 빠져나간 저녁. 페르마와 교수만 칠판 앞에 남는다. 창밖엔 낙엽.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교수님.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네, 페르마 교수님.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……그 호칭, 아직도 적응 안 돼요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "저도요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[두 사람, 칠판을 바라본다. 증명이 아직 반만 쓰여 있다. 빈 오른쪽 절반 — 여백.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "……이 여백이요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "이번 주까지 반, 다음 주까지 반. 이렇게 채워가요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "좋습니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "교수님 부분 틀리시면, 제가 지적할 거예요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "이미 그러고 계시잖아요.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "앞으로 더 할 거예요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "……환영입니다.",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 분필을 든다. 교수도 다른 색 분필을 든다. 두 사람이 나란히 칠판 앞에 선다. 어깨 높이가 거의 비슷하다. 2년 전엔 그렇지 않았던 것 같은데, 이제는 그렇다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[마지막 컷. 연구실. 페르마, 서랍에서 낡은 노트를 꺼낸다. 1막 첫날부터 써온 그 노트. 마지막 빈 페이지가 기다리고 있다. 페르마, 펜을 들고 잠시 멈춘다. 그리고 한 줄을 쓴다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "> 2028년 가을학기, 첫 랩미팅.\n칠판의 여백, 반씩 채우기 시작함.\n> \n> \n> ……\"이따\"가, 결국 오늘이 됨.\n>",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 그 아래에 한 줄을 더 쓴다. 손끝에 힘이 없지만, 글자는 단정하다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "> 수학의 공주, 은퇴.\n이제는 여왕도 공주도 아닌, 옆자리.\n>",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마 (속마음):]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "……교수님. 저, 당신한테 배우고 싶어서 성 밖에 나왔던 1년차는, 이제 끝났어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "2년차, 3년차의 저는, 당신 옆자리에서 — 당신과 같이 증명하는 사람이 되려고, 남았어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "당신이 \"자명하다\"고 쓴 여백에, 제가 두 줄을 채울게요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "제가 \"자명하다\"고 쓴 여백에, 당신이 두 줄을 채워 주세요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "그렇게 서로의 여백을 채우면서, 우리 — 평생을, 같이 풀어요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "냅킨이 좁으면, 종이를 덧대고.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "종이가 좁으면, 칠판을 쓰고.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "character",
+    "name": "페르마 (속마음)",
+    "text": "칠판이 좁으면, 새 방을 얻어서요.",
+    "characterImage": "fermat-png.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[페르마, 노트를 덮는다. 창밖으로 낙엽이 한 장, 창틀 위에 내려앉았다 바람에 다시 날아간다. 페르마는 그걸 보지 않는다. 페르마는 문 밖에서 자기를 기다리고 있는 사람에게로, 걸어간다.]",
+    "characterImage": "fermat-png-dark.png",
+    "backgroundImage": "bg-lobby.png"
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "...",
+    "backgroundImage": "bg-fermat-mem4-2.png" 
+  },
+  {
+    "speaker": "character",
+    "name": "페르마",
+    "text": "──교수님. 가요.",
+    "backgroundImage": "bg-fermat-mem4-2.png" 
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "네, 갑시다.",
+    "backgroundImage": "bg-fermat-mem4-2.png" 
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[연구실 문이 닫힌다. 불이 꺼진다. 책상 위의 낡은 노트, 마지막 페이지가 잠시 펼쳐져 있다가, 바람에 조용히 덮인다.]",
+    "backgroundImage": "bg-fermat-mem4-2.png" 
+  },
+  {
+    "speaker": "narrative",
+    "name": "",
+    "text": "[4막 ──「여백」, 끝.][「천재 교수와 아마추어 수학의 공주님」 인연 스토리, 완결.]",
+    "backgroundImage": "bg-fermat-mem4-2.png" 
   }
 ]

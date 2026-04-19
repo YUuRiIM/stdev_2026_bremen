@@ -64,9 +64,9 @@ def parse_script(file_path):
 import os
 import json
 
-# script = parse_script('script-intro.txt') 
-# with open('script-intro.json', 'w', encoding='utf-8') as f: json.dump(script, f, ensure_ascii=False, indent=2) 
-# print('JSON 변환 완료')
+script = parse_script('script-fermat-4.txt') 
+with open('script-fermat-4.json', 'w', encoding='utf-8') as f: json.dump(script, f, ensure_ascii=False, indent=2) 
+print('JSON 변환 완료')
 
 # for i in range(1, 1):
 #     txt_file = f"script-fermat-{i}.txt"
