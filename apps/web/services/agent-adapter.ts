@@ -2,6 +2,7 @@ import type {
   LectureState,
   LectureVerdictApplied,
   CutscenePlay,
+  InnerMonologue,
 } from '@mys/shared/protocol';
 
 export type ConnectionState = 'connected' | 'reconnecting' | 'closed';
@@ -27,6 +28,8 @@ export interface AdapterEvents {
   onVerdictApplied?: (verdict: LectureVerdictApplied) => void;
   /** `cutscene.play` — 풀스크린 컷씬 (TTS는 agent 측이 mute). */
   onCutscenePlay?: (cutscene: CutscenePlay) => void;
+  /** `agent.inner_monologue` — 속마음 (TTS 로 읽히지 않는 자막 전용). */
+  onInnerMonologue?: (monologue: InnerMonologue) => void;
 }
 
 export type Unsubscribe = () => void;

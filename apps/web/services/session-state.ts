@@ -3,6 +3,7 @@ import type {
   LectureState,
   LectureVerdictApplied,
   CutscenePlay,
+  InnerMonologue,
 } from '@mys/shared/protocol';
 import type {
   AgentMessage,
@@ -38,6 +39,8 @@ export interface SessionState {
   verdict: LectureVerdictApplied | null;
   /** 활성 컷씬 (null 이면 재생 안함). */
   activeCutscene: CutscenePlay | null;
+  /** 가장 최근 속마음 자막. 자체 타이머로 자동 소멸(캡션 컴포넌트가 관리). */
+  latestInnerMonologue: (InnerMonologue & { id: number }) | null;
 }
 
 export type SessionAction =
@@ -50,6 +53,8 @@ export type SessionAction =
   | { type: 'VERDICT_APPLIED'; verdict: LectureVerdictApplied }
   | { type: 'CUTSCENE_PLAY'; cutscene: CutscenePlay }
   | { type: 'CUTSCENE_END' }
+  | { type: 'INNER_MONOLOGUE'; monologue: InnerMonologue }
+  | { type: 'INNER_MONOLOGUE_CLEAR'; id: number }
   | { type: 'ACTIVATE' }
   | { type: 'END' };
 
@@ -64,7 +69,10 @@ export const initialSessionState: SessionState = {
   objectivesStatus: [],
   verdict: null,
   activeCutscene: null,
+  latestInnerMonologue: null,
 };
+
+let innerMonologueCounter = 0;
 
 export function sessionReducer(
   state: SessionState,
@@ -98,6 +106,19 @@ export function sessionReducer(
       return { ...state, activeCutscene: action.cutscene };
     case 'CUTSCENE_END':
       return { ...state, activeCutscene: null };
+    case 'INNER_MONOLOGUE':
+      return {
+        ...state,
+        latestInnerMonologue: {
+          ...action.monologue,
+          id: ++innerMonologueCounter,
+        },
+      };
+    case 'INNER_MONOLOGUE_CLEAR':
+      // Only clear if the id still matches — guards against a newer monologue
+      // racing the fade-out timer of an older one.
+      if (state.latestInnerMonologue?.id !== action.id) return state;
+      return { ...state, latestInnerMonologue: null };
     case 'ACTIVATE':
       return { ...state, status: 'active' };
     case 'END':
