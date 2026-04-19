@@ -24,7 +24,7 @@ const CARDS: GalleryCard[] = [
   { id: '호킹', image: '/assets/images/hawking-full.png', requiresChapterLecture: null, alwaysLocked: true },
   { id: '일론', image: '/assets/images/elon-full.png', requiresChapterLecture: null, alwaysLocked: true },
   { id: '페르마-인연1', image: '/assets/images/bg-mem-1.png', requiresChapterLecture: null },
-  { id: '페르마-인연2', image: '/assets/images/bg-mem-2.png', requiresChapterLecture: null },
+  { id: '페르마-인연2', image: '/assets/images/bg-mem-2.png', requiresChapterLecture: 1 },
   {
     id: '페르마-해변에서',
     image: '/assets/images/bg-fermat-ball.png',
@@ -37,6 +37,8 @@ const CARDS: GalleryCard[] = [
     video: '/assets/cutscenes/lecture-end-2.mp4',
     requiresChapterLecture: 2,
   },
+  { id: '페르마-인연4-1', image: '/assets/images/bg-fermat-mem4-1.png', requiresChapterLecture: 3 },
+  { id: '페르마-인연4-2', image: '/assets/images/bg-fermat-mem4-2.png', requiresChapterLecture: 3 },
 ];
 
 export default function GalleryScreen() {

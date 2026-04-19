@@ -1886,13 +1886,6 @@
     "backgroundImage": "bg-lobby.png"
   },
   {
-    "speaker": "narrative",
-    "name": "",
-    "text": "[페르마 (속마음):]",
-    "characterImage": "fermat-png-dark.png",
-    "backgroundImage": "bg-lobby.png"
-  },
-  {
     "speaker": "character",
     "name": "페르마 (속마음)",
     "text": "……교수님. 저, 당신한테 배우고 싶어서 성 밖에 나왔던 1년차는, 이제 끝났어요.",
