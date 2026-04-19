@@ -243,9 +243,22 @@ export default function LecturePage() {
           const wasLectureEnd =
             state.activeCutscene?.eventKey === 'lecture-end';
           dispatch({ type: 'CUTSCENE_END' });
-          if (wasLectureEnd) {
-            handleEnd();
-          }
+          if (!wasLectureEnd) return;
+
+          // Clean up voice session before navigating away.
+          adapterRef.current?.endSession().catch(() => {});
+          dispatch({ type: 'END' });
+
+          // Chapter N 강의 완료 → 다음 인연 스토리(fermat-{N+1}) 가 있으면
+          // 자동 재생, 없으면 로비로. fermat-1 은 온보딩이라 Ch1 완료 후
+          // 플레이할 이야기는 fermat-2 부터 시작.
+          const chapterNumber = CHAPTER_BY_SUBJECT[subjectSlug];
+          const nextStoryIdx = chapterNumber ? chapterNumber + 1 : null;
+          const hasNextStory =
+            nextStoryIdx !== null && nextStoryIdx >= 2 && nextStoryIdx <= 4;
+          router.push(
+            hasNextStory ? `/visual-novel/fermat-${nextStoryIdx}` : '/lobby',
+          );
         }}
       />
 
