@@ -51,6 +51,13 @@ function MainLobbyScreen() {
       }
     };
     read();
+    // Mark this session as "not a first-time visit" so the landing (/)
+    // redirect skips the intro chain on next reload.
+    try {
+      localStorage.setItem('demo_visited', 'true');
+    } catch {
+      /* ignore */
+    }
     window.addEventListener('focus', read);
     return () => window.removeEventListener('focus', read);
   }, []);
@@ -192,13 +199,16 @@ function MainLobbyScreen() {
                         try {
                           localStorage.removeItem('chapter1_quiz_passed');
                           localStorage.removeItem('chapter1_lesson_done');
+                          localStorage.removeItem('demo_visited');
                         } catch {
                           /* ignore */
                         }
                         await fetch('/api/demo/reset', {
                           method: 'POST',
                         }).catch(() => {});
-                        location.reload();
+                        // Route through `/` so the intro gate kicks in (the
+                        // demo_visited flag was just cleared).
+                        location.href = '/';
                       }}
                       style={{
                         display: 'block',
