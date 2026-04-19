@@ -72,11 +72,32 @@ function VisualNovelScreen() {
     };
   }, [scriptId]);
 
-  if (!script) {
+  // Keyboard shortcut — Space / Enter advances dialogue (skip in choice
+  // mode since a selection is required, and while the skip modal is open).
+  // Must be declared before the early return so the hook order stays stable
+  // across renders (React enforces Rules of Hooks).
+  const current = script?.[index];
+  const isChoiceMode = current?.speaker === 'choice';
+  useEffect(() => {
+    if (!script) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (showSkipModal || isChoiceMode) return;
+      if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
+        e.preventDefault();
+        if (index < script.length - 1) {
+          setIndex(index + 1);
+        } else {
+          router.push(nextRouteFor(scriptId));
+        }
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [index, script, showSkipModal, isChoiceMode, router, scriptId]);
+
+  if (!script || !current) {
     return <div>Loading...</div>;
   }
-
-  const current = script[index];
 
   const next = () => {
     if (index < script.length - 1) {
@@ -91,25 +112,6 @@ function VisualNovelScreen() {
     setShowSkipModal(false);
     router.push(nextRouteFor(scriptId));
   };
-
-  const isChoiceMode = current.speaker === 'choice';
-
-  // Keyboard shortcut — Space / Enter advances dialogue (skip in choice
-  // mode since a selection is required, and while the skip modal is open).
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (showSkipModal || isChoiceMode) return;
-      if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'Enter') {
-        e.preventDefault();
-        next();
-      }
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-    // `next` closes over index/script, so depend on those; React will
-    // re-attach the listener with the freshest closure each frame.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, script, showSkipModal, isChoiceMode]);
 
   return (
     <section className="visual-novel" onClick={!isChoiceMode ? next : undefined}>
