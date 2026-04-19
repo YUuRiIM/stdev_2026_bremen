@@ -30,21 +30,21 @@ interface ChapterDef {
    *  으로 시각 상태를 표시. quiz 는 popup 진입점. */
   board: Array<
     | {
-        id: string;
-        type: 'lesson';
-        titleTop: string;
-        titleBottom: string;
-        image: string;
-        status: 'done' | 'current' | 'locked';
-        position: { left: string; top: string };
-      }
+      id: string;
+      type: 'lesson';
+      titleTop: string;
+      titleBottom: string;
+      image: string;
+      status: 'done' | 'current' | 'locked';
+      position: { left: string; top: string };
+    }
     | {
-        id: string;
-        type: 'quiz';
-        label: string;
-        teacher: string;
-        position: { left: string; top: string };
-      }
+      id: string;
+      type: 'quiz';
+      label: string;
+      teacher: string;
+      position: { left: string; top: string };
+    }
   >;
 }
 
@@ -171,7 +171,7 @@ function MainLobbyScreen() {
     idx === 0
       ? true
       : chapterProgress.lectureCompleted[CHAPTERS[idx - 1]!.chapterNumber] ===
-        true;
+      true;
   const gotoChapter = (idx: number) => {
     if (idx < 0 || idx >= CHAPTERS.length) return;
     if (!isChapterUnlocked(idx)) return;
@@ -280,7 +280,7 @@ function MainLobbyScreen() {
                         }
                         await fetch('/api/demo/reset', {
                           method: 'POST',
-                        }).catch(() => {});
+                        }).catch(() => { });
                         // Route through `/` so the intro gate kicks in (the
                         // demo_visited flag was just cleared).
                         location.href = '/';
@@ -418,12 +418,12 @@ function MainLobbyScreen() {
                       color: '#333',
                       cursor:
                         currentChapterIdx < CHAPTERS.length - 1 &&
-                        isChapterUnlocked(currentChapterIdx + 1)
+                          isChapterUnlocked(currentChapterIdx + 1)
                           ? 'pointer'
                           : 'not-allowed',
                       opacity:
                         currentChapterIdx < CHAPTERS.length - 1 &&
-                        isChapterUnlocked(currentChapterIdx + 1)
+                          isChapterUnlocked(currentChapterIdx + 1)
                           ? 1
                           : 0.35,
                       fontSize: 18,
@@ -514,19 +514,19 @@ function MainLobbyScreen() {
                               background: 'transparent',
                               cursor:
                                 currentChapter.chapterNumber !== 1 ||
-                                isLessonDone
+                                  isLessonDone
                                   ? 'pointer'
                                   : 'not-allowed',
                               padding: 0,
                               flexShrink: 0,
                               opacity:
                                 currentChapter.chapterNumber !== 1 ||
-                                isLessonDone
+                                  isLessonDone
                                   ? 1
                                   : 0.45,
                               filter:
                                 currentChapter.chapterNumber !== 1 ||
-                                isLessonDone
+                                  isLessonDone
                                   ? 'none'
                                   : 'grayscale(0.7)',
                             }}
@@ -615,88 +615,61 @@ function MainLobbyScreen() {
             </div>
           </div>
 
-          <div className="main-lobby-bottom"
-            style={{
-              zIndex: 1000,
-            }}>
+          <div className="main-lobby-bottom">
 
             <img src={mainTalking} alt="대사" className="main-lobby-dialogue__image" />
 
             <div className="main-lobby-actions">
-              
-              <Link href="/gallery" className="main-lobby-action main-lobby-action--ghost">
-                갤러리
-              </Link>
 
-              <Link href="/detail" className="main-lobby-action main-lobby-action--ghost">
-                캐릭터
-              </Link>
+              {/* 왼쪽 */}
+              <div className="main-lobby-left">
+                <Link href="/gallery" className="main-lobby-action main-lobby-action--ghost">
+                  갤러리
+                </Link>
 
-              {(() => {
-                // Ch1 만 퀴즈 선행. Ch2+ 는 챕터 자체가 해금 상태로 넘어와야 보임
-                // (이전 챕터 강의 완료 flag 요구). 그래서 화면에 보이기만 해도 바로
-                // 강의 진입 가능하게 둔다.
-                const lectureEnabled =
-                  currentChapter.chapterNumber === 1 ? isQuizPassed : true;
-                const sub =
-                  currentChapter.chapterNumber === 1
-                    ? isQuizPassed
-                      ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
-                      : '퀴즈 통과 후 해금'
-                    : `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`;
-                return (
-                  <button
-                    type="button"
-                    className="main-lobby-action main-lobby-action--primary"
-                    disabled={!lectureEnabled}
-                    onClick={() =>
-                      router.push(
-                        `/lecture?subject=${currentChapter.subjectSlug}`,
-                      )
-                    }
-                    style={
-                      !lectureEnabled
-                        ? {
-                            opacity: 0.45,
-                            cursor: 'not-allowed',
-                            filter: 'grayscale(0.6)',
-                          }
-                        : undefined
-                    }
-                  >
-                    강의하기
-                    <span>{sub}</span>
-                  </button>
-                );
-              })()}
+                <Link href="/detail" className="main-lobby-action main-lobby-action--ghost">
+                  캐릭터
+                </Link>
+              </div>
 
-              <button
-                type="button"
-                className="main-lobby-action main-lobby-action--primary"
-                disabled={currentChapter.chapterNumber !== 1}
-                onClick={() => {
-                  if (currentChapter.chapterNumber !== 1) return;
-                  setIsPopupQuiz(false);
-                  setIsLessonPopupOpen(true);
-                }}
-                style={
-                  currentChapter.chapterNumber !== 1
-                    ? {
-                        opacity: 0.45,
-                        cursor: 'not-allowed',
-                        filter: 'grayscale(0.6)',
+              {/* 오른쪽 */}
+              <div className="main-lobby-right">
+
+                {(() => {
+                  const lectureEnabled =
+                    currentChapter.chapterNumber === 1 ? isQuizPassed : true;
+
+                  const sub =
+                    currentChapter.chapterNumber === 1
+                      ? isQuizPassed
+                        ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
+                        : '퀴즈 통과 후 해금'
+                      : `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`;
+
+                  return (
+                    <button
+                      type="button"
+                      className="main-lobby-action main-lobby-action--primary"
+                      disabled={!lectureEnabled}
+                      onClick={() =>
+                        router.push(`/lecture?subject=${currentChapter.subjectSlug}`)
                       }
-                    : undefined
-                }
-              >
-                수업
-                <span>
-                  {currentChapter.chapterNumber === 1
-                    ? 'Chapter 1 · 곱셈 설명'
-                    : '준비 중'}
-                </span>
-              </button>
+                    >
+                      강의하기
+                      <span>{sub}</span>
+                    </button>
+                  );
+                })()}
 
+                <button
+                  type="button"
+                  className="main-lobby-action main-lobby-action--primary"
+                >
+                  수업
+                  <span>Chapter 1 · 곱셈 설명</span>
+                </button>
+
+              </div>
             </div>
           </div>
         </div>
@@ -721,10 +694,10 @@ function MainLobbyScreen() {
                 type="button"
                 className="main-lobby-modal__button main-lobby-modal__button--primary"
                 onClick={() => {
-                  if(!isPopupQuiz){
+                  if (!isPopupQuiz) {
                     router.push('/lesson/basic-multiplication')
                   }
-                  else{
+                  else {
                     router.push('/quiz')
                   }
                 }}

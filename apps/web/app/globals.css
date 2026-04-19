@@ -1656,226 +1656,16 @@ h1 {
   z-index: 3;
 }
 
-/* .main-lobby-board-shell {
-  /* 데스크톱: 화이트보드의 오른쪽 끝이 화면 오른쪽에 닿도록 설정 
-  position: absolute;
-  right: 0;
-  top: 12px; /* 더 위로 이동 
-  padding-top: 18px;
-  /* 기본 너비는 프레임의 max-width에 따름 
-}
-
-.main-lobby-board-bg {
-  position: relative;
-  width: 40%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  user-select: none;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* 화이트보드 이미지를 약 4cm(≈152px) 위로 올림 
-.main-lobby-board-bg {
-  transform: translateY(-152px);
-}
-
-.main-lobby-board-viewport {
-  position: absolute;
-  top: 11%;
-  left: 8%;
-  width: 80%;
-  height: 70%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  z-index: 2;
-}
-
-.main-lobby-board-viewport::-webkit-scrollbar {
-  height: 8px;
-}
-
-.main-lobby-board-viewport::-webkit-scrollbar-thumb {
-  background: rgba(170, 170, 170, 0.5);
-  border-radius: 999px;
-}
-
-.main-lobby-board-content {
-  position: relative;
-  /* 컨텐츠 너비를 프레임에 맞춰 확장 
-  width: 820px;
-  height: 100%;
-}
-
-/* 보드 내부의 모든 컨텐츠를 약 2cm(≈76px) 위로 올려 시각적으로 배경과 맞춤 
-.main-lobby-board-content {
-  transform: translateY(-76px);
-}
-
-
-.main-lobby-board-scroll::-webkit-scrollbar {
-  height: 8px;
-}
-
-.main-lobby-board-scroll::-webkit-scrollbar-thumb {
-  background: rgba(170, 170, 170, 0.5);
-  border-radius: 999px;
-}
-
-
-.main-lobby-board-bg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  user-select: none;
-  pointer-events: none;
-}
-
-
-.main-lobby-board-title-image {
-  position: absolute;
-  top: 36px;
-  left: 48px;
-  width: 180px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-
-.board-node {
-  position: absolute;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
-}
-
-.board-node__image {
-  display: block;
-  width: 72px;
-  height: auto;
-  object-fit: contain;
-}
-
-.board-node--current .board-node__image {
-  width: 92px;
-}
-
-.board-node__label {
-  margin-top: 6px;
-  text-align: center;
-  color: #3a342d;
-  line-height: 1.05;
-}
-
-.board-node__label span {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.board-node__label strong {
-  display: block;
-  font-size: 1rem;
-  font-weight: 800;
-}
-
-.board-quiz-button {
-  position: absolute;
-  z-index: 3;
-  width: 100px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-}
-
-.board-quiz-button__teacher {
-  display: block;
-  margin: 0 auto 8px;
-  width: 92px;
-  padding: 8px 6px;
-  background: #efefef;
-  border-radius: 8px;
-  color: #3d3d3d;
-  font-size: 0.72rem;
-  font-weight: 700;
-  line-height: 1.15;
-  white-space: pre-line;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.board-quiz-button__title {
-  display: block;
-  padding: 14px 8px;
-  background: linear-gradient(180deg, #f7c14a, #e7a72f);
-  border-radius: 14px;
-  color: white;
-  font-size: 1.15rem;
-  font-weight: 800;
-  line-height: 1.05;
-  white-space: pre-line;
-  box-shadow: 0 6px 0 rgba(166, 118, 29, 0.45);
-}
-
-.board-path {
-  position: absolute;
-  height: 0;
-  border-top: 4px dashed #8e8e8e;
-  z-index: 1;
-}
-
-.board-path--one {
-  width: 130px;
-  left: 150px;
-  top: 225px;
-  transform: rotate(22deg);
-}
-
-.board-path--two {
-  width: 148px;
-  left: 375px;
-  top: 220px;
-  transform: rotate(-18deg);
-}
-
-.board-path--three {
-  width: 150px;
-  left: 565px;
-  top: 245px;
-  transform: rotate(20deg);
-}
-
-.main-lobby-scroll-indicator {
-  width: 170px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(210, 210, 210, 0.7);
-  margin: 12px 0 0 48px;
-  overflow: hidden;
-}
-
-.main-lobby-scroll-indicator span {
-  display: block;
-  width: 90px;
-  height: 100%;
-  background: #f0ae2c;
-  border-radius: 999px;
-} */
-
 .main-lobby-bottom {
   position: absolute;
-  left: 0;
+  left: 0px;
   right: 40px;
   bottom: 44px;
   display: flex;
   justify-content: space-between;
   align-items: end;
   gap: 20px;
-  z-index: 5;
+  z-index: 1000;
 }
 
 .main-lobby-dialogue {
@@ -1903,49 +1693,67 @@ h1 {
   /* 이미지가 캐릭터 위에 보이도록 z-index를 높임 */
   position: relative;
   z-index: 6;
-  margin: 0;
+  margin-left: 280;
   /* 오른쪽으로 약 3cm 추가 이동 (기존 위치에서 더 이동) */
   transform: translateX(280px);
 }
 
 .main-lobby-actions {
+  position: absolute;
+  width: 100%;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  z-index: 100;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
+/* 왼쪽 세로 */
+.main-lobby-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* 오른쪽 가로 */
+.main-lobby-right {
+  display: flex;
+  gap: 12px;
+}
+
+/* 공통 */
 .main-lobby-action {
   min-width: 200px;
   height: 100px;
   padding: 16px 24px;
   border-radius: 999px;
-  text-decoration: none;
   border: none;
+  text-decoration: none;
   font-size: 1.7rem;
   font-weight: 800;
-  line-height: 1;
   cursor: pointer;
   text-align: center;
-  align-items: center;
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.12);
 }
 
+/* 회색 버튼 */
 .main-lobby-action--ghost {
   background: linear-gradient(180deg, #f2f2f2, #dddddd);
+  border-radius: 20px;
   color: #525252;
-  display: flex;              /* 추가 */
-  justify-content: center;    /* 가로 중앙 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 32px;
-  border: 5px solid #fff
+  border: 5px solid #fff;
 }
 
+/* 노란 버튼 */
 .main-lobby-action--primary {
   min-width: 250px;
   background: #e7a72f;
-  font-size: 32px;
   color: white;
-  border: 5px solid #fff
+  font-size: 32px;
+  border: 5px solid #fff;
 }
 
 .main-lobby-action--primary span {
