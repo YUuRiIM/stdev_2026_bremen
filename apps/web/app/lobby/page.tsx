@@ -140,6 +140,94 @@ const CHAPTERS: ChapterDef[] = [
       },
     ],
   },
+  {
+    chapterNumber: 3,
+    title: 'Chapter 3: 소수',
+    topic: '소수',
+    subjectSlug: 'basic-primes',
+    lessonSlug: 'basic-primes',
+    lessonSubLabel: 'Chapter 3 · 소수 기본',
+    board: [
+      {
+        id: 'ch3-lesson-1',
+        type: 'lesson',
+        titleTop: '3-1',
+        titleBottom: '소수',
+        image: mainCircle1,
+        status: 'done',
+        position: { left: '70px', top: '120px' },
+      },
+      {
+        id: 'ch3-lesson-2',
+        type: 'lesson',
+        titleTop: '3-2',
+        titleBottom: '판정',
+        image: mainCircle2,
+        status: 'current',
+        position: { left: '255px', top: '145px' },
+      },
+      {
+        id: 'ch3-lesson-3',
+        type: 'lesson',
+        titleTop: '3-3',
+        titleBottom: '소인수',
+        image: mainCircle3,
+        status: 'locked',
+        position: { left: '460px', top: '118px' },
+      },
+      {
+        id: 'chapter3-quiz',
+        type: 'quiz',
+        label: 'Chapter 3\n퀴즈',
+        teacher: '페르마\n호감도 상승 가능',
+        position: { left: '690px', top: '185px' },
+      },
+    ],
+  },
+  {
+    chapterNumber: 4,
+    title: 'Chapter 4: 페르마 소정리',
+    topic: '페르마 소정리',
+    subjectSlug: 'fermat-little-theorem',
+    lessonSlug: 'fermat-little-theorem',
+    lessonSubLabel: 'Chapter 4 · 페르마 소정리',
+    board: [
+      {
+        id: 'ch4-lesson-1',
+        type: 'lesson',
+        titleTop: '4-1',
+        titleBottom: '선언',
+        image: mainCircle1,
+        status: 'done',
+        position: { left: '70px', top: '120px' },
+      },
+      {
+        id: 'ch4-lesson-2',
+        type: 'lesson',
+        titleTop: '4-2',
+        titleBottom: '직관',
+        image: mainCircle2,
+        status: 'current',
+        position: { left: '255px', top: '145px' },
+      },
+      {
+        id: 'ch4-lesson-3',
+        type: 'lesson',
+        titleTop: '4-3',
+        titleBottom: '응용',
+        image: mainCircle3,
+        status: 'locked',
+        position: { left: '460px', top: '118px' },
+      },
+      {
+        id: 'chapter4-quiz',
+        type: 'quiz',
+        label: 'Chapter 4\n퀴즈',
+        teacher: '페르마\n호감도 상승 가능',
+        position: { left: '690px', top: '185px' },
+      },
+    ],
+  },
 ];
 
 function MainLobbyScreen() {
@@ -662,8 +750,20 @@ function MainLobbyScreen() {
                 </Link>
               </div>
 
-              {/* 오른쪽 */}
+              {/* 오른쪽 — 학습 순서대로 수업 → 강의하기. */}
               <div className="main-lobby-right">
+                <button
+                  type="button"
+                  className="main-lobby-action main-lobby-action--primary"
+                  onClick={() => {
+                    setIsPopupQuiz(false);
+                    setIsLessonPopupOpen(true);
+                  }}
+                >
+                  수업
+                  <span>{currentChapter.lessonSubLabel}</span>
+                </button>
+
                 <button
                   type="button"
                   className="main-lobby-action main-lobby-action--primary"
@@ -687,18 +787,6 @@ function MainLobbyScreen() {
                       ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
                       : '퀴즈 통과 후 해금'}
                   </span>
-                </button>
-
-                <button
-                  type="button"
-                  className="main-lobby-action main-lobby-action--primary"
-                  onClick={() => {
-                    setIsPopupQuiz(false);
-                    setIsLessonPopupOpen(true);
-                  }}
-                >
-                  수업
-                  <span>{currentChapter.lessonSubLabel}</span>
                 </button>
               </div>
 

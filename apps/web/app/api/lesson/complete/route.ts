@@ -50,6 +50,14 @@ const LESSON_REGISTRY: Record<string, { delta: number; flagKey: string }> = {
     delta: 1,
     flagKey: 'lesson_basic_fractions_awarded',
   },
+  'basic-primes': {
+    delta: 1,
+    flagKey: 'lesson_basic_primes_awarded',
+  },
+  'fermat-little-theorem': {
+    delta: 1,
+    flagKey: 'lesson_fermat_little_theorem_awarded',
+  },
 };
 
 export async function POST(req: Request) {
