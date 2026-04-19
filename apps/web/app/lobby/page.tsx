@@ -705,8 +705,15 @@ function MainLobbyScreen() {
       {isLessonPopupOpen && (
         <div className="main-lobby-modal-overlay">
           <div className="main-lobby-modal">
-            <h3>Chapter 1 -  시작</h3>
-            <p>수업을 시작할까요?</p>
+            <h3>
+              Chapter {currentChapter.chapterNumber} ·{' '}
+              {isPopupQuiz ? '퀴즈' : '수업'} 시작
+            </h3>
+            <p>
+              {isPopupQuiz
+                ? '4문제 퀴즈를 풀어볼까요? 70% 이상 맞히면 강의가 해금됩니다.'
+                : '수업을 시작할까요? 끝내면 퀴즈가 해금됩니다.'}
+            </p>
 
             <div className="main-lobby-modal__buttons">
               <button
