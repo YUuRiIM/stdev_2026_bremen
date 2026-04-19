@@ -141,8 +141,8 @@ function LessonScreen() {
                 src={current.character}
                 alt="페르마 캐릭터"
                 className="lesson-character lesson-character--small"
-                width={160}
-                height={240}
+                width={1900}
+                height={600}
               />
             </div>
 

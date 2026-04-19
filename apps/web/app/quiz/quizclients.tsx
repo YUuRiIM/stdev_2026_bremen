@@ -220,7 +220,7 @@ export default function QuizClient() {
           right: 0,
           textAlign: 'center',
           color: '#fff',
-          fontSize: 14,
+          fontSize: 18,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
           opacity: 0.75,
@@ -265,7 +265,7 @@ export default function QuizClient() {
             <div
               style={{
                 color: '#f4f5f7ff',
-                fontSize: 22,
+                fontSize: 26,
                 marginBottom: 18,
                 lineHeight: 1.5,
               }}

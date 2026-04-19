@@ -1336,10 +1336,6 @@ h1 {
   min-height: 470px;
 }
 
-.lesson-character--small {
-  max-height: 260px;
-  margin: 0 auto;
-}
 
 .lesson-talk-right {
   display: grid;
@@ -1351,7 +1347,7 @@ h1 {
   position: relative;
   max-width: 720px;
   border-radius: 999px;
-  padding: 28px 38px;
+  padding: 28px 20px;
   font-size: 1.9rem;
   font-weight: 700;
   line-height: 1.45;
