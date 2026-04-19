@@ -62,7 +62,7 @@ function LoginScreen() {
     <section className="login-screen" data-testid="login-screen">
       <div className="login-screen__bg" aria-hidden>
         <Image
-          src="/assets/images/bg-intro.webp"
+          src="/assets/images/bg-intro.png"
           alt=""
           fill
           priority

@@ -3,7 +3,7 @@ import Image from 'next/image';
 const images: Record<string, string> = {
   'bg-lobby.png': '/assets/images/bg-lobby.webp',
   'bg-lobby-night.png': '/assets/images/bg-lobby-night.png',
-  'bg-intro.png': '/assets/images/bg-intro.webp',
+  'bg-intro.png': '/assets/images/bg-intro.png',
   'bg-mem-1.png': '/assets/images/bg-mem-1.png',
   'bg-mem-2.png': '/assets/images/bg-mem-2.png',
   'bg-mem-3.png': '/assets/images/bg-mem-3.png',

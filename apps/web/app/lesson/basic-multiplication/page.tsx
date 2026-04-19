@@ -145,7 +145,7 @@ function LessonScreen() {
         {current.mode === 'talk' && (
           <div className="lesson-talk-layout">
             <div className="lesson-talk-left">
-              <Image
+              <Image 
                 src={current.character}
                 alt="페르마 캐릭터"
                 className="lesson-character lesson-character--small"
