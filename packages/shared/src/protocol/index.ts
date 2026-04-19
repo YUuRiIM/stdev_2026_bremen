@@ -10,7 +10,7 @@
  *     UserText, CutsceneEnd
  *   - Agent → Client: CutscenePlay, LectureState,
  *     LectureJudgePending, LectureVerdictApplied, ShowFormula,
- *     SuggestTypeInput
+ *     SuggestTypeInput, InnerMonologue
  *
  * Usage (agent side):
  *   const parsed = ChalkboardUpdateSchema.safeParse(JSON.parse(raw));
@@ -28,10 +28,12 @@
  * through these channels. Only the sanitized fields defined in the schemas.
  */
 
+export * from './agent-turn';
 export * from './auth';
 export * from './chalkboard';
 export * from './cutscene';
 export * from './formula';
+export * from './inner-monologue';
 export * from './lecture';
 export * from './user-transcript';
 
@@ -58,6 +60,14 @@ import {
 } from './cutscene';
 import { ShowFormulaSchema, SHOW_FORMULA_TOPIC } from './formula';
 import {
+  AgentTurnTextSchema,
+  AGENT_TURN_TEXT_TOPIC,
+} from './agent-turn';
+import {
+  InnerMonologueSchema,
+  INNER_MONOLOGUE_TOPIC,
+} from './inner-monologue';
+import {
   LectureJudgePendingSchema,
   LectureStateSchema,
   LectureVerdictAppliedSchema,
@@ -81,6 +91,8 @@ export const DATA_CHANNEL_TOPICS = {
   LectureJudgePending: LECTURE_JUDGE_PENDING_TOPIC,
   LectureVerdictApplied: LECTURE_VERDICT_APPLIED_TOPIC,
   UserTranscript: USER_TRANSCRIPT_TOPIC,
+  InnerMonologue: INNER_MONOLOGUE_TOPIC,
+  AgentTurnText: AGENT_TURN_TEXT_TOPIC,
 } as const;
 
 /** Schema registry keyed by topic string. */
@@ -97,6 +109,8 @@ export const SCHEMAS_BY_TOPIC = {
   [LECTURE_STATE_TOPIC]: LectureStateSchema,
   [LECTURE_JUDGE_PENDING_TOPIC]: LectureJudgePendingSchema,
   [LECTURE_VERDICT_APPLIED_TOPIC]: LectureVerdictAppliedSchema,
+  [INNER_MONOLOGUE_TOPIC]: InnerMonologueSchema,
+  [AGENT_TURN_TEXT_TOPIC]: AgentTurnTextSchema,
 } as const;
 
 export type DataChannelTopic = keyof typeof SCHEMAS_BY_TOPIC;
