@@ -5,6 +5,8 @@ import type { ObjectiveStatus } from '@/services/session-state';
 export interface EndLecturePopupProps {
   open: boolean;
   objectives: ObjectiveStatus[];
+  /** verdict 적용 후 서버가 돌려준 호감도 증감. 없으면 표시 안 함. */
+  affectionDelta?: number;
   onClose: () => void;
   onConfirmLeave: () => void;
 }
@@ -24,6 +26,7 @@ function statusEmoji(tier: ReturnType<typeof statusTier>) {
 export function EndLecturePopup({
   open,
   objectives,
+  affectionDelta,
   onClose,
   onConfirmLeave,
 }: EndLecturePopupProps) {
@@ -54,6 +57,36 @@ export function EndLecturePopup({
       <div className="main-lobby-modal" onClick={(e) => e.stopPropagation()}>
         <h3>{title}</h3>
         <p>{lede}</p>
+
+        {typeof affectionDelta === 'number' && affectionDelta !== 0 && (
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              margin: '0 0 18px',
+              padding: '6px 14px',
+              borderRadius: 999,
+              background:
+                affectionDelta > 0
+                  ? 'linear-gradient(135deg,#ff6b8f22,#febc2f22)'
+                  : 'rgba(148,163,184,0.18)',
+              color: affectionDelta > 0 ? '#d04063' : '#555',
+              fontSize: 14,
+              fontWeight: 700,
+              border:
+                affectionDelta > 0
+                  ? '1px solid rgba(208,64,99,0.25)'
+                  : '1px solid rgba(100,116,139,0.25)',
+            }}
+          >
+            <span aria-hidden>♥</span>
+            <span>
+              페르마 호감도 {affectionDelta > 0 ? '+' : ''}
+              {affectionDelta}
+            </span>
+          </div>
+        )}
 
         {total > 0 && (
           <ul

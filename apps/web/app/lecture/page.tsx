@@ -252,6 +252,7 @@ export default function LecturePage() {
       <EndLecturePopup
         open={isEndPopupOpen}
         objectives={state.objectivesStatus}
+        affectionDelta={state.verdict?.affectionDelta}
         onClose={closeEndPopup}
         onConfirmLeave={confirmLeave}
       />

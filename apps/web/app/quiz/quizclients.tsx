@@ -415,6 +415,27 @@ export default function QuizClient() {
             <p style={{ marginTop: 12, color: '#333' }}>
               {correctCount} / {quizzes.length} 문제를 맞혔어요.
             </p>
+            {correctCount / quizzes.length >= 0.7 && (
+              <div
+                style={{
+                  marginTop: 14,
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                  padding: '6px 14px',
+                  borderRadius: 999,
+                  background:
+                    'linear-gradient(135deg,#ff6b8f22,#febc2f22)',
+                  color: '#d04063',
+                  fontSize: 14,
+                  fontWeight: 700,
+                  border: '1px solid rgba(208,64,99,0.25)',
+                }}
+              >
+                <span aria-hidden>♥</span>
+                <span>페르마 호감도 +{correctCount}</span>
+              </div>
+            )}
             <div
               style={{
                 marginTop: 18,
