@@ -750,8 +750,20 @@ function MainLobbyScreen() {
                 </Link>
               </div>
 
-              {/* 오른쪽 */}
+              {/* 오른쪽 — 학습 순서대로 수업 → 강의하기. */}
               <div className="main-lobby-right">
+                <button
+                  type="button"
+                  className="main-lobby-action main-lobby-action--primary"
+                  onClick={() => {
+                    setIsPopupQuiz(false);
+                    setIsLessonPopupOpen(true);
+                  }}
+                >
+                  수업
+                  <span>{currentChapter.lessonSubLabel}</span>
+                </button>
+
                 <button
                   type="button"
                   className="main-lobby-action main-lobby-action--primary"
@@ -775,18 +787,6 @@ function MainLobbyScreen() {
                       ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
                       : '퀴즈 통과 후 해금'}
                   </span>
-                </button>
-
-                <button
-                  type="button"
-                  className="main-lobby-action main-lobby-action--primary"
-                  onClick={() => {
-                    setIsPopupQuiz(false);
-                    setIsLessonPopupOpen(true);
-                  }}
-                >
-                  수업
-                  <span>{currentChapter.lessonSubLabel}</span>
                 </button>
               </div>
 

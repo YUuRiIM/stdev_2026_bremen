@@ -34,6 +34,14 @@ const CUTSCENE_BY_SUBJECT: Record<string, string> = {
 };
 const FALLBACK_CUTSCENE = '/assets/cutscenes/lecture-end.mp4';
 
+// Subject slug → chapter number. Mirrors lobby CHAPTERS catalog.
+const CHAPTER_BY_SUBJECT: Record<string, number> = {
+  'basic-arithmetic': 1,
+  'basic-fractions': 2,
+  'basic-primes': 3,
+  'fermat-little-theorem': 4,
+};
+
 export default function LecturePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -73,12 +81,12 @@ export default function LecturePage() {
         if (cancelled) return;
         dispatch({ type: 'VERDICT_APPLIED', verdict });
         setEndPopupOpen(true);
-        // Record chapter unlock. Demo covers only Chapter 1; extend once
-        // more subjects gain chapter metadata.
+        // Record chapter unlock — derive number from the active subject.
+        const chapterNumber = CHAPTER_BY_SUBJECT[subjectSlug] ?? 1;
         void fetch('/api/lecture/complete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chapterNumber: 1 }),
+          body: JSON.stringify({ chapterNumber }),
         }).catch(() => {
           /* non-fatal */
         });
