@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Character, useManifest } from '@/components/character-kit';
 import { AffectionGauge } from '@/components/affection/AffectionGauge';
 import { useAffection } from '@/lib/affection/use-affection';
-import { chapterClearStatus } from '@/config/gameConfig';
+import { useChapterProgress } from '@/lib/affection/use-chapter-progress';
 
 interface Story {
   id: number;
@@ -82,6 +83,7 @@ const characters: DetailCharacter[] = [
 ];
 
 function CharacterDetailScreen() {
+  const router = useRouter();
   const [selectedCharacterId, setSelectedCharacterId] = useState('fermat');
   const [tab, setTab] = useState('info');
   const fermatManifest = useManifest('/assets/fermat/manifest.json');
@@ -91,10 +93,15 @@ function CharacterDetailScreen() {
     score: 0,
     level: 'stranger' as const,
   };
+  const { progress } = useChapterProgress();
 
   const character = characters.find((c) => c.id === selectedCharacterId)!;
+  // Story N is unlocked when the Chapter N-1 lecture is cleared. Chapter 1's
+  // story is the baseline intro — always available.
   const isStoryUnlocked = (story: Story) =>
-    !!(chapterClearStatus as Record<string, boolean>)[`chapter${story.chapter}`];
+    story.chapter === 1
+      ? true
+      : progress.lectureCompleted[story.chapter - 1] === true;
   const isLockedCharacter = selectedCharacterId === 'hawking' || selectedCharacterId === 'elon';
   const lockMessage =
     selectedCharacterId === 'hawking'
@@ -199,8 +206,14 @@ function CharacterDetailScreen() {
                         <button
                           className="character-detail__play-button"
                           type="button"
-                          disabled={!unlocked}
+                          disabled={!unlocked || selectedCharacterId !== 'fermat'}
                           aria-label="play story"
+                          onClick={() => {
+                            if (!unlocked) return;
+                            if (selectedCharacterId === 'fermat') {
+                              router.push(`/visual-novel/fermat-${story.id}`);
+                            }
+                          }}
                         >
                           ▶
                         </button>

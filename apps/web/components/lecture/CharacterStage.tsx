@@ -61,11 +61,14 @@ export function CharacterStage({
       )}
     >
       {manifest ? (
+        // Negative margin-bottom shifts the sprite below the stage's bottom
+        // edge so the feet (which breathe) are cropped cleanly behind the
+        // dialogue overlay instead of bobbing in/out of visible whitespace.
         <Character
           manifest={manifest}
           assetBase={assetBase}
-          width="clamp(280px, 30vw, 520px)"
-          className="drop-shadow-2xl"
+          width="clamp(420px, 50vw, 760px)"
+          className="drop-shadow-2xl mb-[-5vh]"
         />
       ) : null}
     </div>

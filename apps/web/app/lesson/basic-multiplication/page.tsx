@@ -68,6 +68,15 @@ function LessonScreen() {
       return;
     }
 
+    // Fire-and-forget affection bump; server dedupes via flag so repeat
+    // plays don't stack. UI doesn't block on the response.
+    void fetch('/api/lesson/complete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lessonSlug: 'basic-multiplication' }),
+    }).catch(() => {
+      /* non-fatal */
+    });
     router.push('/lobby');
   };
 
@@ -150,7 +159,7 @@ function LessonScreen() {
 
           <button type="button" className="lesson-finish-button" onClick={goNext}>
             {isLast ? '수업 종료' : '다음'}
-            {isLast && <span className="lesson-finish-sub">페르마 호감도 +10</span>}
+            {isLast && <span className="lesson-finish-sub">페르마 호감도 +1</span>}
           </button>
         </div>
       </div>

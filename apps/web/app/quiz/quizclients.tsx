@@ -1,53 +1,238 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { createSupabaseBrowserClient } from '@/lib/supabase/client';
 
 const boardImg = '/assets/images/quiz-board.png';
 const correctImg = '/assets/images/quiz-correct.png';
 const incorrectImg = '/assets/images/quiz-incorrect.png';
 
+// Chapter 1 = 초등 난이도 10문제 (seed sortOrder 1..10).
+const CHAPTER_SORT_MIN = 1;
+const CHAPTER_SORT_MAX = 4;
+const CHARACTER_SLUG = 'fermat';
+
+interface Quiz {
+  id: string;
+  sortOrder: number;
+  question: string;
+  choices: string[];
+  answerIdx: number;
+  flavorOnCorrect: string | null;
+  flavorOnWrong: string | null;
+}
+
 export default function QuizClient() {
+  const router = useRouter();
+  const [quizzes, setQuizzes] = useState<Quiz[] | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [result, setResult] = useState<'correct' | 'incorrect' | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const router = useRouter();
+  const [correctCount, setCorrectCount] = useState(0);
 
-  const options = [9, 12, 15, 18];
-  const correctIndex = 1; // options[1] === 12
+  // Fetch the quiz batch once.
+  useEffect(() => {
+    let cancelled = false;
+    const run = async () => {
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const { data, error } = await supabase
+          .from('quizzes')
+          .select(
+            'id, sort_order, question, choices, answer_idx, flavor_on_correct, flavor_on_wrong',
+          )
+          .eq('character_slug', CHARACTER_SLUG)
+          .gte('sort_order', CHAPTER_SORT_MIN)
+          .lte('sort_order', CHAPTER_SORT_MAX)
+          .order('sort_order', { ascending: true });
+        if (cancelled) return;
+        if (error) {
+          setLoadError(error.message);
+          return;
+        }
+        const mapped: Quiz[] = (data ?? []).map((row) => ({
+          id: row.id as string,
+          sortOrder: row.sort_order as number,
+          question: row.question as string,
+          choices: row.choices as string[],
+          answerIdx: row.answer_idx as number,
+          flavorOnCorrect: row.flavor_on_correct as string | null,
+          flavorOnWrong: row.flavor_on_wrong as string | null,
+        }));
+        setQuizzes(mapped);
+      } catch (err) {
+        if (!cancelled) {
+          setLoadError((err as Error).message);
+        }
+      }
+    };
+    run();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const current = quizzes?.[idx];
+
+  const recordAttempt = useCallback(
+    async (quizId: string, selectedIdx: number, correct: boolean) => {
+      try {
+        const supabase = createSupabaseBrowserClient();
+        const { data: userData } = await supabase.auth.getUser();
+        const uid = userData.user?.id;
+        if (!uid) return; // demo / unauthenticated — skip logging
+        await supabase.from('quiz_attempts').insert({
+          user_id: uid,
+          quiz_id: quizId,
+          selected_idx: selectedIdx,
+          correct,
+        });
+      } catch {
+        /* best-effort logging */
+      }
+    },
+    [],
+  );
 
   const handleSelect = (i: number) => {
+    if (!current || selected !== null) return;
     setSelected(i);
-    setResult(i === correctIndex ? 'correct' : 'incorrect');
+    const isCorrect = i === current.answerIdx;
+    setResult(isCorrect ? 'correct' : 'incorrect');
+    if (isCorrect) setCorrectCount((c) => c + 1);
+    void recordAttempt(current.id, i, isCorrect);
+  };
+
+  const advance = () => {
+    const last = idx >= (quizzes?.length ?? 0) - 1;
+    if (last) {
+      const total = quizzes?.length ?? 0;
+      const passed = total > 0 && correctCount / total >= 0.7;
+      if (passed) {
+        // Local flag drives the lobby's "강의하기" button gate.
+        try {
+          localStorage.setItem('chapter1_quiz_passed', 'true');
+        } catch {
+          /* storage blocked */
+        }
+        // Server-side: affection bump with dedupe on `quiz_chapter_1_awarded`.
+        // Fire-and-forget — UI doesn't block on this; lobby re-fetches on
+        // focus via useAffection.
+        void fetch('/api/quiz/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chapter: 1,
+            correctCount,
+            total,
+          }),
+        }).catch(() => {
+          /* non-fatal */
+        });
+      }
+      setShowPopup(true);
+      return;
+    }
+    setIdx((n) => n + 1);
+    setSelected(null);
+    setResult(null);
+    setShowExplanation(false);
   };
 
   const handleScreenClick = () => {
-    // When user clicked the screen after an incorrect answer, show explanation inside the board
+    if (!current) return;
+    // Wrong answer → first click shows explanation, next click advances
     if (result === 'incorrect' && !showExplanation) {
       setShowExplanation(true);
       return;
     }
-
-    // If explanation is already shown, a further click opens the completion popup
-    if (result === 'incorrect' && showExplanation && !showPopup) {
-      setShowPopup(true);
-      return;
-    }
-
-    // If the user answered correctly, clicking the screen should open the completion popup
-    if (result === 'correct' && !showPopup) {
-      setShowPopup(true);
-      return;
+    if (result !== null) {
+      advance();
     }
   };
 
-  return (
-    <div onClick={handleScreenClick} style={{ position: 'relative', width: '880px', maxWidth: '94vw' }}>
-      <img src={boardImg} alt="quiz board" style={{ width: '100%', display: 'block' }} />
+  if (loadError) {
+    return (
+      <div
+        style={{
+          background: '#fff',
+          borderRadius: 16,
+          padding: 24,
+          color: '#333',
+        }}
+      >
+        퀴즈를 불러오지 못했어요: {loadError}
+      </div>
+    );
+  }
 
-      {/* 정답/오답 이미지: 보드 바로 위에 표시 */}
+  if (!quizzes) {
+    return (
+      <div
+        style={{
+          color: '#fff',
+          fontSize: 18,
+          letterSpacing: '0.04em',
+        }}
+      >
+        퀴즈 불러오는 중…
+      </div>
+    );
+  }
+
+  if (quizzes.length === 0) {
+    return (
+      <div
+        style={{
+          background: '#fff',
+          borderRadius: 16,
+          padding: 24,
+          color: '#333',
+        }}
+      >
+        준비된 문제가 없어요.
+      </div>
+    );
+  }
+
+  return (
+    <div
+      onClick={handleScreenClick}
+      style={{ position: 'relative', width: '880px', maxWidth: '94vw' }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={boardImg}
+        alt="quiz board"
+        style={{ width: '100%', display: 'block' }}
+      />
+
+      {/* 진행 표시 */}
+      <div
+        style={{
+          position: 'absolute',
+          top: 40,
+          left: 0,
+          right: 0,
+          textAlign: 'center',
+          color: '#fff',
+          fontSize: 14,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          opacity: 0.75,
+          pointerEvents: 'none',
+        }}
+      >
+        {idx + 1} / {quizzes.length}
+      </div>
+
+      {/* 정답/오답 이미지 */}
       {result && !showExplanation && (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={result === 'correct' ? correctImg : incorrectImg}
           alt={result}
@@ -63,8 +248,8 @@ export default function QuizClient() {
         />
       )}
 
-      {/* 보드 위 오버레이: 질문 + 객관식 버튼 (해설 보여줄 때는 숨김) */}
-      {!showExplanation && (
+      {/* 질문 + 객관식 */}
+      {!showExplanation && current && (
         <div
           style={{
             position: 'absolute',
@@ -77,37 +262,72 @@ export default function QuizClient() {
           }}
         >
           <div style={{ width: 620, pointerEvents: 'auto', textAlign: 'center' }}>
-            <div style={{ color: '#f4f5f7ff', fontSize: 28, marginBottom: 6 }}>아래 연산의 결과는?</div>
-            <div style={{ fontSize: 40, fontWeight: 700, marginBottom: 18 }}>6 + 3 × 2</div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 12, justifyContent: 'center' }}>
-              {options.map((opt, i) => (
-                <button
-                  key={i}
-                  onClick={(e) => {
-                    // prevent this click from bubbling up to the screen click handler
-                    e.stopPropagation();
-                    handleSelect(i);
-                  }}
-                  style={{
-                    cursor: 'pointer',
-                    padding: '14px 12px',
-                    borderRadius: 10,
-                    border: selected === i ? '2px solid #89f63bff' : '1px solid #cbd5e1',
-                    background: selected === i ? '#89f63bff' : '#ffffff',
-                    color: selected === i ? '#fff' : '#0b1220',
-                    fontSize: 18,
-                  }}
-                >
-                  <div>{opt}</div>
-                </button>
-              ))}
+            <div
+              style={{
+                color: '#f4f5f7ff',
+                fontSize: 22,
+                marginBottom: 18,
+                lineHeight: 1.5,
+              }}
+            >
+              {current.question}
             </div>
+
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2,1fr)',
+                gap: 12,
+                justifyContent: 'center',
+              }}
+            >
+              {current.choices.map((opt, i) => {
+                const isSelected = selected === i;
+                const isCorrectAns =
+                  result !== null && i === current.answerIdx;
+                const isWrongSelected =
+                  result === 'incorrect' && isSelected;
+                const background = isCorrectAns
+                  ? '#89f63bff'
+                  : isWrongSelected
+                    ? '#ff6b6b'
+                    : '#ffffff';
+                return (
+                  <button
+                    key={i}
+                    disabled={selected !== null}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleSelect(i);
+                    }}
+                    style={{
+                      cursor: selected !== null ? 'default' : 'pointer',
+                      padding: '14px 12px',
+                      borderRadius: 10,
+                      border:
+                        isSelected || isCorrectAns
+                          ? '2px solid #89f63bff'
+                          : '1px solid #cbd5e1',
+                      background,
+                      color:
+                        isSelected || isCorrectAns || isWrongSelected
+                          ? '#fff'
+                          : '#0b1220',
+                      fontSize: 18,
+                    }}
+                  >
+                    <div>{opt}</div>
+                  </button>
+                );
+              })}
+            </div>
+
           </div>
         </div>
       )}
-      {/* Explanation view shown inside the board when user clicked after wrong answer */}
-      {showExplanation && (
+
+      {/* 해설 화면 (오답 시 2번째 클릭에서) */}
+      {showExplanation && current && (
         <div
           style={{
             position: 'absolute',
@@ -121,21 +341,42 @@ export default function QuizClient() {
           }}
         >
           <div style={{ width: 620, pointerEvents: 'auto', textAlign: 'center' }}>
-            <div style={{ color: '#f4f5f7ff', fontSize: 28, marginBottom: 6, whiteSpace: 'pre-line',}}>해설</div>
-            <div style={{ fontSize: 28, fontWeight: 700, marginBottom: 18 }}>
-              <br />
-              곱셈이 먼저 계산됩니다.
-              <br />
-              <br />
-
-              따라서 6 + 3 × 2 = 6 + (3×2) 
-              <br />
-              <br />
-              = 12
+            <div
+              style={{
+                color: '#f4f5f7ff',
+                fontSize: 22,
+                marginBottom: 10,
+              }}
+            >
+              해설
+            </div>
+            <div
+              style={{
+                fontSize: 22,
+                fontWeight: 700,
+                marginBottom: 12,
+                color: '#fff',
+              }}
+            >
+              정답: {current.choices[current.answerIdx]}
+            </div>
+            <div
+              style={{
+                marginTop: 16,
+                color: '#fff',
+                opacity: 0.7,
+                fontSize: 13,
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+              }}
+            >
+              탭하여 다음 문제로
             </div>
           </div>
         </div>
       )}
+
+      {/* 완료 팝업 */}
       {showPopup && (
         <div
           role="dialog"
@@ -160,17 +401,34 @@ export default function QuizClient() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 style={{ margin: 0, fontSize: '1.2rem', color:'#333' }}>Chapter 1을 완료하였습니다.</h3>
-            <p style={{ marginTop: 12, color: '#333' }}>다음 챕터로 넘어갑니다!</p>
-            <div style={{ marginTop: 18, display: 'flex', justifyContent: 'center' }}>
+            <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#333' }}>
+              Chapter 1 완료!
+            </h3>
+            <p style={{ marginTop: 12, color: '#333' }}>
+              {correctCount} / {quizzes.length} 문제를 맞혔어요.
+            </p>
+            <div
+              style={{
+                marginTop: 18,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
               <button
                 type="button"
-                style={{ padding: '10px 18px', borderRadius: 999, background: '#FEBC2F', color: '#fff', border: 'none', cursor: 'pointer' }}
+                style={{
+                  padding: '10px 18px',
+                  borderRadius: 999,
+                  background: '#FEBC2F',
+                  color: '#fff',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
                 onClick={() => {
                   router.push('/lobby');
                 }}
               >
-                확인
+                로비로
               </button>
             </div>
           </div>

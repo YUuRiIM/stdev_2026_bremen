@@ -70,7 +70,7 @@ export function CutsceneOverlay({
           autoPlay
           playsInline
           onEnded={onEnd}
-          className="max-h-full max-w-full object-contain"
+          className="h-full w-full object-contain"
         />
       ) : (
         <div className="relative h-full w-full">

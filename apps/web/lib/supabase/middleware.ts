@@ -52,7 +52,7 @@ export async function updateSession(request: NextRequest) {
   if (!user && !isPublic) {
     const redirect = request.nextUrl.clone();
     redirect.pathname = '/login';
-    redirect.searchParams.set('next', path === '/' ? '/lecture' : path);
+    redirect.searchParams.set('next', path === '/' ? '/lobby' : path);
     return NextResponse.redirect(redirect);
   }
 

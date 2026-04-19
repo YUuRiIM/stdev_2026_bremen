@@ -16,6 +16,21 @@ const KNOWN_SCRIPTS = new Set([
   'fermat-4',
 ]);
 
+/** Where the linear demo chain continues after this script ends (natural end
+ *  OR skip). Defaults to `/lobby` for anything unmapped.
+ *  intro → 캐릭터 선택, fermat-1 → 로비 (이후는 허브 기반). */
+const NEXT_ROUTE_BY_SCRIPT: Record<string, string> = {
+  intro: '/select',
+  'fermat-1': '/lobby',
+  'fermat-2': '/lobby',
+  'fermat-3': '/lobby',
+  'fermat-4': '/lobby',
+};
+
+function nextRouteFor(scriptId: string): string {
+  return NEXT_ROUTE_BY_SCRIPT[scriptId] ?? '/lobby';
+}
+
 type ScriptEntry = {
   speaker: string;
   name?: string;
@@ -67,14 +82,14 @@ function VisualNovelScreen() {
     if (index < script.length - 1) {
       setIndex(index + 1);
     } else {
-      router.push('/');
+      router.push(nextRouteFor(scriptId));
     }
   };
 
   const confirmSkip = () => {
     setIndex(script.length - 1);
     setShowSkipModal(false);
-    router.push('/');
+    router.push(nextRouteFor(scriptId));
   };
 
   const isChoiceMode = current.speaker === 'choice';

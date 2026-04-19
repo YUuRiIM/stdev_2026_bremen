@@ -2,6 +2,7 @@ import type {
   LectureState,
   LectureVerdictApplied,
   CutscenePlay,
+  InnerMonologue,
 } from '@mys/shared/protocol';
 import type {
   AdapterEvents,
@@ -56,12 +57,28 @@ const MOCK_OBJECTIVES: NonNullable<LectureState['objectivesStatus']> = [
   },
 ];
 
-const MOCK_CUTSCENE: CutscenePlay = {
-  eventKey: 'approved_smile',
-  assetUrl: '/assets/cv-fermat.png',
-  muteTTS: true,
-  ts: 0,
-};
+const MOCK_CUTSCENE_POOL = [
+  '/assets/cutscenes/lecture-end.mp4',
+  '/assets/cutscenes/lecture-end-2.mp4',
+] as const;
+function pickMockCutscene(): CutscenePlay {
+  return {
+    eventKey: 'lecture-end',
+    assetUrl:
+      MOCK_CUTSCENE_POOL[
+        Math.floor(Math.random() * MOCK_CUTSCENE_POOL.length)
+      ]!,
+    mimeType: 'video/mp4',
+    muteTTS: true,
+    ts: 0,
+  };
+}
+
+const MOCK_INNER_MONOLOGUES = [
+  '심장이 너무 뛰어서 숨을 못 쉬겠어…',
+  '2026년 봄학기, 교수님의 눈물을 본 날.',
+  '이 사람 앞에선 왜 이렇게 작아지는 거지.',
+];
 
 function resolveProfile(override?: MockProfile): MockProfile {
   if (override) return override;
@@ -136,6 +153,10 @@ export function createMockAgentAdapter(
     handlers.onVerdictApplied?.(payload);
   const emitCutscene = (payload: CutscenePlay) =>
     handlers.onCutscenePlay?.(payload);
+  const emitInnerMonologue = (text: string) => {
+    const payload: InnerMonologue = { text, ts: Date.now() };
+    handlers.onInnerMonologue?.(payload);
+  };
 
   const bumpObjective = (idx: number, coverage: number) => {
     if (idx < 0 || idx >= objectives.length) return;
@@ -160,6 +181,9 @@ export function createMockAgentAdapter(
       bumpObjective(objectiveIdx, 0.75);
       emitLectureState('lecturing');
     });
+    const monologue =
+      MOCK_INNER_MONOLOGUES[objectiveIdx % MOCK_INNER_MONOLOGUES.length]!;
+    schedule(cycleOffsetMs + 5200, () => emitInnerMonologue(monologue));
   };
 
   const runBurst = () => {
@@ -185,7 +209,9 @@ export function createMockAgentAdapter(
       runSteadyCycle(0, objectiveIdx);
       objectiveIdx += 1;
       if (objectiveIdx >= objectives.length) {
-        // 모두 달성 → verdict_applied + cutscene + phase=verdicted.
+        // 모두 달성 → verdict_applied + phase=verdicted. Cutscene is driven by
+        // the lecture page after user confirms via end-of-lecture popup, not
+        // here, so the popup always gets a chance to show success summary first.
         schedule(5500, () => {
           emitVerdict({
             affectionDelta: 4,
@@ -194,7 +220,6 @@ export function createMockAgentAdapter(
             newlyUnderstood: objectives.map((o) => o.id),
             ts: Date.now(),
           });
-          emitCutscene({ ...MOCK_CUTSCENE, ts: Date.now() });
           emitLectureState('verdicted');
         });
         return;

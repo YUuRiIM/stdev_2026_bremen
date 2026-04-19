@@ -54,7 +54,9 @@ function CharacterConfirmScreen() {
 
   const handleConfirm = () => {
     setIsConfirmOpen(false)
-    router.push('/lobby')
+    // 선발 도장 → 첫 번째 인연 스토리로 진입. 스토리가 끝나면 /lobby 로 이어짐
+    // (visual-novel/[scriptId] 의 NEXT_ROUTE_BY_SCRIPT 가 결정).
+    router.push('/visual-novel/fermat-1')
   }
 
   const handleCancel = () => {

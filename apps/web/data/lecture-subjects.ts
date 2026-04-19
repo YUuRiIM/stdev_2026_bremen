@@ -64,6 +64,86 @@ export const LECTURE_SUBJECTS: LectureSubject[] = [
       },
     ],
   },
+  // Chapter 1: 사칙연산 — 단일 subject, 3 objectives (덧셈/뺄셈/곱셈). DB seed
+  // row id = c05079ce-c704-4900-9462-f9f3f025f3b6 (topic="사칙연산"). This FE
+  // mirror re-uses the same ids/statements so the ObjectiveChecklist renders
+  // consistently before `startLecture` publishes the authoritative state.
+  {
+    slug: 'basic-arithmetic',
+    topic: '사칙연산',
+    difficulty: 1,
+    keyterms: [
+      '더하기', '합', '+', '덧셈',
+      '빼기', '차', '-', '뺄셈',
+      '곱하기', '곱', '×', '곱셈',
+      '받아올림', '받아내림', '구구단',
+    ],
+    prerequisites: [],
+    objectives: [
+      {
+        id: 'obj_arith_addition',
+        statement:
+          '덧셈이 "두 묶음의 개수를 합쳐 하나의 전체 개수를 구하는 연산" 임을 설명하고, 한 자리 수 덧셈 예시와 두 자리 이상에서의 받아올림을 보인다.',
+        conceptKey: 'arith_addition',
+        weight: 1,
+        expectedTerms: ['합치다', '모으다', '합', '개수', '+', '받아올림', '자리', '10'],
+      },
+      {
+        id: 'obj_arith_subtraction',
+        statement:
+          '뺄셈이 "한 묶음에서 일부를 덜어냈을 때 남은 개수 또는 두 양의 차이를 구하는 연산" 임을 설명하고, 한 자리 수 뺄셈 예시와 두 자리 이상에서의 받아내림을 보인다.',
+        conceptKey: 'arith_subtraction',
+        weight: 1,
+        expectedTerms: ['빼다', '남다', '차이', '차', '-', '받아내림', '빌려'],
+      },
+      {
+        id: 'obj_arith_multiplication',
+        statement:
+          '곱셈이 "같은 수를 여러 번 더하는 것의 단축 표기" 임을 설명하고, 구구단 범위 내 곱셈 예시와 덧셈·뺄셈보다 먼저 계산한다는 연산 순서를 보인다.',
+        conceptKey: 'arith_multiplication',
+        weight: 1,
+        expectedTerms: ['같은 수', '반복', '더하기', '×', '구구단', '순서', '먼저'],
+      },
+    ],
+  },
+  // Chapter 2: 분수 기초 — 단일 subject, 3 objectives (개념/등가/사칙).
+  // DB seed row should mirror this slug/topic (topic="분수"). Difficulty 2.
+  {
+    slug: 'basic-fractions',
+    topic: '분수',
+    difficulty: 2,
+    keyterms: [
+      '분수', '분자', '분모', '등가분수', '약분', '통분',
+      '공통분모', '분수 덧셈', '분수 뺄셈', '기약분수',
+    ],
+    prerequisites: ['사칙연산'],
+    objectives: [
+      {
+        id: 'obj_frac_concept',
+        statement:
+          '분수가 "전체를 똑같은 개수로 나눈 뒤 그 중 몇 부분을 가리키는 표기" 임을 설명하고, 분자·분모의 의미를 한 가지 시각적 예로 보인다.',
+        conceptKey: 'frac_concept',
+        weight: 1,
+        expectedTerms: ['분수', '분자', '분모', '나누다', '전체', '부분'],
+      },
+      {
+        id: 'obj_frac_equivalent',
+        statement:
+          '서로 다른 분자·분모로 같은 크기를 나타내는 "등가분수" 개념을 설명하고, 약분 또는 통분 과정을 실제 예로 보인다 (예: 2/4 = 1/2).',
+        conceptKey: 'frac_equivalent',
+        weight: 1,
+        expectedTerms: ['등가', '약분', '통분', '공통분모', '기약분수', '같은 크기'],
+      },
+      {
+        id: 'obj_frac_addsub',
+        statement:
+          '분모가 같은 분수의 덧셈·뺄셈 규칙(분자끼리만 더하고/빼기, 분모 유지)을 설명하고, 간단한 예제를 풀어 보인다.',
+        conceptKey: 'frac_addsub',
+        weight: 1,
+        expectedTerms: ['분모', '분자', '더하기', '빼기', '그대로', '유지'],
+      },
+    ],
+  },
 ];
 
 export function getSubject(slug: string): LectureSubject {

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { AffectionGauge } from '@/components/affection/AffectionGauge';
@@ -18,10 +18,37 @@ const mainCircle2 = '/assets/images/main-circle2.png';
 const mainCircle3 = '/assets/images/main-circle3.png';
 const mainTalking = '/assets/images/main-talking.png';
 
+// "강의하기" (voice lecture) routing. Chapter 1 = 사칙연산 (단일 subject,
+// 3 objectives 로 덧셈/뺄셈/곱셈 전부를 한 강의에서 다룸). DB subjects.topic
+// = "사칙연산", FE slug = `basic-arithmetic`.
+const CHAPTER_1_LECTURE = {
+  chapterNumber: 1,
+  topic: '사칙연산',
+  subjectSlug: 'basic-arithmetic',
+} as const;
+
 function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
   const [isPopupQuiz, setIsPopupQuiz] = useState(false);
+  // Gate the 강의하기 button until the chapter 1 quiz is passed (≥70%).
+  // Flag is written by /quiz on completion; read on mount + whenever the
+  // tab regains focus (handles the return-from-quiz navigation case).
+  const [isQuizPassed, setIsQuizPassed] = useState(false);
+  useEffect(() => {
+    const read = () => {
+      try {
+        setIsQuizPassed(
+          localStorage.getItem('chapter1_quiz_passed') === 'true',
+        );
+      } catch {
+        /* storage blocked — leave gate locked */
+      }
+    };
+    read();
+    window.addEventListener('focus', read);
+    return () => window.removeEventListener('focus', read);
+  }, []);
   const { data: affection } = useAffection();
   const fermatAffection = affection.fermat ?? {
     slug: 'fermat',
@@ -69,6 +96,8 @@ function MainLobbyScreen() {
     ],
     []
   );
+
+
 
   return (
     <>
@@ -353,13 +382,71 @@ function MainLobbyScreen() {
               <button
                 type="button"
                 className="main-lobby-action main-lobby-action--primary"
-                onClick={() => {
-                              setIsPopupQuiz(false);
-                              setIsLessonPopupOpen(true);
-                            }}
+                disabled={!isQuizPassed}
+                onClick={() =>
+                  router.push(`/lecture?subject=${CHAPTER_1_LECTURE.subjectSlug}`)
+                }
+                style={
+                  !isQuizPassed
+                    ? {
+                        opacity: 0.45,
+                        cursor: 'not-allowed',
+                        filter: 'grayscale(0.6)',
+                      }
+                    : undefined
+                }
               >
-                수업 시작
-                <span>Chapter 1 퀴즈</span>
+                강의하기
+                <span>
+                  {isQuizPassed
+                    ? `Chapter ${CHAPTER_1_LECTURE.chapterNumber} · ${CHAPTER_1_LECTURE.topic}`
+                    : '퀴즈 통과 후 해금'}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                className="main-lobby-action main-lobby-action--primary"
+                onClick={() => {
+                  setIsPopupQuiz(false);
+                  setIsLessonPopupOpen(true);
+                }}
+              >
+                수업
+                <span>Chapter 1 · 곱셈 설명</span>
+              </button>
+
+              <button
+                type="button"
+                className="main-lobby-action main-lobby-action--primary"
+                onClick={() => {
+                  setIsPopupQuiz(true);
+                  setIsLessonPopupOpen(true);
+                }}
+              >
+                퀴즈
+                <span>Chapter 1 · 4문제</span>
+              </button>
+
+              <button
+                type="button"
+                className="main-lobby-action main-lobby-action--ghost"
+                onClick={async () => {
+                  if (!confirm('데모 리셋: 호감도·퀴즈 기록을 전부 지울까요?'))
+                    return;
+                  try {
+                    localStorage.removeItem('chapter1_quiz_passed');
+                  } catch {
+                    /* ignore */
+                  }
+                  await fetch('/api/demo/reset', { method: 'POST' }).catch(
+                    () => {},
+                  );
+                  location.reload();
+                }}
+                style={{ opacity: 0.7 }}
+              >
+                🧪 데모 리셋
               </button>
             </div>
           </div>
