@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/hero.png" alt="두근두근 연구실 — 교수가 되어 학생을 가르치는 게임" width="100%" />
+</p>
+
 # 두근두근 연구실
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-000?style=flat)](https://nextjs.org/)
