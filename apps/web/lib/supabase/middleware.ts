@@ -35,26 +35,26 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  // CRITICAL: don't run other logic between createServerClient and getUser.
-  // getUser refreshes the session cookie.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // Refresh the session cookie even though we're not gating any routes — so
+  // if the user DOES happen to have a valid session (e.g. from a previous
+  // login), server-side API handlers can still read it and persist their
+  // writes against RLS.
+  await supabase.auth.getUser();
 
-  // Auth-required by default. Only /login, /auth/*, and /api/livekit/token
-  // (which self-gates and has a demo fallback) stay public.
-  const path = request.nextUrl.pathname;
-  const isPublic =
-    path.startsWith('/login') ||
-    path.startsWith('/auth/') ||
-    path.startsWith('/api/livekit/token');
-
-  if (!user && !isPublic) {
-    const redirect = request.nextUrl.clone();
-    redirect.pathname = '/login';
-    redirect.searchParams.set('next', path === '/' ? '/lobby' : path);
-    return NextResponse.redirect(redirect);
-  }
+  // Auth enforcement is currently OFF for the demo. Re-enable the block
+  // below when login is restored.
+  //
+  // const path = request.nextUrl.pathname;
+  // const isPublic =
+  //   path.startsWith('/login') ||
+  //   path.startsWith('/auth/') ||
+  //   path.startsWith('/api/livekit/token');
+  // if (!user && !isPublic) {
+  //   const redirect = request.nextUrl.clone();
+  //   redirect.pathname = '/login';
+  //   redirect.searchParams.set('next', path === '/' ? '/lobby' : path);
+  //   return NextResponse.redirect(redirect);
+  // }
 
   return response;
 }

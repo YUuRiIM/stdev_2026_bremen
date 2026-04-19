@@ -31,21 +31,33 @@ function MainLobbyScreen() {
   const router = useRouter();
   const [isLessonPopupOpen, setIsLessonPopupOpen] = useState(false);
   const [isPopupQuiz, setIsPopupQuiz] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   // Gate the 강의하기 button until the chapter 1 quiz is passed (≥70%).
   // Flag is written by /quiz on completion; read on mount + whenever the
   // tab regains focus (handles the return-from-quiz navigation case).
   const [isQuizPassed, setIsQuizPassed] = useState(false);
+  const [isLessonDone, setIsLessonDone] = useState(false);
   useEffect(() => {
     const read = () => {
       try {
         setIsQuizPassed(
           localStorage.getItem('chapter1_quiz_passed') === 'true',
         );
+        setIsLessonDone(
+          localStorage.getItem('chapter1_lesson_done') === 'true',
+        );
       } catch {
-        /* storage blocked — leave gate locked */
+        /* storage blocked — leave gates locked */
       }
     };
     read();
+    // Mark this session as "not a first-time visit" so the landing (/)
+    // redirect skips the intro chain on next reload.
+    try {
+      localStorage.setItem('demo_visited', 'true');
+    } catch {
+      /* ignore */
+    }
     window.addEventListener('focus', read);
     return () => window.removeEventListener('focus', read);
   }, []);
@@ -138,9 +150,91 @@ function MainLobbyScreen() {
               />
             )}
 
-            <button type="button" className="main-lobby-setting">
-              ⚙
-            </button>
+            <div style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className="main-lobby-setting"
+                onClick={() => setIsSettingsOpen((v) => !v)}
+                aria-expanded={isSettingsOpen}
+              >
+                ⚙
+              </button>
+              {isSettingsOpen && (
+                <>
+                  {/* Click-outside catcher */}
+                  <div
+                    onClick={() => setIsSettingsOpen(false)}
+                    style={{
+                      position: 'fixed',
+                      inset: 0,
+                      zIndex: 998,
+                    }}
+                  />
+                  <div
+                    role="menu"
+                    style={{
+                      position: 'absolute',
+                      top: 'calc(100% + 8px)',
+                      right: 0,
+                      minWidth: 180,
+                      background: '#fff',
+                      borderRadius: 12,
+                      boxShadow: '0 10px 30px rgba(0,0,0,0.22)',
+                      padding: 8,
+                      zIndex: 999,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 2,
+                    }}
+                  >
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        if (
+                          !confirm(
+                            '데모 리셋: 호감도·퀴즈 기록을 전부 지울까요?',
+                          )
+                        )
+                          return;
+                        try {
+                          localStorage.removeItem('chapter1_quiz_passed');
+                          localStorage.removeItem('chapter1_lesson_done');
+                          localStorage.removeItem('demo_visited');
+                        } catch {
+                          /* ignore */
+                        }
+                        await fetch('/api/demo/reset', {
+                          method: 'POST',
+                        }).catch(() => {});
+                        // Route through `/` so the intro gate kicks in (the
+                        // demo_visited flag was just cleared).
+                        location.href = '/';
+                      }}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        padding: '10px 14px',
+                        textAlign: 'left',
+                        background: 'transparent',
+                        border: 'none',
+                        borderRadius: 8,
+                        color: '#333',
+                        cursor: 'pointer',
+                        fontSize: 14,
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.background = '#f3f3f3')
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.background = 'transparent')
+                      }
+                    >
+                      🧪 데모 리셋
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
 
           <div className="main-lobby-center">
@@ -261,21 +355,24 @@ function MainLobbyScreen() {
 
                           </div>
                         ) : (
-                          // QUIZ
+                          // QUIZ — gated until Chapter 1 수업 완료
                           <button
                             type="button"
+                            disabled={!isLessonDone}
                             onClick={() => {
+                              if (!isLessonDone) return;
                               setIsPopupQuiz(true);
                               setIsLessonPopupOpen(true);
-                            }
-                            }
+                            }}
                             style={{
                               width: '118px',
                               border: 'none',
                               background: 'transparent',
-                              cursor: 'pointer',
+                              cursor: isLessonDone ? 'pointer' : 'not-allowed',
                               padding: 0,
-                              flexShrink: 0
+                              flexShrink: 0,
+                              opacity: isLessonDone ? 1 : 0.45,
+                              filter: isLessonDone ? 'none' : 'grayscale(0.7)',
                             }}
                           >
                             <div
@@ -416,38 +513,6 @@ function MainLobbyScreen() {
                 <span>Chapter 1 · 곱셈 설명</span>
               </button>
 
-              <button
-                type="button"
-                className="main-lobby-action main-lobby-action--primary"
-                onClick={() => {
-                  setIsPopupQuiz(true);
-                  setIsLessonPopupOpen(true);
-                }}
-              >
-                퀴즈
-                <span>Chapter 1 · 4문제</span>
-              </button>
-
-              <button
-                type="button"
-                className="main-lobby-action main-lobby-action--ghost"
-                onClick={async () => {
-                  if (!confirm('데모 리셋: 호감도·퀴즈 기록을 전부 지울까요?'))
-                    return;
-                  try {
-                    localStorage.removeItem('chapter1_quiz_passed');
-                  } catch {
-                    /* ignore */
-                  }
-                  await fetch('/api/demo/reset', { method: 'POST' }).catch(
-                    () => {},
-                  );
-                  location.reload();
-                }}
-                style={{ opacity: 0.7 }}
-              >
-                🧪 데모 리셋
-              </button>
             </div>
           </div>
         </div>
