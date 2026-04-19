@@ -1,16 +1,19 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { createSupabaseBrowserClient } from '@/lib/supabase/client';
 
 const boardImg = '/assets/images/quiz-board.png';
 const correctImg = '/assets/images/quiz-correct.png';
 const incorrectImg = '/assets/images/quiz-incorrect.png';
 
-// Chapter 1 = 초등 난이도 10문제 (seed sortOrder 1..10).
-const CHAPTER_SORT_MIN = 1;
-const CHAPTER_SORT_MAX = 4;
+// Chapter → DB sort_order range. Ch1 은 초등 사칙 (1..4), Ch2 는 분수
+// (11..14). 새 챕터 추가 시 이 맵과 quizzes 시드 둘 다 갱신.
+const CHAPTER_SORT_RANGE: Record<number, { min: number; max: number }> = {
+  1: { min: 1, max: 4 },
+  2: { min: 11, max: 14 },
+};
 const CHARACTER_SLUG = 'fermat';
 
 interface Quiz {
@@ -25,6 +28,10 @@ interface Quiz {
 
 export default function QuizClient() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const chapterParam = Number(searchParams?.get('chapter') ?? '1');
+  const chapter = CHAPTER_SORT_RANGE[chapterParam] ? chapterParam : 1;
+  const range = CHAPTER_SORT_RANGE[chapter]!;
   const [quizzes, setQuizzes] = useState<Quiz[] | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [idx, setIdx] = useState(0);
@@ -46,8 +53,8 @@ export default function QuizClient() {
             'id, sort_order, question, choices, answer_idx, flavor_on_correct, flavor_on_wrong',
           )
           .eq('character_slug', CHARACTER_SLUG)
-          .gte('sort_order', CHAPTER_SORT_MIN)
-          .lte('sort_order', CHAPTER_SORT_MAX)
+          .gte('sort_order', range.min)
+          .lte('sort_order', range.max)
           .order('sort_order', { ascending: true });
         if (cancelled) return;
         if (error) {
@@ -113,20 +120,19 @@ export default function QuizClient() {
       const total = quizzes?.length ?? 0;
       const passed = total > 0 && correctCount / total >= 0.7;
       if (passed) {
-        // Local flag drives the lobby's "강의하기" button gate.
+        // Local flag drives the lobby's "강의하기" button gate (per chapter).
         try {
-          localStorage.setItem('chapter1_quiz_passed', 'true');
+          localStorage.setItem(`chapter${chapter}_quiz_passed`, 'true');
         } catch {
           /* storage blocked */
         }
-        // Server-side: affection bump with dedupe on `quiz_chapter_1_awarded`.
-        // Fire-and-forget — UI doesn't block on this; lobby re-fetches on
-        // focus via useAffection.
+        // Server-side: affection bump with dedupe on
+        // `quiz_chapter_${chapter}_awarded`. Fire-and-forget.
         void fetch('/api/quiz/complete', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            chapter: 1,
+            chapter,
             correctCount,
             total,
           }),
@@ -402,7 +408,7 @@ export default function QuizClient() {
             onClick={(e) => e.stopPropagation()}
           >
             <h3 style={{ margin: 0, fontSize: '1.2rem', color: '#333' }}>
-              Chapter 1 완료!
+              Chapter {chapter} 완료!
             </h3>
             <p style={{ marginTop: 12, color: '#333' }}>
               {correctCount} / {quizzes.length} 문제를 맞혔어요.

@@ -46,6 +46,10 @@ const LESSON_REGISTRY: Record<string, { delta: number; flagKey: string }> = {
     delta: 1,
     flagKey: 'lesson_basic_multiplication_awarded',
   },
+  'basic-fractions': {
+    delta: 1,
+    flagKey: 'lesson_basic_fractions_awarded',
+  },
 };
 
 export async function POST(req: Request) {
