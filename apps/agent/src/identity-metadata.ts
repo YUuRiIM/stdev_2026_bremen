@@ -5,6 +5,10 @@ export interface IdentityMetadata {
   characterId: string | null;
   identityMode: IdentityMode;
   supabaseJwt: string | null;
+  /** Subject topic (human string, e.g. "뺄셈") picked by the client on the
+   *  lobby. When present, the agent preloads that subject so the first turn
+   *  can jump straight into the lecture instead of asking "what topic today?". */
+  subjectTopic: string | null;
 }
 
 // Participant metadata is attached by /api/livekit/token.
@@ -17,6 +21,7 @@ export function parseIdentityMetadata(
       characterId: null,
       identityMode: 'livekit',
       supabaseJwt: null,
+      subjectTopic: null,
     };
   }
   try {
@@ -31,6 +36,10 @@ export function parseIdentityMetadata(
         parsed.identityMode === 'meeting' ? 'meeting' : 'livekit',
       supabaseJwt:
         typeof parsed.supabaseJwt === 'string' ? parsed.supabaseJwt : null,
+      subjectTopic:
+        typeof parsed.subjectTopic === 'string' && parsed.subjectTopic.trim()
+          ? parsed.subjectTopic.trim()
+          : null,
     };
   } catch {
     return {
@@ -38,6 +47,7 @@ export function parseIdentityMetadata(
       characterId: null,
       identityMode: 'livekit',
       supabaseJwt: null,
+      subjectTopic: null,
     };
   }
 }
