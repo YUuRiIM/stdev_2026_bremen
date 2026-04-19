@@ -26,6 +26,9 @@ interface ChapterDef {
   title: string; // 화이트보드 h1
   topic: string; // 강의 subject topic
   subjectSlug: string; // lecture-subjects.ts slug
+  /** /lesson/<lessonSlug> 라우트로 이동. */
+  lessonSlug: string;
+  lessonSubLabel: string; // 액션바 수업 버튼 서브 텍스트
   /** 보드에 배치되는 스테이지들 (왼→오). lesson 은 `status: done|current|locked`
    *  으로 시각 상태를 표시. quiz 는 popup 진입점. */
   board: Array<
@@ -54,6 +57,8 @@ const CHAPTERS: ChapterDef[] = [
     title: 'Chapter 1: 사칙연산',
     topic: '사칙연산',
     subjectSlug: 'basic-arithmetic',
+    lessonSlug: 'basic-multiplication',
+    lessonSubLabel: 'Chapter 1 · 곱셈 설명',
     board: [
       {
         id: 'lesson-1',
@@ -96,9 +101,44 @@ const CHAPTERS: ChapterDef[] = [
     title: 'Chapter 2: 분수',
     topic: '분수',
     subjectSlug: 'basic-fractions',
-    // Chapter 2 는 음성 강의만 준비됨 (수업/퀴즈 콘텐츠는 다음 스프린트).
-    // 보드는 비워두고, 진입은 하단 "강의하기" 버튼에서만 허용.
-    board: [],
+    lessonSlug: 'basic-fractions',
+    lessonSubLabel: 'Chapter 2 · 분수 기본',
+    board: [
+      {
+        id: 'ch2-lesson-1',
+        type: 'lesson',
+        titleTop: '2-1',
+        titleBottom: '분수',
+        image: mainCircle1,
+        status: 'done',
+        position: { left: '70px', top: '120px' },
+      },
+      {
+        id: 'ch2-lesson-2',
+        type: 'lesson',
+        titleTop: '2-2',
+        titleBottom: '등가',
+        image: mainCircle2,
+        status: 'current',
+        position: { left: '255px', top: '145px' },
+      },
+      {
+        id: 'ch2-lesson-3',
+        type: 'lesson',
+        titleTop: '2-3',
+        titleBottom: '덧뺄셈',
+        image: mainCircle3,
+        status: 'locked',
+        position: { left: '460px', top: '118px' },
+      },
+      {
+        id: 'chapter2-quiz',
+        type: 'quiz',
+        label: 'Chapter 2\n퀴즈',
+        teacher: '페르마\n호감도 상승 가능',
+        position: { left: '690px', top: '185px' },
+      },
+    ],
   },
 ];
 
@@ -110,19 +150,29 @@ function MainLobbyScreen() {
   // Gate the 강의하기 button until the chapter 1 quiz is passed (≥70%).
   // Flag is written by /quiz on completion; read on mount + whenever the
   // tab regains focus (handles the return-from-quiz navigation case).
-  const [isQuizPassed, setIsQuizPassed] = useState(false);
-  const [isLessonDone, setIsLessonDone] = useState(false);
+  const [quizPassedByChapter, setQuizPassedByChapter] = useState<
+    Record<number, boolean>
+  >({});
+  const [lessonDoneByChapter, setLessonDoneByChapter] = useState<
+    Record<number, boolean>
+  >({});
   const [currentChapterIdx, setCurrentChapterIdx] = useState(0);
   const { progress: chapterProgress } = useChapterProgress();
   useEffect(() => {
     const read = () => {
       try {
-        setIsQuizPassed(
-          localStorage.getItem('chapter1_quiz_passed') === 'true',
-        );
-        setIsLessonDone(
-          localStorage.getItem('chapter1_lesson_done') === 'true',
-        );
+        const quiz: Record<number, boolean> = {};
+        const lesson: Record<number, boolean> = {};
+        for (const c of CHAPTERS) {
+          quiz[c.chapterNumber] =
+            localStorage.getItem(`chapter${c.chapterNumber}_quiz_passed`) ===
+            'true';
+          lesson[c.chapterNumber] =
+            localStorage.getItem(`chapter${c.chapterNumber}_lesson_done`) ===
+            'true';
+        }
+        setQuizPassedByChapter(quiz);
+        setLessonDoneByChapter(lesson);
         const savedChapter = Number(
           localStorage.getItem('current_chapter_idx') ?? '0',
         );
@@ -158,6 +208,8 @@ function MainLobbyScreen() {
 
   const currentChapter = CHAPTERS[currentChapterIdx] ?? CHAPTERS[0]!;
   const boardPages = currentChapter.board;
+  const isLessonDone = !!lessonDoneByChapter[currentChapter.chapterNumber];
+  const isQuizPassed = !!quizPassedByChapter[currentChapter.chapterNumber];
   // 챕터 해금 규칙: Ch1 은 항상, Ch2+ 는 바로 이전 챕터 강의 완료 flag 가 있어야.
   const isChapterUnlocked = (idx: number) =>
     idx === 0
@@ -263,8 +315,14 @@ function MainLobbyScreen() {
                         )
                           return;
                         try {
-                          localStorage.removeItem('chapter1_quiz_passed');
-                          localStorage.removeItem('chapter1_lesson_done');
+                          for (const c of CHAPTERS) {
+                            localStorage.removeItem(
+                              `chapter${c.chapterNumber}_quiz_passed`,
+                            );
+                            localStorage.removeItem(
+                              `chapter${c.chapterNumber}_lesson_done`,
+                            );
+                          }
                           localStorage.removeItem('demo_visited');
                           localStorage.removeItem('current_chapter_idx');
                         } catch {
@@ -606,42 +664,44 @@ function MainLobbyScreen() {
 
               {/* 오른쪽 */}
               <div className="main-lobby-right">
-
-                {(() => {
-                  const lectureEnabled =
-                    currentChapter.chapterNumber === 1 ? isQuizPassed : true;
-
-                  const sub =
-                    currentChapter.chapterNumber === 1
-                      ? isQuizPassed
-                        ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
-                        : '퀴즈 통과 후 해금'
-                      : `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`;
-
-                  return (
-                    <button
-                      type="button"
-                      className="main-lobby-action main-lobby-action--primary"
-                      disabled={!lectureEnabled}
-                      onClick={() =>
-                        router.push(`/lecture?subject=${currentChapter.subjectSlug}`)
-                      }
-                    >
-                      강의하기
-                      <span>{sub}</span>
-                    </button>
-                  );
-                })()}
+                <button
+                  type="button"
+                  className="main-lobby-action main-lobby-action--primary"
+                  disabled={!isQuizPassed}
+                  onClick={() =>
+                    router.push(`/lecture?subject=${currentChapter.subjectSlug}`)
+                  }
+                  style={
+                    !isQuizPassed
+                      ? {
+                          opacity: 0.45,
+                          cursor: 'not-allowed',
+                          filter: 'grayscale(0.6)',
+                        }
+                      : undefined
+                  }
+                >
+                  강의하기
+                  <span>
+                    {isQuizPassed
+                      ? `Chapter ${currentChapter.chapterNumber} · ${currentChapter.topic}`
+                      : '퀴즈 통과 후 해금'}
+                  </span>
+                </button>
 
                 <button
                   type="button"
                   className="main-lobby-action main-lobby-action--primary"
+                  onClick={() => {
+                    setIsPopupQuiz(false);
+                    setIsLessonPopupOpen(true);
+                  }}
                 >
                   수업
-                  <span>Chapter 1 · 곱셈 설명</span>
+                  <span>{currentChapter.lessonSubLabel}</span>
                 </button>
-
               </div>
+
             </div>
           </div>
         </div>
@@ -674,10 +734,11 @@ function MainLobbyScreen() {
                 className="main-lobby-modal__button main-lobby-modal__button--primary"
                 onClick={() => {
                   if (!isPopupQuiz) {
-                    router.push('/lesson/basic-multiplication')
-                  }
-                  else {
-                    router.push('/quiz')
+                    router.push(`/lesson/${currentChapter.lessonSlug}`);
+                  } else {
+                    router.push(
+                      `/quiz?chapter=${currentChapter.chapterNumber}`,
+                    );
                   }
                 }}
               >

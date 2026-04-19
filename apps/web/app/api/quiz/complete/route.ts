@@ -50,7 +50,7 @@ export async function POST(req: Request) {
   }
   const { chapter, correctCount, total } = body;
   if (
-    chapter !== 1 ||
+    ![1, 2].includes(chapter) ||
     typeof correctCount !== 'number' ||
     typeof total !== 'number' ||
     correctCount < 0 ||

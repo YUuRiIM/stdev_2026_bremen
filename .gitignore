@@ -50,3 +50,8 @@ logs
 CLAUDE.local.md
 .claude/settings.local.json
 .env.agent
+
+# Local agent deploy bundle — regenerated via pnpm deploy, not tracked
+.agent-deploy/
+# Claude Code MCP config (per-workspace, developer-local)
+.mcp.json
