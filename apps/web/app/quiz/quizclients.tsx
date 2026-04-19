@@ -13,6 +13,8 @@ const incorrectImg = '/assets/images/quiz-incorrect.png';
 const CHAPTER_SORT_RANGE: Record<number, { min: number; max: number }> = {
   1: { min: 1, max: 4 },
   2: { min: 11, max: 14 },
+  3: { min: 21, max: 24 },
+  4: { min: 31, max: 34 },
 };
 const CHARACTER_SLUG = 'fermat';
 

@@ -24,6 +24,16 @@ import { requestMicOnce } from '@/services/voice-permission';
 
 const DEFAULT_SUBJECT_SLUG = 'basic-arithmetic';
 
+// 챕터별 완료 컷씬. 현재 실제 영상 자산은 2개뿐이라 Ch3/Ch4 는 순환 배정.
+// 자산이 늘어나면 각 키에 고유 mp4 를 지정하면 된다.
+const CUTSCENE_BY_SUBJECT: Record<string, string> = {
+  'basic-arithmetic': '/assets/cutscenes/lecture-end.mp4',
+  'basic-fractions': '/assets/cutscenes/lecture-end-2.mp4',
+  'basic-primes': '/assets/cutscenes/lecture-end.mp4',
+  'fermat-little-theorem': '/assets/cutscenes/lecture-end-2.mp4',
+};
+const FALLBACK_CUTSCENE = '/assets/cutscenes/lecture-end.mp4';
+
 export default function LecturePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -160,11 +170,8 @@ export default function LecturePage() {
       handleEnd();
       return;
     }
-    const pool = [
-      '/assets/cutscenes/lecture-end.mp4',
-      '/assets/cutscenes/lecture-end-2.mp4',
-    ];
-    const assetUrl = pool[Math.floor(Math.random() * pool.length)]!;
+    const assetUrl =
+      CUTSCENE_BY_SUBJECT[subjectSlug] ?? FALLBACK_CUTSCENE;
     dispatch({
       type: 'CUTSCENE_PLAY',
       cutscene: {

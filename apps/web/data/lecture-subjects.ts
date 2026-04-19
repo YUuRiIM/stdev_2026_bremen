@@ -144,6 +144,40 @@ export const LECTURE_SUBJECTS: LectureSubject[] = [
       },
     ],
   },
+  // Chapter 3: 소수 기본 — 단일 subject, 3 objectives. DB seed 에 있는 "소수"
+  // subject 와 매핑.
+  {
+    slug: 'basic-primes',
+    topic: '소수',
+    difficulty: 3,
+    keyterms: ['소수', '합성수', '약수', '나누어떨어진다', '소인수분해'],
+    prerequisites: ['사칙연산'],
+    objectives: [
+      {
+        id: 'obj_prime_def',
+        statement:
+          '소수의 정의(1과 자기 자신 외엔 약수가 없는 1보다 큰 자연수)를 설명한다.',
+        conceptKey: 'prime_def',
+        weight: 1,
+        expectedTerms: ['소수', '약수', '1', '자기 자신', '자연수'],
+      },
+      {
+        id: 'obj_prime_check',
+        statement:
+          '자연수가 소수인지 판정하는 기본 방법(약수 유무)을 설명한다.',
+        conceptKey: 'prime_check',
+        weight: 1,
+        expectedTerms: ['나누어떨어진다', '약수', '판정'],
+      },
+      {
+        id: 'obj_prime_factor',
+        statement: '소인수분해의 개념을 설명한다 (합성수 → 소수의 곱).',
+        conceptKey: 'prime_factor',
+        weight: 1,
+        expectedTerms: ['소인수', '분해', '곱', '유일'],
+      },
+    ],
+  },
 ];
 
 export function getSubject(slug: string): LectureSubject {
