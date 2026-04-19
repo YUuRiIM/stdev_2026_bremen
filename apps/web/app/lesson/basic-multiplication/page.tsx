@@ -68,6 +68,14 @@ function LessonScreen() {
       return;
     }
 
+    // Local gate for the lobby's quiz button — mirrors the server-side
+    // `lesson_basic_multiplication_awarded` flag but lets the UI respond
+    // instantly on return without a round trip.
+    try {
+      localStorage.setItem('chapter1_lesson_done', 'true');
+    } catch {
+      /* storage blocked */
+    }
     // Fire-and-forget affection bump; server dedupes via flag so repeat
     // plays don't stack. UI doesn't block on the response.
     void fetch('/api/lesson/complete', {
