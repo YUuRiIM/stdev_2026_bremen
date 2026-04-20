@@ -48,10 +48,12 @@ logs
 # claude / omc state (plans intentionally copied to docs/plans/ for history)
 .omc/
 CLAUDE.local.md
-.claude/settings.local.json
+.claude/
 .env.agent
 
 # Local agent deploy bundle — regenerated via pnpm deploy, not tracked
 .agent-deploy/
 # Claude Code MCP config (per-workspace, developer-local)
 .mcp.json
+.vercel
+.env*.local

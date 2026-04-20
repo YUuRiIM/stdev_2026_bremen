@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import QuizClient from './quizclients';
 import Link from 'next/link';
 
@@ -38,7 +39,13 @@ export default function QuizPage() {
           zIndex: -1
         }}
       />
-      <QuizClient />
+      <Suspense
+        fallback={
+          <div style={{ color: '#fff', fontSize: 18 }}>퀴즈 불러오는 중…</div>
+        }
+      >
+        <QuizClient />
+      </Suspense>
     </main>
   )
 }

@@ -1,7 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "cd ../.. && corepack enable && pnpm install --frozen-lockfile",
-  "buildCommand": "cd ../.. && NODE_OPTIONS='--max-old-space-size=7168' pnpm --filter @bremen/web build",
-  "framework": "nextjs",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile --filter '@bremen/web...'",
+  "buildCommand": "cd ../.. && pnpm --filter @bremen/web build",
   "outputDirectory": ".next"
 }

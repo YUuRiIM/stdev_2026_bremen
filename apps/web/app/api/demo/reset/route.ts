@@ -41,5 +41,27 @@ export async function POST() {
     );
   }
 
+  const { error: understoodErr } = await supabase
+    .from('understood_concepts')
+    .delete()
+    .eq('user_id', userId);
+  if (understoodErr) {
+    return NextResponse.json(
+      { error: `understood_concepts_delete_failed: ${understoodErr.message}` },
+      { status: 500 },
+    );
+  }
+
+  const { error: lectureErr } = await supabase
+    .from('lecture_sessions')
+    .delete()
+    .eq('user_id', userId);
+  if (lectureErr) {
+    return NextResponse.json(
+      { error: `lecture_sessions_delete_failed: ${lectureErr.message}` },
+      { status: 500 },
+    );
+  }
+
   return NextResponse.json({ ok: true });
 }

@@ -5,16 +5,16 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], display: 'swap' });
 
 export const metadata: Metadata = {
-  title: 'Bremen',
-  description: 'Visual novel game',
+  title: '두근두근 연구실',
+  description: '페르마와 함께하는 수학 연구실',
   icons: {
     icon: '/assets/images/fermat-profile.png',
     apple: '/assets/images/fermat-profile.png',
   },
   openGraph: {
-    title: 'Bremen',
-    description: 'Visual novel game',
-    images: ['/assets/images/main-fermat.png'],
+    title: '두근두근 연구실',
+    description: '페르마와 함께하는 수학 연구실',
+    images: ['/assets/images/bg-fermat-ball.png'],
   },
 };
 
